@@ -23,13 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> screens = [
     ApartmentList(),
     SliverToBoxAdapter(
-      child: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: LatLng(37.42796133580664, -122.085749655962),
-          zoom: 14.4746,
-        ),
-        mapType: MapType.hybrid,
-      ),
+      child: Text('Map'),
     )
   ];
 
