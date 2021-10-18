@@ -1,4 +1,6 @@
 class Apartment {
+  final String? name;
+
   final int price;
   final String location;
   final String ownerName;
@@ -7,18 +9,19 @@ class Apartment {
   final int bathroom_number;
   final int size;
 
-  Apartment(
-      {required this.price,
-      required this.location,
-      required this.ownerName,
-      required this.imageUrl,
-      required this.room_number,
-      required this.bathroom_number,
-      required this.size});
+  Apartment({this.name,
+    required this.price,
+    required this.location,
+    required this.ownerName,
+    required this.imageUrl,
+    required this.room_number,
+    required this.bathroom_number,
+    required this.size});
 }
 
 List<Apartment> apartments = [
   Apartment(
+    name: 'no.1',
     price: 120,
     location: 'خانيونس',
     ownerName: 'محمد',
@@ -28,6 +31,8 @@ List<Apartment> apartments = [
     size: 150,
   ),
   Apartment(
+    name: 'no.2',
+
     price: 320,
     location: 'غزة',
     ownerName: 'احمد',
@@ -37,6 +42,8 @@ List<Apartment> apartments = [
     size: 220,
   ),
   Apartment(
+    name: 'no.3',
+
     price: 500,
     location: 'جباليا',
     ownerName: 'عبدالله',
@@ -46,6 +53,8 @@ List<Apartment> apartments = [
     size: 350,
   ),
   Apartment(
+    name: 'no.3',
+
     price: 250,
     location: 'نل الهوا',
     ownerName: 'عزيز',

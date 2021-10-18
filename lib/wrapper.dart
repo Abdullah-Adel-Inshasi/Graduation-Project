@@ -4,27 +4,26 @@ import 'package:home_explorer/screens/notifications_screen.dart';
 import 'package:home_explorer/screens/profile_screen.dart';
 
 class Wrapper extends StatefulWidget {
-
-
   @override
   _WrapperState createState() => _WrapperState();
 }
 
 class _WrapperState extends State<Wrapper> {
   final List<Widget> _bnbScreens = [
-   HomeScreen(),
-   NotificationsScreen(),
+    HomeScreen(),
+    NotificationsScreen(),
     Text('bookmarks'),
     ProfileScreen(),
   ];
   int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-          onTap: (int index){
+          onTap: (int index) {
             setState(() {
               _selectedIndex = index;
             });

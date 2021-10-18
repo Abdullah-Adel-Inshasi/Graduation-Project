@@ -17,6 +17,7 @@ class SearchOptionScreen extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         body: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: [
             CustomAppBar2(
               label: 'إعادة ضبط الفلتر',
@@ -31,12 +32,15 @@ class SearchOptionScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AveragePriceSelector(),
-                    SizedBox(height: 32),
+                    SizedBox(height: 64),
                     CitySelector(),
                     SizedBox(height: 16),
                     SizeSelector(),
-                    SizedBox(height: 16),
-                    EstateType()
+                    SizedBox(height: 32),
+                    EstateType(),
+                    SizedBox(height: 32),
+                    TimeSelector(),
+                    SizedBox(height: 50),
                   ],
                 ),
               ),
@@ -48,8 +52,60 @@ class SearchOptionScreen extends StatelessWidget {
   }
 }
 
-class EstateType extends StatelessWidget {
+class TimeSelector extends StatefulWidget {
+  const TimeSelector({Key? key}) : super(key: key);
+
+  @override
+  _TimeSelectorState createState() => _TimeSelectorState();
+}
+
+class _TimeSelectorState extends State<TimeSelector> {
+  @override
+  Widget build(BuildContext context) {
+    final SfRangeValues _priceRange = SfRangeValues(1, 12);
+    final Function updateStartPrice;
+    final Function updateEndPrice;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('مدة العقد',style: GoogleFonts.tajawal(fontSize: 18,color: Colors.black),),
+        SizedBox(height: 16),
+        SfRangeSelector(
+          child: SizedBox(
+            width: double.infinity,
+          ),
+          min: _priceRange.start,
+          max: _priceRange.end,
+          initialValues: _priceRange,
+          // showTicks: true,
+          // showDividers: true,
+          showLabels: true,
+          // enableIntervalSelection: true,
+          interval: 1,
+          enableTooltip: true,
+          stepSize: 1,
+          tooltipShape: SfRectangularTooltipShape(),
+          minorTickShape: SfTickShape(),
+          onChanged: (SfRangeValues values) {},
+          activeColor: Colors.blue,
+          inactiveColor: Colors.transparent,
+          enableIntervalSelection: true,
+
+        )
+      ],
+    );
+  }
+}
+
+class EstateType extends StatefulWidget {
   const EstateType({Key? key}) : super(key: key);
+
+  @override
+  State<EstateType> createState() => _EstateTypeState();
+}
+
+class _EstateTypeState extends State<EstateType> {
+  List<String> estateTypes = ['شقة', 'منزل', 'غرفة'];
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +115,17 @@ class EstateType extends StatelessWidget {
         Text(
           'نوع العقار',
           style: kHeadlineTextStyle,
-        )
+        ),
+        DropdownButton(
+          value: estateTypes[0],
+          onChanged: (x) {},
+          items: estateTypes
+              .map((e) => DropdownMenuItem(
+                    child: Text(e),
+                    value: e,
+                  ))
+              .toList(),
+        ),
       ],
     );
   }
