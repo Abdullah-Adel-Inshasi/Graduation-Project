@@ -21,6 +21,7 @@ class _Notifications_ListState extends State<Notifications_List> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: BouncingScrollPhysics(),
       children: notifications
           .map(
             (e) => NotificationBuilder(notification: e,goToDetails: (){},),

@@ -3,6 +3,8 @@ import 'package:home_explorer/landlord/my_apartments/apartments_screen.dart';
 import 'package:home_explorer/landlord/notifications/notifications_wrapper.dart';
 import 'package:home_explorer/landlord/profile/landlord_homescreen.dart';
 
+import 'add_apartment/appbar/price_and_location.dart';
+
 class LandLordWrapper extends StatefulWidget {
   const LandLordWrapper({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class LandLordWrapper extends StatefulWidget {
 class _LandLordWrappeState extends State<LandLordWrapper> {
   final List<Widget> _bnbScreens = [
     MyApartments(),
-    Text(''),
+    PriceAndLocation(),
     NotificationsWrapper(),
     HomeScreen_Landlord(),
   ];
@@ -24,12 +26,29 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Color(0xFFF4EDEA),
+
+        drawer: Drawer(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  children: <Widget>[],
+                ),
+              )
+            ],
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
+          elevation: 16,
           onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            setState(
+              () {
+                _selectedIndex = index;
+              },
+            );
           },
+          backgroundColor: Color(0xFFFEF9EF),
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.grey,
@@ -39,19 +58,24 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon:
+                  Icon(_selectedIndex == 0 ? Icons.home : Icons.home_outlined),
               label: 'عقاراتي',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.add),
+              icon: Icon(
+                  _selectedIndex == 1 ? Icons.add_circle_sharp : Icons.add),
               label: 'اضافة عقار',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none),
+              icon: Icon(_selectedIndex == 2
+                  ? Icons.notifications
+                  : Icons.notifications_none),
               label: 'الاشعارات',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
+              icon: Icon(
+                  _selectedIndex == 3 ? Icons.person : Icons.person_outline),
               label: 'الملف الشخصي',
             ),
           ],

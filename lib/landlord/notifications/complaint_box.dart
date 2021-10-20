@@ -8,6 +8,7 @@ class ComplaintBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
       itemCount: complaints.length,
       itemBuilder: (BuildContext context, int index) {

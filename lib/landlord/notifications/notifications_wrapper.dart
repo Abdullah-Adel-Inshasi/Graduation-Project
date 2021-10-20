@@ -14,7 +14,7 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   int selected_index = 0;
-  List<Widget> tabScreens = [Notifications_List(),ComplaintBox()];
+  List<Widget> tabScreens = [Notifications_List(), ComplaintBox()];
 
   @override
   void initState() {
@@ -25,12 +25,23 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF4EDEA),
       appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: Text(
+          'الاشعارات',
+          style: GoogleFonts.tajawal(
+              color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        leading: GestureDetector(
+          child: Icon(Icons.menu),
+          onTap: () => Scaffold.of(context).openDrawer(),
+        ),
         bottom: TabBar(
           controller: tabController,
           labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
+          indicatorColor: Color(0xFF12263A),
+          unselectedLabelColor: Color(0xFFC5D8D1),
           tabs: [
             Tab(text: 'اشعارات العقارات'),
             Tab(text: 'صندوق الشكاوي'),
@@ -41,21 +52,6 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
             });
           },
         ),
-        title: Text(
-          'الاشعارات',
-          style: GoogleFonts.tajawal(
-              color: Colors.black, fontWeight: FontWeight.w600),
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.menu), onPressed: () {}, color: Colors.black),
-        ],
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {},
-            color: Colors.black),
-        centerTitle: true,
-        backgroundColor: Colors.white,
       ),
       body: tabScreens[selected_index],
     );

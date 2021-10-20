@@ -26,15 +26,18 @@ class _HomeScreen_LandlordState extends State<HomeScreen_Landlord>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF4EDEA),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title: Text('Hi Ahmad'),
+            title: Text(
+              'الصفحة الشخصية',
+              style: GoogleFonts.tajawal(
+                  color: Colors.white, fontWeight: FontWeight.w600),
+            ),
             backgroundColor: Colors.teal,
             forceElevated: true,
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.menu),
               onPressed: () {
@@ -52,7 +55,8 @@ class _HomeScreen_LandlordState extends State<HomeScreen_Landlord>
                     radius: 30,
                   ),
                   title: Text('Ahmad Ahmad Ahmad '),
-                  subtitle: Text('ahmaed@gmail.com'),
+                  subtitle: Text('059-2089866'),
+                  trailing: Icon(Icons.remove_red_eye),
                 ),
                 SizedBox(height: 16),
                 TabBar(
