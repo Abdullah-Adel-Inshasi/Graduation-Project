@@ -22,6 +22,7 @@ class _WrapperState extends State<Wrapper> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Color(0xFFF4EDEA),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int index) {
             setState(() {

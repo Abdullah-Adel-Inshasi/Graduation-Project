@@ -16,6 +16,8 @@ class SearchOptionScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Color(0xFFF4EDEA),
+
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [

@@ -1,7 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class PriceAndLocation extends StatefulWidget {
   const PriceAndLocation({Key? key}) : super(key: key);
@@ -30,6 +35,12 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
   List<bool> selectedRooms = [false, false, false, true, false];
   List<String> numOfBathrooms = ['1', '2', '3+'];
   List<bool> selectedBathrooms = [false, false, false];
+  bool nearMosque = false;
+  bool nearSuperMarket = false;
+  bool hasAC = false;
+  bool hasElevator = false;
+  bool hasGarage = false;
+  bool hasBalcony = false;
 
   // ignore: non_constant_identifier_names
   late String selected_city;
@@ -316,6 +327,111 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                     maxLength: 200,
                     decoration: InputDecoration(
                         hintText: 'اوصف العقار في جدود 200 حرف'),
+                  ),
+                  SizedBox(height: 15),
+                  Text('المزايا'),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.ac_unit),
+                    value: hasAC,
+                    onChanged: (x) {
+                      setState(() {
+                        hasAC = x!;
+                      });
+                    },
+                    title: Text('مكيفة'),
+                  ),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.home_work_sharp),
+                    value: nearMosque,
+                    onChanged: (x) => setState(() => nearMosque = x!),
+                    title: Text('قريبة من مسجد'),
+                  ),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.store_mall_directory_outlined),
+                    value: nearSuperMarket,
+                    onChanged: (x) => setState(() => nearSuperMarket = x!),
+                    title: Text('قريبة من سوبرماركت'),
+                  ),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.elevator),
+                    value: hasElevator,
+                    onChanged: (x) => setState(() => hasElevator = x!),
+                    title: Text('مصعد'),
+                  ),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.garage),
+                    value: hasGarage,
+                    onChanged: (x) => setState(() => hasGarage = x!),
+                    title: Text('جراج'),
+                  ),
+                  CheckboxListTile(
+                    secondary: Icon(Icons.balcony),
+                    value: hasBalcony,
+                    onChanged: (x) => setState(() => hasBalcony = x!),
+                    title: Text('بلكونة'),
+                  ),
+                  Text('قم بإدراج الصور'),
+                  GestureDetector(
+                    onTap: () {
+                      /// implement upload picture
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.cloud_upload,
+                            size: 100,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'اختر صور من الاستوديو',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            'ملاحظة : أول صورة سوف تكون صورة الغلاف',
+                            style: TextStyle(fontSize: 10),
+                          )
+                        ],
+                      ),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.teal[50],
+                        border: Border.all(color: Colors.grey),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6.0,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: (){
+                      /// implement post ad
+                    },
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.blue,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'أعلن عن العقار !',
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
                   ),
                 ],
               ),

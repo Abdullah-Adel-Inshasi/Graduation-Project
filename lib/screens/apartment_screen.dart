@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/constants/styles.dart';
 import 'package:home_explorer/models/apartment.dart';
@@ -21,74 +23,77 @@ class ApartmentScreen extends StatelessWidget {
         child: Scaffold(
           body: CustomScrollView(
             physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
-              SliverPersistentHeader(
-                delegate: BlurredOutAppBar(),
-                pinned: true,
-              ),
+              // SliverPersistentHeader(
+              //   delegate: BlurredOutAppBar(),
+              //   pinned: true,
+              // ),
+
               SliverToBoxAdapter(
-                child: Images(imageUrl: apartment.imageUrl),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  // transform: Matrix4.translationValues(0, -32, 0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(32),
-                      topRight: Radius.circular(32),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ApartmentPrice(price: apartment.price),
-                      SizedBox(height: 20),
-                      BookingDetails(
-                        bookingPercentage: 22,
-                        numOfAvailableDays: 5,
-                        numOfIntrestedPeople: 23,
+                child: Column(
+                  children: [
+                    Images(imageUrl: apartment.imageUrl),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(16),
+                      transform: Matrix4.translationValues(0, -16, 0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
                       ),
-                      SizedBox(height: 32),
-                      DetailedParagraph(
-                        title: 'العنوان',
-                        body:
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ApartmentPrice(price: apartment.price),
+                          // SizedBox(height: 20),
+                          // BookingDetails(
+                          //   bookingPercentage: 22,
+                          //   numOfAvailableDays: 5,
+                          //   numOfIntrestedPeople: 23,
+                          // ),
+                          SizedBox(height: 20),
+                          DetailedParagraph(
+                            title: 'وصف العقار',
+                            body:
                             ' مساحة الشقة 170 م ومسورة وفيها بئر مياه خاص ومبنى مؤسس لخمس طوابق بعد الدور الارضي بالقرب من مفترق ضبيط جنوب جامع ابو ايوب الانصاري',
+                          ),
+                          SizedBox(height: 20),
+                          DetailedParagraph(
+                            title: 'اتجاهات الشقة',
+                            body: 'الشقة على شارعين',
+                          ),
+                          SizedBox(height: 32),
+                          ApartmentDetails(apartment: apartment),
+                          SizedBox(height: 20),
+                          AvailableDays(),
+                          SizedBox(height: 32),
+                          Text(
+                            'قد يعجبك أيضاً',
+                            style: Constant.kHeadlineTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [HalfImageCard(), HalfImageCard()],
+                          ),
+                          SizedBox(height: 32),
+                          Text(
+                            'إبقى على معرفة',
+                            style: Constant.kHeadlineTextStyle,
+                          ),
+                          SizedBox(height: 20),
+                          TrackThisApartment(),
+                          SizedBox(height: 15),
+                          ReportButton(),
+                          SizedBox(height: 30),
+                          MakeAnOfferButton(),
+                        ],
                       ),
-                      SizedBox(height: 20),
-                      DetailedParagraph(
-                        title: 'نبذة عن العقار',
-                        body: 'الشقة على شارعين',
-                      ),
-                      SizedBox(height: 32),
-                      ApartmentDetails(apartment: apartment),
-                      SizedBox(height: 20),
-                      AvailableDays(),
-                      SizedBox(height: 32),
-                      Text(
-                        'قد يعجبك أيضاً',
-                        style: Constant.kHeadlineTextStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [HalfImageCard(), HalfImageCard()],
-                      ),
-                      SizedBox(height: 32),
-                      Text(
-                        'إبقى على معرفة',
-                        style: Constant.kHeadlineTextStyle,
-                      ),
-                      SizedBox(height: 20),
-                      TrackThisApartment(),
-                      SizedBox(height: 15),
-                      ReportButton(),
-                      SizedBox(height: 30),
-                      MakeAnOfferButton(),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               // SliverFillRemaining()
@@ -166,7 +171,8 @@ class HalfImageCard extends StatelessWidget {
                 ),
                 Text(apartments[0].location),
                 Text(
-                  ' ${apartments[0].room_number}  غرفة | ${apartments[0].bathroom_number} حمام | ${apartments[0].size} متر',
+                  ' ${apartments[0].room_number}  غرفة | ${apartments[0]
+                      .bathroom_number} حمام | ${apartments[0].size} متر',
                   style: GoogleFonts.tajawal(fontSize: 12),
                 )
               ],
@@ -259,8 +265,8 @@ class AvailableDays extends StatelessWidget {
                 SizedBox(width: 8),
                 Text(
                   'الأيام المتاحة للزيارة',
-                  style:
-                      Constant.kBodyTextStyle.copyWith(fontWeight: FontWeight.bold),
+                  style: Constant.kBodyTextStyle
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
               ],
@@ -276,6 +282,7 @@ class AvailableDays extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+
                 ///TODO : make the day name and times bold to stand out and attract user attention
                 Text(
                   'الأحد : من ال12 ظهراً حتى 1:30 ظهراً',
@@ -291,7 +298,7 @@ class AvailableDays extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 26, vertical: 4),
+                      EdgeInsets.symmetric(horizontal: 26, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(
@@ -396,7 +403,8 @@ class ApartmentDetails extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'مصعد',
-                    style: Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                    style:
+                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -418,7 +426,8 @@ class ApartmentDetails extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'مكيف',
-                    style: Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                    style:
+                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -440,7 +449,8 @@ class ApartmentDetails extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'مفروشة',
-                    style: Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                    style:
+                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -471,11 +481,10 @@ class ApartmentDetail extends StatelessWidget {
   final IconData iconData;
   final int num;
 
-  const ApartmentDetail(
-      {Key? key,
-      required this.label,
-      required this.iconData,
-      required this.num})
+  const ApartmentDetail({Key? key,
+    required this.label,
+    required this.iconData,
+    required this.num})
       : super(key: key);
 
   @override
@@ -500,15 +509,46 @@ class Images extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      transitionOnUserGestures: true,
-      tag: imageUrl,
-      child: Image.asset(
-        imageUrl,
-        fit: BoxFit.cover,
-        height: 300,
-        width: double.infinity,
-      ),
+    return Stack(
+      children: [
+        Hero(
+          transitionOnUserGestures: true,
+          tag: imageUrl,
+          child: Image.asset(
+            imageUrl,
+            fit: BoxFit.cover,
+            height: 300,
+            width: double.infinity,
+          ),
+        ),
+        Positioned(
+          top: 20,
+          right: 40,
+          left: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              GestureDetector(
+                onTap:(){
+                  print('added to favourites');
+                },
+                child: Icon(
+                  Icons.favorite_outline_rounded,
+                  size: 30,
+                ),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    Icons.arrow_forward,
+                    size: 30,
+                  )),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
@@ -544,10 +584,9 @@ class BookingDetails extends StatelessWidget {
   final int numOfIntrestedPeople;
   final int bookingPercentage;
 
-  BookingDetails(
-      {required this.bookingPercentage,
-      required this.numOfIntrestedPeople,
-      required this.numOfAvailableDays});
+  BookingDetails({required this.bookingPercentage,
+    required this.numOfIntrestedPeople,
+    required this.numOfAvailableDays});
 
   @override
   Widget build(BuildContext context) {
@@ -631,11 +670,13 @@ class ApartmentPrice extends StatelessWidget {
         children: [
           TextSpan(
             text: '\$$price',
-            style: GoogleFonts.tajawal(color: Colors.green, fontSize: 22),
+            style: GoogleFonts.tajawal(
+                color: Colors.green, fontSize: 22, fontWeight: FontWeight.bold),
           ),
           TextSpan(
             text: '/شهريا',
-            style: GoogleFonts.tajawal(color: Colors.black),
+            style: GoogleFonts.tajawal(
+                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 18),
           ),
         ],
       ),
@@ -645,8 +686,8 @@ class ApartmentPrice extends StatelessWidget {
 
 class BlurredOutAppBar extends SliverPersistentHeaderDelegate {
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset,
+      bool overlapsContent) {
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),

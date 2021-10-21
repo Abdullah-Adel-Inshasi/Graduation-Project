@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -15,30 +16,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF4EDEA),
       body: IndexedStack(
         index: stackIndex,
         children: [
           CustomScrollView(
+            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
                 backgroundColor: Colors.white,
+                centerTitle: true,
+                pinned: true,
+                floating: true,
                 title: Text(
                   'الملف الشخصي',
                   style: GoogleFonts.tajawal(
-                    fontSize: 16,
+                    fontSize: 20,
                     color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
-                actions: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: Colors.black,
-                        size: 30,
-                      )),
-                ],
+                elevation: 10,
+                shadowColor: Colors.black,
+
               ),
               SliverToBoxAdapter(
                 child: Padding(

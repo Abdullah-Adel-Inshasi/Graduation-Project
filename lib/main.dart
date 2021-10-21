@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: LandLordWrapper(),
+      home: Wrapper(),
     );
   }
 }

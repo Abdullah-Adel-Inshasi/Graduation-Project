@@ -60,7 +60,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
             BottomNavigationBarItem(
               icon:
                   Icon(_selectedIndex == 0 ? Icons.home : Icons.home_outlined),
-              label: 'عقاراتي',
+              label: 'طلباتي',
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -69,9 +69,9 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
             ),
             BottomNavigationBarItem(
               icon: Icon(_selectedIndex == 2
-                  ? Icons.notifications
-                  : Icons.notifications_none),
-              label: 'الاشعارات',
+                  ? Icons.message_outlined
+                  : Icons.message_outlined),
+              label: 'رسائل',
             ),
             BottomNavigationBarItem(
               icon: Icon(
