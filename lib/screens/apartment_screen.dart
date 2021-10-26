@@ -23,7 +23,7 @@ class ApartmentScreen extends StatelessWidget {
         child: Scaffold(
           body: CustomScrollView(
             physics:
-            BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               // SliverPersistentHeader(
               //   delegate: BlurredOutAppBar(),
@@ -59,12 +59,12 @@ class ApartmentScreen extends StatelessWidget {
                           DetailedParagraph(
                             title: 'وصف العقار',
                             body:
-                            ' مساحة الشقة 170 م ومسورة وفيها بئر مياه خاص ومبنى مؤسس لخمس طوابق بعد الدور الارضي بالقرب من مفترق ضبيط جنوب جامع ابو ايوب الانصاري',
+                                ' مساحة الشقة 170 م ومسورة وفيها بئر مياه خاص ومبنى مؤسس لخمس طوابق بعد الدور الارضي بالقرب من مفترق ضبيط جنوب جامع ابو ايوب الانصاري',
                           ),
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'اتجاهات الشقة',
-                            body: 'الشقة على شارعين',
+                            body: 'شمالي غربي',
                           ),
                           SizedBox(height: 32),
                           ApartmentDetails(apartment: apartment),
@@ -80,11 +80,7 @@ class ApartmentScreen extends StatelessWidget {
                             children: [HalfImageCard(), HalfImageCard()],
                           ),
                           SizedBox(height: 32),
-                          Text(
-                            'إبقى على معرفة',
-                            style: Constant.kHeadlineTextStyle,
-                          ),
-                          SizedBox(height: 20),
+
                           TrackThisApartment(),
                           SizedBox(height: 15),
                           ReportButton(),
@@ -112,15 +108,26 @@ class TrackThisApartment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 300,
-      color: Colors.red,
-      child: Row(
-        children: <Widget>[
-          Text('for'),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'إبقى على معرفة',
+          style: Constant.kHeadlineTextStyle,
+        ),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'توفر هذه الإضافة ضمان معرفتك في حال أن \nالعقار متاح و يمكنك الإطلاع على حالة العقار \nو بدء الإجراءات اللازمة',
+                style: GoogleFonts.tajawal(fontWeight: FontWeight.w600),
+              ),
+              Image.asset('assets/images/bell.png'),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -171,8 +178,7 @@ class HalfImageCard extends StatelessWidget {
                 ),
                 Text(apartments[0].location),
                 Text(
-                  ' ${apartments[0].room_number}  غرفة | ${apartments[0]
-                      .bathroom_number} حمام | ${apartments[0].size} متر',
+                  ' ${apartments[0].room_number}  غرفة | ${apartments[0].bathroom_number} حمام | ${apartments[0].size} متر',
                   style: GoogleFonts.tajawal(fontSize: 12),
                 )
               ],
@@ -282,7 +288,6 @@ class AvailableDays extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
                 ///TODO : make the day name and times bold to stand out and attract user attention
                 Text(
                   'الأحد : من ال12 ظهراً حتى 1:30 ظهراً',
@@ -298,7 +303,7 @@ class AvailableDays extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       padding:
-                      EdgeInsets.symmetric(horizontal: 26, vertical: 4),
+                          EdgeInsets.symmetric(horizontal: 26, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(
@@ -404,7 +409,7 @@ class ApartmentDetails extends StatelessWidget {
                   Text(
                     'مصعد',
                     style:
-                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -427,7 +432,7 @@ class ApartmentDetails extends StatelessWidget {
                   Text(
                     'مكيف',
                     style:
-                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -450,7 +455,7 @@ class ApartmentDetails extends StatelessWidget {
                   Text(
                     'مفروشة',
                     style:
-                    Constant.kBodyTextStyle.copyWith(color: Colors.white),
+                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(width: 5),
                   Container(
@@ -481,10 +486,11 @@ class ApartmentDetail extends StatelessWidget {
   final IconData iconData;
   final int num;
 
-  const ApartmentDetail({Key? key,
-    required this.label,
-    required this.iconData,
-    required this.num})
+  const ApartmentDetail(
+      {Key? key,
+      required this.label,
+      required this.iconData,
+      required this.num})
       : super(key: key);
 
   @override
@@ -502,23 +508,56 @@ class ApartmentDetail extends StatelessWidget {
   }
 }
 
-class Images extends StatelessWidget {
+class Images extends StatefulWidget {
   final String imageUrl;
 
   const Images({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
+  State<Images> createState() => _ImagesState();
+}
+
+class _ImagesState extends State<Images> {
+  late PageController _pageController;
+  @override
+  void initState() {
+    _pageController = PageController(viewportFraction: 0.8);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Hero(
-          transitionOnUserGestures: true,
-          tag: imageUrl,
-          child: Image.asset(
-            imageUrl,
-            fit: BoxFit.cover,
-            height: 300,
-            width: double.infinity,
+        Container(
+          height: 300,
+          child: PageView(
+            padEnds: true,
+            controller: _pageController,
+            children: [
+              // should be the cover image ALWAYS
+              Hero(
+                tag:widget.imageUrl,
+                child: Image.asset(
+                  widget.imageUrl,
+                  fit: BoxFit.cover,
+                  height: 300,
+                  width: double.infinity,
+                ),
+              ),
+              Image.asset(
+                'assets/images/house4.jpg',
+                fit: BoxFit.cover,
+                height: 300,
+                width: double.infinity,
+              ),
+
+              Image.asset(
+                'assets/images/house3.jpg',
+                fit: BoxFit.cover,
+                height: 300,
+                width: double.infinity,
+              )
+            ],
           ),
         ),
         Positioned(
@@ -529,7 +568,7 @@ class Images extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               GestureDetector(
-                onTap:(){
+                onTap: () {
                   print('added to favourites');
                 },
                 child: Icon(
@@ -584,9 +623,10 @@ class BookingDetails extends StatelessWidget {
   final int numOfIntrestedPeople;
   final int bookingPercentage;
 
-  BookingDetails({required this.bookingPercentage,
-    required this.numOfIntrestedPeople,
-    required this.numOfAvailableDays});
+  BookingDetails(
+      {required this.bookingPercentage,
+      required this.numOfIntrestedPeople,
+      required this.numOfAvailableDays});
 
   @override
   Widget build(BuildContext context) {
@@ -686,8 +726,8 @@ class ApartmentPrice extends StatelessWidget {
 
 class BlurredOutAppBar extends SliverPersistentHeaderDelegate {
   @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),

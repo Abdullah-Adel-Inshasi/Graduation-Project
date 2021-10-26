@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,55 +12,62 @@ class ApartmentPage_Landlord extends StatefulWidget {
 
 class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
   bool canEdit = false;
-  String address = '';
-  late TextEditingController addressTEC ;
+  String address = 'غزة - شارع النصر - دوار الشباب و الرياضة';
+  double rentPrice = 120;
+  bool isRented = false;
+  late TextEditingController addressTEC;
+  late PageController _pageController;
+
   @override
   void initState() {
     addressTEC = TextEditingController(text: address);
+    _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            title: Text('Apartment Name'),
-            backgroundColor: Colors.teal,
-            leading: BackButton(),
-            actions: [
-              Switch(value: canEdit, onChanged: (x)=>setState(() {
-                canEdit = x;
-              })),
-            ],
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 260,
-              width: double.infinity,
-              child: PageView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  Image.asset(
-                    'assets/images/fancyhouse.jpg',
-                    fit: BoxFit.cover,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              title: Text('Apartment Name'),
+              backgroundColor: Colors.teal,
+              leading: BackButton(),
+              actions: [
+                Switch(
+                  value: canEdit,
+                  onChanged: (x) => setState(
+                    () {
+                      canEdit = x;
+                    },
                   ),
-                  Image.asset(
-                    'assets/images/fancyhouse.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                  Image.asset(
-                    'assets/images/fancyhouse.jpg',
-                    fit: BoxFit.cover,
-                  )
-                ],
+                ),
+              ],
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                height: 260,
+                margin: EdgeInsets.only(top: 10),
+                width: double.infinity,
+                child: PageView.builder(
+                  controller: _pageController,
+                  physics: BouncingScrollPhysics(),
+                  padEnds: true,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Image.asset('assets/images/house4.jpg',fit: BoxFit.cover,),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -77,11 +85,12 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                         ),
                       ],
                     ),
-                   canEdit ? Text(''):SizedBox(height :5),
+                    canEdit ? Text('') : SizedBox(height: 5),
                     TextField(
                       textDirection: TextDirection.rtl,
                       controller: addressTEC,
-                      onChanged: (newAddress)=>setState(()=> address = newAddress),
+                      onChanged: (newAddress) =>
+                          setState(() => address = newAddress),
                       enabled: canEdit,
                       style: GoogleFonts.tajawal(
                           fontSize: 16, color: Colors.black),
@@ -93,49 +102,67 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                         ),
                       ),
                     ),
-                    canEdit ? Text(''):SizedBox(height :5),
+                    canEdit ? Text('') : SizedBox(height: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.vpn_key),
-                        SizedBox(width: 5),
-                        Text(
-                          'الحالة',
-                          style: GoogleFonts.tajawal(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+                        Row(children: [
+                          Icon(Icons.vpn_key),
+                          SizedBox(width: 5),
+                          Text(
+                            'الحالة : ${isRented ? 'مؤجرة' : 'متاح للإجار'}',
+                            style: GoogleFonts.tajawal(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ]),
+                        IgnorePointer(
+                          ignoring: !canEdit,
+                          child: Switch(
+                              value: isRented,
+                              onChanged: (x) => setState(() => isRented = x)),
+                        )
                       ],
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      'مؤجرة - 200\$ شهرياً',
-                      style: GoogleFonts.tajawal(
-                          fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Icon(Icons.date_range),
-                        SizedBox(width: 5),
-                        Text(
-                          'تاريخ استلام الايجار',
-                          textAlign: TextAlign.right,
-                          style: GoogleFonts.tajawal(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'ما بين 1 - 6 الشهر',
-                      style: GoogleFonts.tajawal(
-                          fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
+                    isRented
+                        ? Text(
+                            'مؤجرة حتى :',
+                            style: GoogleFonts.tajawal(
+                                fontSize: 18, fontWeight: FontWeight.w600),
+                          )
+                        : Text(''),
+                    isRented
+                        ? DateTimePicker(
+                            type: DateTimePickerType.dateTimeSeparate,
+                            dateMask: 'd MMM, yyyy',
+                            initialValue: DateTime.now().toString(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                            icon: Icon(Icons.event),
+                            dateLabelText: 'Date',
+                            timeLabelText: "Hour",
+                            selectableDayPredicate: (date) {
+                              // Disable weekend days to select from the calendar
+                              if (date.weekday == 6 || date.weekday == 7) {
+                                return false;
+                              }
+
+                              return true;
+                            },
+                            onChanged: (val) => print(val),
+                            validator: (val) {
+                              print(val);
+                              return null;
+                            },
+                            onSaved: (val) => print(val),
+                          )
+                        : Text(''),
+
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

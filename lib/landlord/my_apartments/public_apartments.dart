@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/landlord/manage_apartment.dart';
 
-import 'package:home_explorer/landlord/widgets/pressableChip.dart';
+import 'package:page_transition/page_transition.dart';
 class PublicApartments extends StatelessWidget {
   const PublicApartments({
     Key? key,
@@ -24,58 +25,21 @@ class ApartmentCard_Owner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 1,
-        ),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
       child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/house1.jpg',
-                height: 150,
-                width: 150,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(width: 25),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  /// TODO : Add the apartment details
-                  Text(': اسم الشقة',
-                      style: GoogleFonts.tajawal(fontSize: 16)),
-                  SizedBox(height: 8),
-                  Text(': المستأجر الحالي',
-                      style: GoogleFonts.tajawal(fontSize: 16)),
-                  SizedBox(height: 8),
-                  Text(': الحالة', style: GoogleFonts.tajawal(fontSize: 16)),
-                  SizedBox(height: 8),
-                  Text(": الاجار الشهري",
-                      style: GoogleFonts.tajawal(fontSize: 16)),
-                  SizedBox(height: 8),
-                  Text(': عدد الطلبات',
-                      style: GoogleFonts.tajawal(fontSize: 16)),
-                ],
-              ),
-
-            ],
+        children: [
+          ApartmnetCardLandlord(
+            apt_name: 'عمارة شارع العباس',
+            days_until_pay: 12,
+            imageUrl: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/21276944.jpg?k=c7df7bddc3522b878f60a3e2012c672d1fcbe8a7389aaa597d6ec4292c4a5b62&o=&hp=1',
+            rent: 150,
           ),
-          SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              PressableChip(label: 'حجب العقار عن المنصة'),
-              PressableChip(label: 'الرسائل'),
-              PressableChip(label: 'اختر مستأجر')
-            ],
+          ApartmnetCardLandlord(
+            apt_name: 'روف على الطابق الرابع',
+            days_until_pay: 2,
+            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7H7QOn-S1wlcX0RN632wtE-yl_zuOQK7jtA&usqp=CAU',
+            rent: 200,
           ),
         ],
       ),
@@ -83,3 +47,63 @@ class ApartmentCard_Owner extends StatelessWidget {
   }
 }
 
+class ApartmnetCardLandlord extends StatelessWidget {
+  final String imageUrl;
+  final String apt_name;
+  final int rent;
+  final int days_until_pay;
+
+  const ApartmnetCardLandlord(
+      {Key? key,
+        required this.imageUrl,
+        required this.apt_name,
+        required this.rent,
+        required this.days_until_pay})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+          context,
+          PageTransition(
+              child: ApartmentPage_Landlord(),
+              type: PageTransitionType.bottomToTop)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20),
+            ),
+            child: Image.network(
+              imageUrl,
+              width: double.infinity,
+              height: 140,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            apt_name,
+            style:
+            GoogleFonts.tajawal(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 4),
+          Text(
+            'الاجار الشهري : ${rent}\$',
+            style:
+            GoogleFonts.tajawal(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            'باقي لاستلام الاجار : ${days_until_pay} يوم',
+            style:
+            GoogleFonts.tajawal(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+}

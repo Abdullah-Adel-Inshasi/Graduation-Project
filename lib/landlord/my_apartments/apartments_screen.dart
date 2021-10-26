@@ -33,8 +33,9 @@ class _MyApartmentsState extends State<MyApartments>
         backgroundColor: Color(0xFFF4EDEA),
 
         appBar: AppBar(
+          automaticallyImplyLeading: true,
           title: Text(
-            'الطلبات',
+            'العقارات',
             style: GoogleFonts.tajawal(
                 color: Colors.white, fontWeight: FontWeight.w600),
           ),
@@ -56,26 +57,25 @@ class _MyApartmentsState extends State<MyApartments>
             tabs: [
               Tab(
                 icon: Icon(
-                  selected_index == 0 ? Icons.lock : Icons.lock_outlined,
-                  size: 32,
-                ),
-                child: Text('طلبات عامة', style: GoogleFonts.tajawal()),
-              ),
-              Tab(
-                icon: Icon(
                   Icons.public,
                   size: 32,
                 ),
-                child: Text('طلبات خاصة', style: GoogleFonts.tajawal()),
+                child: Text('عقارات عامة', style: GoogleFonts.tajawal()),
+              ),
+              Tab(
+                icon: Icon(
+                  selected_index == 0 ? Icons.lock : Icons.lock_outlined,
+                  size: 32,
+                ),
+                child: Text('عقارات خاصة', style: GoogleFonts.tajawal()),
               ),
             ],
-            onTap: (int tapped_tab) {
-              setState(
-                () => selected_index = tapped_tab,
-              );
-            },
+            onTap: (int tappedTab) => setState(
+                () => selected_index = tappedTab,
+              ),
           ),
         ),
         body: tabScreens[selected_index]);
   }
 }
+

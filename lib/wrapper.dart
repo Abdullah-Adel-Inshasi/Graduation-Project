@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_explorer/screens/bookmarks.dart';
 import 'package:home_explorer/screens/home_screen.dart';
 import 'package:home_explorer/screens/notifications_screen.dart';
 import 'package:home_explorer/screens/profile_screen.dart';
@@ -12,7 +13,7 @@ class _WrapperState extends State<Wrapper> {
   final List<Widget> _bnbScreens = [
     HomeScreen(),
     NotificationsScreen(),
-    Text('bookmarks'),
+    Bookmarks(),
     ProfileScreen(),
   ];
   int _selectedIndex = 0;
@@ -23,6 +24,7 @@ class _WrapperState extends State<Wrapper> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Color(0xFFF4EDEA),
+        drawer: Drawer(child: Text('155555555555555555'),),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int index) {
             setState(() {
@@ -38,19 +40,19 @@ class _WrapperState extends State<Wrapper> {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(_selectedIndex == 0 ? Icons.home:Icons.home_outlined),
               label: 'الرئيسية',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none),
+              icon: Icon(_selectedIndex == 1 ? Icons.notifications:Icons.notifications_none),
               label: 'الاشعارات',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_border),
+              icon: Icon(_selectedIndex == 2 ? Icons.bookmark:Icons.bookmark_border),
               label: 'الحجوزات',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
+              icon: Icon(_selectedIndex == 3 ? Icons.person:Icons.person_outline),
               label: 'الملف الشخصي',
             ),
           ],

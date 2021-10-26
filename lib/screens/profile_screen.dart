@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/screens/chat_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -21,28 +22,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         index: stackIndex,
         children: [
           CustomScrollView(
-            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
-                backgroundColor: Colors.white,
-                centerTitle: true,
+                backgroundColor: Colors.blue,
                 pinned: true,
                 floating: true,
                 title: Text(
                   'الملف الشخصي',
-                  style: GoogleFonts.tajawal(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
                 ),
                 elevation: 10,
                 shadowColor: Colors.black,
-
               ),
               SliverToBoxAdapter(
-                child: Padding(
+                child: Container(
                   padding: EdgeInsets.all(16),
+                  color: Color(0xFFF4EDEA),
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -113,9 +110,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 30),
                       NavigationItem(
-                        label: 'الإشعارات',
-                        icon: Icons.notifications_none,
-                        onTap: () => print('الإشعارات'),
+                        label: 'الرسائل',
+                        icon: Icons.message_outlined,
+                        onTap: () => setState(() {
+                          stackIndex = 2;
+                        }),
                       ),
                       SizedBox(height: 30),
                       NavigationItem(
@@ -147,18 +146,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           CustomScrollView(
             physics:
-            BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
-                backgroundColor: Colors.white,
-                elevation: 15,
+                backgroundColor: Colors.blue,
+                pinned: true,
+                floating: true,
                 title: Text(
-                  'الاعدادات',
-                  style: GoogleFonts.tajawal(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                  'الاعدادات و المساعدة',
+                  style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
                 ),
+                elevation: 10,
+                shadowColor: Colors.black,
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -168,16 +167,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     icon: Icon(
                       Icons.arrow_forward_ios_sharp,
-                      color: Colors.black,
+                      color: Colors.white,
                       size: 30,
                     ),
                   ),
                 ],
               ),
               SliverToBoxAdapter(
-                child: Padding(
+                child: Container(
+                  color: Color(0xFFF4EDEA),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -265,7 +265,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         icon: Icons.view_list_outlined,
                         label: 'شروط الاستخدام',
                       ),
-                      SizedBox(height: 16), NavigationItem(
+                      SizedBox(height: 16),
+                      NavigationItem(
                         onTap: () {
                           print('x');
                         },
@@ -279,13 +280,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ],
           ),
+          CustomScrollView(
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              SliverAppBar(
+                backgroundColor: Colors.blue,
+                pinned: true,
+                floating: true,
+                title: Text(
+                  'الرسائل',
+                  style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
+                ),
+                elevation: 10,
+                shadowColor: Colors.black,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        stackIndex = 0;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios_sharp,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    ChatWithUser(
+                      username: 'جميل فارس',
+                      networkImgURL:
+                          'https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5f469ea85cc82fc8d6083f05%2FAmazon-Founder-and-CEO-Jeff-Bezos%2F960x0.jpg%3Ffit%3Dscale',
+                      isRead: false,
+                      lastMessage: 'حسناً أراك غدا',
+                    ),
+                    ChatWithUser(
+                      username: 'جميل فارس',
+                      networkImgURL:
+                          'https://img.i-scmp.com/cdn-cgi/image/fit=contain,width=1098,format=auto/sites/default/files/styles/1200x800/public/d8/images/methode/2021/01/26/192d35d8-5618-11eb-84b3-e7426e7b8906_image_hires_131135.jpg?itok=7cjYpM-L&v=1611637908',
+                      isRead: true,
+                      lastMessage: 'السعر النهائي 120 دولار !',
+                    ),
+                    ChatWithUser(
+                      username: 'كمال السمكري',
+                      networkImgURL:
+                          'https://ichef.bbci.co.uk/news/640/cpsprodpb/9041/production/_117492963_mackenziescott2.jpg',
+                      isRead: false,
+                      lastMessage: 'صحيح ! السعر قابل للتفاوض',
+                    ),
+                    ChatWithUser(
+                      username: 'جميل فارس',
+                      networkImgURL:
+                          'https://images.unsplash.com/photo-1530268729831-4b0b9e170218?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',
+                      isRead: true,
+                      lastMessage: 'نعم العقار ما زال متاحاً',
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
+class ChatWithUser extends StatelessWidget {
+  final String networkImgURL;
+  final String username;
+  final String lastMessage;
+  final bool isRead;
 
+  const ChatWithUser(
+      {Key? key,
+      required this.networkImgURL,
+      required this.username,
+      required this.lastMessage,
+      required this.isRead})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Chat(imageUrl: networkImgURL,))),
+      tileColor: isRead ? Colors.grey[300] : Colors.transparent,
+      title: Text(username),
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(networkImgURL),
+      ),
+      subtitle: Text(lastMessage),
+      trailing: Column(
+        mainAxisAlignment:
+            isRead ? MainAxisAlignment.start : MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('05:46 صباحاً'),
+          isRead
+              ? Text('')
+              : Container(
+                  width: 14,
+                  height: 14,
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                )
+        ],
+      ),
+    );
+  }
+}
 
 class NavigationItem extends StatelessWidget {
   final String label;

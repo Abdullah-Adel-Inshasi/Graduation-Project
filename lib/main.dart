@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/landlord/wrapper.dart';
-import 'package:home_explorer/screens/onBoardingScreen.dart';
-import 'package:home_explorer/wrapper.dart';
-import 'package:home_explorer/landlord/my_apartments/apartments_screen.dart';
 
 
 void main() => runApp(MyApp());
@@ -18,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: Wrapper(),
+      home: LandLordWrapper(),
     );
   }
 }

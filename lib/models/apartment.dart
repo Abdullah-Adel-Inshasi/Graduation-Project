@@ -73,3 +73,172 @@ List<Apartment> apartments = [
     size: 250,
   )
 ];
+
+//
+// class User {
+//   final String name;
+//   final String email;
+//   final String phoneNumber;
+//   final String profileImgUrl;
+//
+//   User(this.name, this.email, this.phoneNumber, this.profileImgUrl);
+// }
+//
+// class Owner extends User {
+//   final List<RealEstate> myRealEstate;
+//
+//   Owner({
+//     required this.myRealEstate,
+//     required String name,
+//     required String email,
+//     required String phoneNumber,
+//     required String profileImgUrl,
+//   }) : super(name, email, phoneNumber, profileImgUrl);
+// }
+//
+// Owner owner = Owner(
+//   name: 'ahmad',
+//   email: 'blahblah@blah.com',
+//   phoneNumber: '123',
+//   profileImgUrl: '',
+//   myRealEstate: [],
+// );
+//
+// class Address {
+//   final String city;
+//   final String street;
+//   final String estate_no;
+//
+//   Address(this.city, this.street, this.estate_no);
+// }
+//
+// enum RealEstateType { home, workspace, shops }
+//
+// class RealEstate {
+//   final Owner owner;
+//   final RealEstateType type;
+//   final double downpayment;
+//   final double monthlyRent;
+//   final String name;
+//   final Address address;
+//   final double size;
+//   final List<String> imgUrl;
+//   final String coverImg;
+//   final String aboutEstate;
+//   final DateTime beginObservation;
+//   final DateTime endObservation;
+//   final bool isAvailable;
+//
+//   RealEstate(
+//       {required this.owner,
+//         required this.type,
+//         required this.downpayment,
+//         required this.monthlyRent,
+//         required this.name,
+//         required this.address,
+//         required this.size,
+//         required this.imgUrl,
+//         required this.coverImg,
+//         required this.aboutEstate,
+//         required this.beginObservation,
+//         required this.endObservation,
+//         required this.isAvailable});
+// }
+//
+// enum Direction {
+//   north,
+//   east,
+//   west,
+//   south,
+//   northEast,
+//   northWest,
+//   southWest,
+//   southEast
+// }
+//
+// enum Advantage { elevator, ac, nearSuperMarket, nearMosque, onCrossRoad }
+// enum HomeType { apartment, roof, house }
+//
+// class Home extends RealEstate {
+//   final int numOfBathroom;
+//   final int numOfRoom;
+//   final bool hasFurnature;
+//   final Direction direction;
+//   final List<Advantage> advantages;
+//   final HomeType typeOfHome;
+//
+//   Home(
+//       {required this.numOfBathroom,
+//         required this.numOfRoom,
+//         required this.hasFurnature,
+//         required this.direction,
+//         required this.advantages,
+//         required this.typeOfHome,
+//         required Owner owner,
+//         required RealEstateType type,
+//         required double downpayment,
+//         required double monthlyRent,
+//         required String name,
+//         required Address address,
+//         required double size,
+//         required List<String> imgUrl,
+//         required String coverImg,
+//         required String aboutEstate,
+//         required DateTime beginObservation,
+//         required DateTime endObservation,
+//         required bool isAvailable})
+//       : super(
+//       name: name,
+//       type: type,
+//       size: size,
+//       aboutEstate: aboutEstate,
+//       address: address,
+//       beginObservation: beginObservation,
+//       coverImg: coverImg,
+//       downpayment: downpayment,
+//       endObservation: endObservation,
+//       imgUrl: imgUrl,
+//       isAvailable: isAvailable,
+//       monthlyRent: monthlyRent,
+//       owner: owner);
+// }
+//
+// class WorkSpace extends RealEstate {
+//   WorkSpace(
+//       {required Owner owner,
+//         required RealEstateType type,
+//         required double downpayment,
+//         required double monthlyRent,
+//         required String name,
+//         required Address address,
+//         required double size,
+//         required List<String> imgUrl,
+//         required String coverImg,
+//         required String aboutEstate,
+//         required DateTime beginObservation,
+//         required DateTime endObservation,
+//         required bool isAvailable})
+//       : super(
+//       name: name,
+//       type: type,
+//       size: size,
+//       aboutEstate: aboutEstate,
+//       address: address,
+//       beginObservation: beginObservation,
+//       coverImg: coverImg,
+//       downpayment: downpayment,
+//       endObservation: endObservation,
+//       imgUrl: imgUrl,
+//       isAvailable: isAvailable,
+//       monthlyRent: monthlyRent,
+//       owner: owner);
+// }
+//
+// class WorkSpaceRoom {
+//   final double size;
+//   final double numOfDesks;
+//
+//   WorkSpaceRoom({required this.size, required this.numOfDesks});
+// }
+
+// List<Home> homes = [Home(numOfBathroom: 2, numOfRoom: 3, hasFurnature: true, direction: Direction.northEast, advantages: [Advantage.ac], typeOfHome: HomeType.apartment, owner: Owner(), type: RealEstateType.home, downpayment: 150, monthlyRent: 100, name: 'شقة 3', address: Address(), size: 140, imgUrl: imgUrl, coverImg: coverImg, aboutEstate: aboutEstate, beginObservation: beginObservation, endObservation: endObservation, isAvailable: isAvailable)];

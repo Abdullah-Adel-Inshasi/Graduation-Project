@@ -1,23 +1,19 @@
 import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/constants/styles.dart';
 import 'package:home_explorer/widgets/appBar.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class SearchOptionScreen extends StatelessWidget {
-  const SearchOptionScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Color(0xFFF4EDEA),
-
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
@@ -33,16 +29,33 @@ class SearchOptionScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    EstateType(),
+                    SizedBox(height: 32),
                     AveragePriceSelector(),
                     SizedBox(height: 64),
                     CitySelector(),
                     SizedBox(height: 16),
                     SizeSelector(),
                     SizedBox(height: 32),
-                    EstateType(),
-                    SizedBox(height: 32),
                     TimeSelector(),
-                    SizedBox(height: 50),
+                    SizedBox(height :15),
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.blue,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'بحث',
+                        style: GoogleFonts.tajawal(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.white
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -62,52 +75,58 @@ class TimeSelector extends StatefulWidget {
 }
 
 class _TimeSelectorState extends State<TimeSelector> {
+  List<String> timeRange = [
+    'قصير المدة (1- 3 شهور)',
+    'متوسط المدة (3 - 9 شهور)',
+    'طويل المدة (9+ أشهر)'
+  ];
+  late String selectedTimeRange;
+
+  @override
+  void initState() {
+    selectedTimeRange = timeRange[0];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final SfRangeValues _priceRange = SfRangeValues(1, 12);
-    final Function updateStartPrice;
-    final Function updateEndPrice;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('مدة العقد',style: GoogleFonts.tajawal(fontSize: 18,color: Colors.black),),
+        Text(
+          'مدة العقد',
+          style: GoogleFonts.tajawal(fontSize: 18, color: Colors.black),
+        ),
         SizedBox(height: 16),
-        SfRangeSelector(
-          child: SizedBox(
-            width: double.infinity,
-          ),
-          min: _priceRange.start,
-          max: _priceRange.end,
-          initialValues: _priceRange,
-          // showTicks: true,
-          // showDividers: true,
-          showLabels: true,
-          // enableIntervalSelection: true,
-          interval: 1,
-          enableTooltip: true,
-          stepSize: 1,
-          tooltipShape: SfRectangularTooltipShape(),
-          minorTickShape: SfTickShape(),
-          onChanged: (SfRangeValues values) {},
-          activeColor: Colors.blue,
-          inactiveColor: Colors.transparent,
-          enableIntervalSelection: true,
-
-        )
+        DropdownButton(
+          value: selectedTimeRange,
+          onChanged: (x) => setState(() => selectedTimeRange = x.toString()),
+          items: timeRange
+              .map((e) => DropdownMenuItem(
+                    child: Text(e),
+                    value: e,
+                  ))
+              .toList(),
+        ),
       ],
     );
   }
 }
 
 class EstateType extends StatefulWidget {
-  const EstateType({Key? key}) : super(key: key);
-
   @override
   State<EstateType> createState() => _EstateTypeState();
 }
 
 class _EstateTypeState extends State<EstateType> {
-  List<String> estateTypes = ['شقة', 'منزل', 'غرفة'];
+  List<String> estateTypes = ['شقة سكنية\\ منزل', 'مساحة عمل', 'متجر'];
+  late String selectedEstateType;
+
+  @override
+  void initState() {
+    selectedEstateType = estateTypes[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +138,11 @@ class _EstateTypeState extends State<EstateType> {
           style: kHeadlineTextStyle,
         ),
         DropdownButton(
-          value: estateTypes[0],
-          onChanged: (x) {},
+          borderRadius: BorderRadius.circular(15),
+          value: selectedEstateType,
+          onChanged: (x) {
+            setState(() => selectedEstateType = x.toString());
+          },
           items: estateTypes
               .map((e) => DropdownMenuItem(
                     child: Text(e),
@@ -178,7 +200,13 @@ class _CitySelectorState extends State<CitySelector> {
     'النصيرات'
   ];
 
-  String city = 'غزة';
+  late String city;
+
+  @override
+  void initState() {
+    city = 'غزة';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +219,7 @@ class _CitySelectorState extends State<CitySelector> {
         ),
         DropdownButton(
           value: city,
-          onChanged: (_) {},
+          onChanged: (x) => setState(() => city = x.toString()),
           items: cities
               .map(
                 (e) => DropdownMenuItem(

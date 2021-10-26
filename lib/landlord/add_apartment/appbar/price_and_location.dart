@@ -6,16 +6,15 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:dotted_border/dotted_border.dart';
 
-class PriceAndLocation extends StatefulWidget {
-  const PriceAndLocation({Key? key}) : super(key: key);
+class AddRealEstate extends StatefulWidget {
+  const AddRealEstate({Key? key}) : super(key: key);
 
   @override
-  _PriceAndLocationState createState() => _PriceAndLocationState();
+  _AddRealEstateState createState() => _AddRealEstateState();
 }
 
-class _PriceAndLocationState extends State<PriceAndLocation> {
+class _AddRealEstateState extends State<AddRealEstate> {
   List<String> cities = [
     'غزة',
     'رفح',
@@ -75,8 +74,13 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
               style: GoogleFonts.tajawal(
                   color: Colors.white, fontWeight: FontWeight.w600),
             ),
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
             backgroundColor: Colors.teal,
-            leading: Icon(Icons.menu),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -88,20 +92,56 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    'نوع العقار السكني',
+                    style: GoogleFonts.tajawal(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: DropdownButton(
+                      alignment: Alignment.centerRight,
+                      elevation: 4,
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(15),
+                      value: selectedTypeOfRealEstate,
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 30),
+                        child: Icon(Icons.arrow_drop_down_outlined),
+                      ),
+                      onChanged: (e) => setState(() {
+                        selectedTypeOfRealEstate = e.toString();
+                      }),
+                      items: typeOfRealEstae
+                          .map((e) => DropdownMenuItem(
+                                child: Text(
+                                  e,
+                                  style: GoogleFonts.tajawal(),
+                                ),
+                                value: e,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Text(
                     'اختر المنطقة',
                     style: GoogleFonts.tajawal(
                         fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 5),
                   Container(
-                    width: 120,
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
                     child: DropdownButton(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.centerRight,
+                      elevation: 4,
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(15),
                       value: selected_city,
-                      icon: Padding(
-                        padding: const EdgeInsets.only(right: 30),
-                        child: Icon(Icons.arrow_drop_down_outlined),
-                      ),
+                      icon: Icon(Icons.arrow_drop_down_outlined),
                       onChanged: (e) => setState(() {
                         selected_city = e.toString();
                       }),
@@ -110,6 +150,7 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                                 child: Text(
                                   e,
                                   style: GoogleFonts.tajawal(),
+                                  textAlign: TextAlign.center,
                                 ),
                                 value: e,
                               ))
@@ -121,7 +162,7 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                     decoration: InputDecoration(
                       icon: Icon(Icons.location_on_rounded),
                       label: Text(
-                        'العنوان',
+                        'عنوان تفصيلي',
                         style: GoogleFonts.tajawal(
                             fontSize: 14, fontWeight: FontWeight.w600),
                       ),
@@ -144,45 +185,6 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                     color: Colors.grey,
                     alignment: Alignment.center,
                     child: Text('خريطة'),
-                  ),
-                  SizedBox(height: 22),
-                  TextField(
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.monetization_on_sharp),
-                      label: Text('الاجار الشهري'),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 22,
-                  ),
-                  Text(
-                    'مدة العقد',
-                    style: GoogleFonts.tajawal(
-                        fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 5),
-                  DropdownButton(
-                    alignment: Alignment.centerRight,
-                    value: selected_timeframe,
-                    icon: Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Icon(Icons.arrow_drop_down_outlined),
-                    ),
-                    onChanged: (e) => setState(() {
-                      selected_timeframe = e.toString();
-                    }),
-                    items: rental_timeframe
-                        .map((e) => DropdownMenuItem(
-                              child: Text(
-                                e,
-                                style: GoogleFonts.tajawal(),
-                              ),
-                              value: e,
-                            ))
-                        .toList(),
                   ),
                   SizedBox(
                     height: 22,
@@ -257,35 +259,6 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                     'الخاص : سيتم عرض طلب التأجير على المنصة وسيتم قبول أي طلب استأجار وعرض وسائل الاتصال الخاصة بالمؤجر \n\n الخاص :سيتم عرض طلب التأجير على المنصة واخفاء وسائل الاتصال الخاصة بالمؤجر وعرضها عندا يقبل المؤجر طلب الاستأجار فقط.',
                     style: GoogleFonts.tajawal(fontSize: 12),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'نوع العقار السكني',
-                    style: GoogleFonts.tajawal(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  DropdownButton(
-                    alignment: Alignment.centerRight,
-                    value: selectedTypeOfRealEstate,
-                    icon: Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Icon(Icons.arrow_drop_down_outlined),
-                    ),
-                    onChanged: (e) => setState(() {
-                      selectedTypeOfRealEstate = e.toString();
-                    }),
-                    items: typeOfRealEstae
-                        .map((e) => DropdownMenuItem(
-                              child: Text(
-                                e,
-                                style: GoogleFonts.tajawal(),
-                              ),
-                              value: e,
-                            ))
-                        .toList(),
-                  ),
                   Text('عدد الغرف'),
                   ToggleButtons(
                     children: numOfRooms.map((e) => Text(e)).toList(),
@@ -330,46 +303,55 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                   ),
                   SizedBox(height: 15),
                   Text('المزايا'),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.ac_unit),
-                    value: hasAC,
-                    onChanged: (x) {
-                      setState(() {
-                        hasAC = x!;
-                      });
-                    },
-                    title: Text('مكيفة'),
+                  Wrap(
+                    children: [
+                      Chip(
+                        label: Text('مكيف'),
+
+                      ),
+                    ],
                   ),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.home_work_sharp),
-                    value: nearMosque,
-                    onChanged: (x) => setState(() => nearMosque = x!),
-                    title: Text('قريبة من مسجد'),
-                  ),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.store_mall_directory_outlined),
-                    value: nearSuperMarket,
-                    onChanged: (x) => setState(() => nearSuperMarket = x!),
-                    title: Text('قريبة من سوبرماركت'),
-                  ),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.elevator),
-                    value: hasElevator,
-                    onChanged: (x) => setState(() => hasElevator = x!),
-                    title: Text('مصعد'),
-                  ),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.garage),
-                    value: hasGarage,
-                    onChanged: (x) => setState(() => hasGarage = x!),
-                    title: Text('جراج'),
-                  ),
-                  CheckboxListTile(
-                    secondary: Icon(Icons.balcony),
-                    value: hasBalcony,
-                    onChanged: (x) => setState(() => hasBalcony = x!),
-                    title: Text('بلكونة'),
-                  ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.ac_unit),
+                  //   value: hasAC,
+                  //   onChanged: (x) {
+                  //     setState(() {
+                  //       hasAC = x!;
+                  //     });
+                  //   },
+                  //   title: Text('مكيفة'),
+                  // ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.home_work_sharp),
+                  //   value: nearMosque,
+                  //   onChanged: (x) => setState(() => nearMosque = x!),
+                  //   title: Text('قريبة من مسجد'),
+                  // ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.store_mall_directory_outlined),
+                  //   value: nearSuperMarket,
+                  //   onChanged: (x) => setState(() => nearSuperMarket = x!),
+                  //   title: Text('قريبة من سوبرماركت'),
+                  // ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.elevator),
+                  //   value: hasElevator,
+                  //   onChanged: (x) => setState(() => hasElevator = x!),
+                  //   title: Text('مصعد'),
+                  // ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.garage),
+                  //   value: hasGarage,
+                  //   onChanged: (x) => setState(() => hasGarage = x!),
+                  //   title: Text('جراج'),
+                  // ),
+                  // CheckboxListTile(
+                  //   secondary: Icon(Icons.balcony),
+                  //   value: hasBalcony,
+                  //   onChanged: (x) => setState(() => hasBalcony = x!),
+                  //   title: Text('بلكونة'),
+                  // ),
+                  SizedBox(height: 15),
                   Text('قم بإدراج الصور'),
                   GestureDetector(
                     onTap: () {
@@ -413,7 +395,7 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       /// implement post ad
                     },
                     child: Container(
@@ -430,6 +412,43 @@ class _PriceAndLocationState extends State<PriceAndLocation> {
                             fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 22),
+                  Text(
+                    'مدة العقد',
+                    style: GoogleFonts.tajawal(
+                        fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 5),
+                  DropdownButton(
+                    alignment: Alignment.centerRight,
+                    value: selected_timeframe,
+                    icon: Padding(
+                      padding: const EdgeInsets.only(right: 30),
+                      child: Icon(Icons.arrow_drop_down_outlined),
+                    ),
+                    onChanged: (e) => setState(() {
+                      selected_timeframe = e.toString();
+                    }),
+                    items: rental_timeframe
+                        .map((e) => DropdownMenuItem(
+                              child: Text(
+                                e,
+                                style: GoogleFonts.tajawal(),
+                              ),
+                              value: e,
+                            ))
+                        .toList(),
+                  ),
+                  SizedBox(height: 22),
+                  TextField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.monetization_on_sharp),
+                      label: Text('الاجار الشهري'),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),

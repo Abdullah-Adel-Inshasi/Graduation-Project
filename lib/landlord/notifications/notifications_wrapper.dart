@@ -33,9 +33,11 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
           style: GoogleFonts.tajawal(
               color: Colors.white, fontWeight: FontWeight.w600),
         ),
-        leading: GestureDetector(
-          child: Icon(Icons.menu),
-          onTap: () => Scaffold.of(context).openDrawer(),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
         ),
         bottom: TabBar(
           controller: tabController,

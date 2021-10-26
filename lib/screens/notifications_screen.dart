@@ -15,15 +15,11 @@ class NotificationsScreen extends StatelessWidget {
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.white,
-            centerTitle: true,
+            backgroundColor: Colors.blue,
             pinned: true,
             title: Text(
               'الإشعارات',
-              style: GoogleFonts.tajawal(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+              style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
             ),
           ),
           SliverToBoxAdapter(

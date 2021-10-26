@@ -41,54 +41,31 @@ class CustomAppBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      children: [
-        Image.asset('assets/images/path.png',color: Colors.black,),
-        Container(
-          height: 120,
-          color: Colors.blue,
-          padding: EdgeInsets.fromLTRB(16, 22, 16, 0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              GestureDetector(
-                onTap: _labelOnTap,
-                child: Text(
-                  '$_label',
-                  style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Container(
-                  width: 220,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                  ),
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              IconButton(
-                  onPressed: _iconOnTap,
-                  icon: Icon(
-                    _iconData,
-                    color: Colors.white,
-                    size: 30,
-                  ))
-            ],
+    return Container(
+      height: 120,
+      color: Colors.blue,
+      padding: EdgeInsets.fromLTRB(16, 22, 16, 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          GestureDetector(
+            onTap: _labelOnTap,
+            child: Text(
+              '$_label',
+              style: GoogleFonts.tajawal(color: Colors.white, fontSize: 22),
+            ),
           ),
-        ),
-      ],
+          Spacer(),
+          IconButton(
+            onPressed: _iconOnTap,
+            icon: Icon(
+              _iconData,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
