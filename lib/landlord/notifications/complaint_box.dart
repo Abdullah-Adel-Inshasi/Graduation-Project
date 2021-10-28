@@ -8,6 +8,7 @@ class ComplaintBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
 
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
       itemCount: complaints.length,

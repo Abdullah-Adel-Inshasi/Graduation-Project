@@ -30,52 +30,58 @@ class _MyApartmentsState extends State<MyApartments>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF4EDEA),
-
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: Text(
-            'العقارات',
-            style: GoogleFonts.tajawal(
-                color: Colors.white, fontWeight: FontWeight.w600),
+      backgroundColor: Color(0xFFF4EDEA),
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: Text(
+          'العقارات',
+          style: GoogleFonts.tajawal(
+              color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.menu,
+            color: Colors.white,
           ),
-          leading: GestureDetector(
-            child: Icon(
-              Icons.menu,
-              color: Colors.white,
+          onTap: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+        backgroundColor: Colors.teal,
+        bottom: TabBar(
+          indicatorColor: Color(0xFF12263A),
+          controller: tabController,
+          labelColor: Colors.black,
+          unselectedLabelColor: Color(0xFFC5D8D1),
+          tabs: [
+            Tab(
+              icon: Icon(
+                Icons.public,
+                size: 32,
+              ),
+              child: Text('عقارات عامة', style: GoogleFonts.tajawal()),
             ),
-            onTap: () {
-              Scaffold.of(context).openDrawer();
-            },
-          ),
-          backgroundColor: Colors.teal,
-          bottom: TabBar(
-            indicatorColor: Color(0xFF12263A),
-            controller: tabController,
-            labelColor: Colors.black,
-            unselectedLabelColor: Color(0xFFC5D8D1),
-            tabs: [
-              Tab(
-                icon: Icon(
-                  Icons.public,
-                  size: 32,
-                ),
-                child: Text('عقارات عامة', style: GoogleFonts.tajawal()),
+            Tab(
+              icon: Icon(
+                selected_index == 0 ? Icons.lock : Icons.lock_outlined,
+                size: 32,
               ),
-              Tab(
-                icon: Icon(
-                  selected_index == 0 ? Icons.lock : Icons.lock_outlined,
-                  size: 32,
-                ),
-                child: Text('عقارات خاصة', style: GoogleFonts.tajawal()),
-              ),
-            ],
-            onTap: (int tappedTab) => setState(
-                () => selected_index = tappedTab,
-              ),
+              child: Text('عقارات خاصة', style: GoogleFonts.tajawal()),
+            ),
+          ],
+          onTap: (int tappedTab) => setState(
+            () => selected_index = tappedTab,
           ),
         ),
-        body: tabScreens[selected_index]);
+      ),
+      body: CustomScrollView(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          SliverToBoxAdapter(
+            child: tabScreens[selected_index],
+          )
+        ],
+      ),
+    );
   }
 }
-

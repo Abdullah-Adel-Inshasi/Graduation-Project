@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/landlord/wrapper.dart';
+import 'package:home_explorer/normal_user/wrapper.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: LandLordWrapper(),
+      home: Wrapper(),
     );
   }
 }

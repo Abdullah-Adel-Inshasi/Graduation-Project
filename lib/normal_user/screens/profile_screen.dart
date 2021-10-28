@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:home_explorer/screens/chat_screen.dart';
+import 'package:home_explorer/normal_user/screens/chat_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -77,6 +78,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               )
                             ],
                           ),
+                          Spacer(),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Icon(Icons.edit),
+                          )
                         ],
                       ),
                       SizedBox(height: 20),
@@ -369,7 +375,12 @@ class ChatWithUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Chat(imageUrl: networkImgURL,))),
+          context,
+          MaterialPageRoute(
+              builder: (context) => Chat(
+                    imageUrl: networkImgURL,
+                    username: username,
+                  ))),
       tileColor: isRead ? Colors.grey[300] : Colors.transparent,
       title: Text(username),
       leading: CircleAvatar(

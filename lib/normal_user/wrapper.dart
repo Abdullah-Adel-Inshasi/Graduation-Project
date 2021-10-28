@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_explorer/screens/bookmarks.dart';
-import 'package:home_explorer/screens/home_screen.dart';
-import 'package:home_explorer/screens/notifications_screen.dart';
-import 'package:home_explorer/screens/profile_screen.dart';
+import 'package:home_explorer/normal_user/screens/bookmarks.dart';
+import 'package:home_explorer/normal_user/screens/home_screen.dart';
+import 'package:home_explorer/normal_user/screens/notifications_screen.dart';
+import 'package:home_explorer/normal_user/screens/profile_screen.dart';
 
 class Wrapper extends StatefulWidget {
   @override

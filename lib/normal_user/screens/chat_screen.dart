@@ -5,8 +5,9 @@ import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 
 
 class Chat extends StatelessWidget {
-  const Chat({Key? key, required this.imageUrl}) : super(key: key);
+  const Chat({Key? key, required this.imageUrl,required this.username}) : super(key: key);
   final String imageUrl;
+  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class Chat extends StatelessWidget {
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           slivers: [
             SliverPersistentHeader(
-              delegate: ChatAppBar(imageUrl: imageUrl),
+              delegate: ChatAppBar(imageUrl: imageUrl,username: username),
             ),
             SliverToBoxAdapter(
               child: SingleChildScrollView(
@@ -71,8 +72,9 @@ class Chat extends StatelessWidget {
 
 class ChatAppBar extends SliverPersistentHeaderDelegate {
   final String imageUrl;
+  final String username;
 
-  ChatAppBar({required this.imageUrl});
+  ChatAppBar({required this.imageUrl,required this.username});
 
   @override
   Widget build(
@@ -108,7 +110,7 @@ class ChatAppBar extends SliverPersistentHeaderDelegate {
           ),
           SizedBox(width: 12),
           Text(
-            'وداع ابو حصيرة',
+            username,
             textAlign: TextAlign.center,
             style: GoogleFonts.tajawal(
               fontSize: 18,

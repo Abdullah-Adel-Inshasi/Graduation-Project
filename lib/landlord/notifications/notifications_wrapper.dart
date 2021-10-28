@@ -24,38 +24,36 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF4EDEA),
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: Text(
-          'الاشعارات',
-          style: GoogleFonts.tajawal(
-              color: Colors.white, fontWeight: FontWeight.w600),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: Color(0xFFF4EDEA),
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          backgroundColor: Colors.teal,
+          title: Text(
+            'الاشعارات',
+            style: GoogleFonts.tajawal(
+                color: Colors.white, fontWeight: FontWeight.w600),
+          ),
+          bottom: TabBar(
+            controller: tabController,
+            labelColor: Colors.black,
+            indicatorColor: Color(0xFF12263A),
+            unselectedLabelColor: Color(0xFFC5D8D1),
+            tabs: [
+              Tab(text: 'اشعارات العقارات'),
+              Tab(text: 'صندوق الشكاوي'),
+            ],
+            onTap: (int index) {
+              setState(() {
+                selected_index = index;
+              });
+            },
+          ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
-        ),
-        bottom: TabBar(
-          controller: tabController,
-          labelColor: Colors.black,
-          indicatorColor: Color(0xFF12263A),
-          unselectedLabelColor: Color(0xFFC5D8D1),
-          tabs: [
-            Tab(text: 'اشعارات العقارات'),
-            Tab(text: 'صندوق الشكاوي'),
-          ],
-          onTap: (int index) {
-            setState(() {
-              selected_index = index;
-            });
-          },
-        ),
+        body: tabScreens[selected_index],
       ),
-      body: tabScreens[selected_index],
     );
   }
 }

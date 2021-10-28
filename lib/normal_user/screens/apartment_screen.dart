@@ -519,11 +519,13 @@ class Images extends StatefulWidget {
 
 class _ImagesState extends State<Images> {
   late PageController _pageController;
+
   @override
   void initState() {
     _pageController = PageController(viewportFraction: 0.8);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -531,31 +533,40 @@ class _ImagesState extends State<Images> {
         Container(
           height: 300,
           child: PageView(
-            padEnds: true,
             controller: _pageController,
+            padEnds: false,
             children: [
               // should be the cover image ALWAYS
-              Hero(
-                tag:widget.imageUrl,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Hero(
+                  tag: widget.imageUrl,
+                  child: Image.asset(
+                    widget.imageUrl,
+                    fit: BoxFit.cover,
+                    height: 300,
+                    width: double.infinity,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Image.asset(
-                  widget.imageUrl,
+                  'assets/images/house4.jpg',
                   fit: BoxFit.cover,
                   height: 300,
                   width: double.infinity,
                 ),
               ),
-              Image.asset(
-                'assets/images/house4.jpg',
-                fit: BoxFit.cover,
-                height: 300,
-                width: double.infinity,
-              ),
 
-              Image.asset(
-                'assets/images/house3.jpg',
-                fit: BoxFit.cover,
-                height: 300,
-                width: double.infinity,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Image.asset(
+                  'assets/images/house3.jpg',
+                  fit: BoxFit.cover,
+                  height: 300,
+                  width: double.infinity,
+                ),
               )
             ],
           ),

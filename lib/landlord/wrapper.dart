@@ -1,9 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/landlord/chats_wrapper/chat_wrapper.dart';
 import 'package:home_explorer/landlord/my_apartments/apartments_screen.dart';
 import 'package:home_explorer/landlord/notifications/notifications_wrapper.dart';
 import 'package:home_explorer/landlord/profile/landlord_homescreen.dart';
+import 'package:home_explorer/normal_user/screens/chat_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
-import 'add_apartment/appbar/price_and_location.dart';
+import 'add_apartment/appbar/add_realestate.dart';
 
 class LandLordWrapper extends StatefulWidget {
   const LandLordWrapper({Key? key}) : super(key: key);
@@ -16,7 +22,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
   final List<Widget> _bnbScreens = [
     MyApartments(),
     AddRealEstate(),
-    NotificationsWrapper(),
+    ChatWrapper(),
     // HomeScreen_Landlord(),
   ];
   int _selectedIndex = 0;
@@ -32,19 +38,48 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
         drawer: Drawer(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 40),
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/girl.jpg'),
-                  radius: 30,
+              Container(
+                height: 240,
+                width: double.infinity,
+                color: Colors.teal,
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                      ),
+                      alignment: Alignment.center,
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage('assets/images/girl.jpg'),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'ليلى مصباح',
+                      style: GoogleFonts.tajawal(
+                        color: Colors.white,
+                        fontSize: 22,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text('(059) - 2089866',
+                        textDirection: TextDirection.ltr,
+                        style: GoogleFonts.tajawal(
+                          color: Colors.white,
+                          fontSize: 22,
+                        ))
+                  ],
                 ),
-                title: Text('Ahmad Ahmad Ahmad '),
-                subtitle: Text('059-2089866'),
-                trailing: Icon(Icons.remove_red_eye),
               ),
               SizedBox(height: 30),
               SwitchListTile.adaptive(
-                title: Text('Aqarat Pro'),
+                title: Text('عقارات PRO'),
                 secondary: Icon(Icons.add),
                 value: isPro,
                 onChanged: (x) {
@@ -54,15 +89,22 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
                 },
               ),
               ListTile(
-                title: Text('show schedule'),
-                leading: Icon(Icons.date_range),
+                title: Text('الاشعارات'),
+                leading: Icon(Icons.notifications),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: NotificationsWrapper(),
+                          type: PageTransitionType.rightToLeft));
+                },
               ),
               ListTile(
-                title: Text('contact support'),
+                title: Text('الدعم و المساندة'),
                 leading: Icon(Icons.support_agent),
               ),
               ListTile(
-                title: Text('log out'),
+                title: Text('تسجيل خروج'),
                 leading: Icon(Icons.logout),
               )
             ],
@@ -85,7 +127,6 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
           unselectedIconTheme: IconThemeData(size: 15),
           selectedIconTheme: IconThemeData(size: 30),
           type: BottomNavigationBarType.shifting,
-
           items: [
             BottomNavigationBarItem(
               icon:
@@ -99,9 +140,9 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
             ),
             BottomNavigationBarItem(
               icon: Icon(_selectedIndex == 2
-                  ? Icons.notifications
-                  : Icons.notifications_none),
-              label: 'اشعارات',
+                  ? Icons.mail
+                  : Icons.mail_outline),
+              label: 'الرسائل',
             ),
             // BottomNavigationBarItem(
             //   icon: Icon(

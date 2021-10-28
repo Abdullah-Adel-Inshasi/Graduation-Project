@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/models/apartment.dart';
-import 'package:home_explorer/screens/search_options_screen.dart';
+import 'package:home_explorer/normal_user/screens/search_options_screen.dart';
 import 'package:home_explorer/widgets/widgets.dart';
 import 'apartment_screen.dart';
 

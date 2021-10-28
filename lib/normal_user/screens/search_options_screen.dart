@@ -38,7 +38,7 @@ class SearchOptionScreen extends StatelessWidget {
                     SizeSelector(),
                     SizedBox(height: 32),
                     TimeSelector(),
-                    SizedBox(height :15),
+                    SizedBox(height: 15),
                     Container(
                       width: double.infinity,
                       height: 50,
@@ -50,10 +50,9 @@ class SearchOptionScreen extends StatelessWidget {
                       child: Text(
                         'بحث',
                         style: GoogleFonts.tajawal(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white
-                        ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                     ),
                   ],
@@ -121,6 +120,8 @@ class EstateType extends StatefulWidget {
 class _EstateTypeState extends State<EstateType> {
   List<String> estateTypes = ['شقة سكنية\\ منزل', 'مساحة عمل', 'متجر'];
   late String selectedEstateType;
+  int numOfRooms = 0;
+  int numOfBathrooms = 0;
 
   @override
   void initState() {
@@ -150,6 +151,138 @@ class _EstateTypeState extends State<EstateType> {
                   ))
               .toList(),
         ),
+        selectedEstateType == estateTypes[0]
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'عدد الغرف',
+                    style:
+                        GoogleFonts.tajawal(fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          numOfRooms > 0
+                              ? setState(() {
+                                  numOfRooms--;
+                                })
+                              : null;
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.remove,
+                            color: Colors.white,
+                            size: 20,
+                          )),
+                        ),
+                      ),
+                      Text(
+                        numOfRooms.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            numOfRooms++;
+                          });
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 20,
+                          )),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'عدد الحمامات',
+                    style:
+                        GoogleFonts.tajawal(fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          numOfBathrooms > 0
+                              ? setState(() {
+                                  numOfBathrooms--;
+                                })
+                              : null;
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.remove,
+                            color: Colors.white,
+                            size: 20,
+                          )),
+                        ),
+                      ),
+                      Text(
+                        numOfBathrooms.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            numOfBathrooms++;
+                          });
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 20,
+                          )),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              )
+            : SizedBox(),
       ],
     );
   }
