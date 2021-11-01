@@ -142,7 +142,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       NavigationItem(
                         label: 'تسجيل الخروج',
                         icon: Icons.logout,
-                        onTap: () => print('تسجيل الخروج'),
+                        onTap: () => (){
+                          Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                        },
                       )
                     ],
                   ),

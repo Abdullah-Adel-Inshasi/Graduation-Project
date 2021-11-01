@@ -4,6 +4,8 @@ import 'package:home_explorer/normal_user/wrapper.dart';
 import 'package:home_explorer/splash_screen.dart';
 
 import 'auth/login_screen.dart';
+import 'map_screen.dart';
+import 'normal_user/screens/home_screen.dart';
 
 
 void main() => runApp(MyApp());
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       routes: {
         '/login' : (context) => LoginScreen(),
+        '/map' : (context) => MapScreen(),
       },
     );
   }

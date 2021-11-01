@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/auth/signup_screen_generic.dart';
+import 'package:home_explorer/normal_user/wrapper.dart';
 
 import '../size_config.dart';
 import 'getting_started_screen.dart';
@@ -172,6 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Wrapper()));
                         print("login");
                       },
                       child: Container(
