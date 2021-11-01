@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_explorer/auth/signup_screen.dart';
+import 'package:home_explorer/auth/signup_screen_generic.dart';
 
 import '../size_config.dart';
+import 'getting_started_screen.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xFFFEF9EF),
+        backgroundColor: Color(0xFFF6F6F6),
         body: Stack(
           children: [
             Container(
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'دخول',
                   style: TextStyle(
                     fontSize: SizeConfig.scaleTextFont(22),
-                    color: Color(0xFFFEF9EF),
+                    color: Color(0xFFF6F6F6),
                   ),
                 ),
                 margin: EdgeInsets.only(right: SizeConfig.scaleWidth(32),top:SizeConfig.scaleHeight(10),bottom: SizeConfig.scaleHeight(30)),
@@ -170,18 +171,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: SizeConfig.scaleHeight(55),
                     ),
                     GestureDetector(
-                      onTap: (){},
+                      onTap: (){
+                        print("login");
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         height: SizeConfig.scaleHeight(50),
                         width: double.infinity,
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                          color: Colors.teal,
+                          color: Color(0xff14688C),
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
                         ),
-                        child: Text('دخول', style: TextStyle(fontSize: SizeConfig.scaleTextFont(18),color: Colors.white)),
+                        child: Text('دخول', style: TextStyle(fontSize: SizeConfig.scaleTextFont(18),color: Color(0xffF6F6F6))),
                       ),
                     ),
                     SizedBox(
@@ -290,7 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignupScreen()));
+                                    builder: (context) => GettingStartedScreen()));
                           },
                           child: Text(
                             'التسجيل',
