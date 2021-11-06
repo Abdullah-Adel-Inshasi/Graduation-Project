@@ -34,14 +34,14 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xFFF4EDEA),
+        backgroundColor:Color(0xFFF6F6F6),
         drawer: Drawer(
           child: Column(
             children: <Widget>[
               Container(
                 height: 240,
                 width: double.infinity,
-                color: Colors.teal,
+                color:Color(0xFF14688C),
                 alignment: Alignment.center,
                 child: Column(
                   children: <Widget>[
@@ -121,7 +121,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
           },
           backgroundColor: Color(0xFFFEF9EF),
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Color(0xFF14688C),
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: true,
           unselectedIconTheme: IconThemeData(size: 15),

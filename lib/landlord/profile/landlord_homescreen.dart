@@ -26,7 +26,7 @@ class _HomeScreen_LandlordState extends State<HomeScreen_Landlord>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4EDEA),
+      backgroundColor: Color(0xFFF6F6F6),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
@@ -36,7 +36,7 @@ class _HomeScreen_LandlordState extends State<HomeScreen_Landlord>
               style: GoogleFonts.tajawal(
                   color: Colors.white, fontWeight: FontWeight.w600),
             ),
-            backgroundColor: Colors.teal,
+            backgroundColor: Color(0xFF14688C),
             forceElevated: true,
             leading: IconButton(
               icon: Icon(Icons.menu),

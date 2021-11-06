@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4EDEA),
+      backgroundColor: Color(0xFFF6F6F6),
       body: IndexedStack(
         index: stackIndex,
         children: [
@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
-                backgroundColor: Colors.blue,
+                backgroundColor: Color(0xFF14688C),
                 pinned: true,
                 floating: true,
                 title: Text(
@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   padding: EdgeInsets.all(16),
-                  color: Color(0xFFF4EDEA),
+                  color: Color(0xFFF6F6F6),
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -157,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
-                backgroundColor: Colors.blue,
+                backgroundColor: Color(0xFF14688C),
                 pinned: true,
                 floating: true,
                 title: Text(
@@ -183,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  color: Color(0xFFF4EDEA),
+                  color: Color(0xFFF6F6F6),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Column(
@@ -293,7 +293,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverAppBar(
-                backgroundColor: Colors.blue,
+                backgroundColor: Color(0xFF14688C),
                 pinned: true,
                 floating: true,
                 title: Text(

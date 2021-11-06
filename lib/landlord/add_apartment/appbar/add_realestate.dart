@@ -98,9 +98,9 @@ class _AddRealEstateState extends State<AddRealEstate> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Color(0xFFF4EDEA),
+      backgroundColor: Color(0xFFF6F6F6),
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xFF14688C),
         title: Text('أضف عقار',
             style: GoogleFonts.tajawal(
                 color: Colors.white, fontWeight: FontWeight.w600)),
@@ -111,177 +111,49 @@ class _AddRealEstateState extends State<AddRealEstate> {
           },
         ),
       ),
-      body: Stepper(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        type: StepperType.vertical,
-        currentStep: currentStep,
-        onStepTapped: (x) {
-          setState(() => currentStep = x);
-        },
-        onStepCancel: () {
-          currentStep == 0 ? null : setState(() => currentStep--);
-        },
-        onStepContinue: () {
-          currentStep < 5 ? setState(() => currentStep++) : _showMyDialog();
-        },
-        steps: [
-          Step(
-            state: currentStep > 0 ? StepState.complete : StepState.indexed,
-            isActive: currentStep > 0,
-            title: Text('اختر نوع العقار',
-                style: GoogleFonts.tajawal(
-                    color: Colors.black, fontWeight: FontWeight.w600)),
-            content: Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: DropdownButton(
-                alignment: Alignment.centerRight,
-                elevation: 4,
-                isExpanded: true,
-                borderRadius: BorderRadius.circular(15),
-                value: selectedTypeOfRealEstate,
-                icon: Padding(
-                  padding: const EdgeInsets.only(right: 30),
-                  child: Icon(Icons.arrow_drop_down_outlined),
-                ),
-                onChanged: (e) => setState(() {
-                  selectedTypeOfRealEstate = e.toString();
-                }),
-                items: typeOfRealEstate
-                    .map((e) => DropdownMenuItem(
-                          child: Text(
-                            e,
-                            style: GoogleFonts.tajawal(),
-                          ),
-                          value: e,
-                        ))
-                    .toList(),
-              ),
-            ),
-          ),
-          Step(
-            state: currentStep > 1 ? StepState.complete : StepState.indexed,
-            isActive: currentStep > 1,
-            title: Text('الموقع',
-                style: GoogleFonts.tajawal(
-                    color: Colors.black, fontWeight: FontWeight.w600)),
-            content: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: DropdownButton(
-                    alignment: Alignment.centerRight,
-                    elevation: 4,
-                    isExpanded: true,
-                    borderRadius: BorderRadius.circular(15),
-                    value: selected_city,
-                    icon: Icon(Icons.arrow_drop_down_outlined),
-                    onChanged: (e) => setState(() {
-                      selected_city = e.toString();
-                    }),
-                    items: cities
-                        .map((e) => DropdownMenuItem(
-                              child: Text(
-                                e,
-                                style: GoogleFonts.tajawal(),
-                                textAlign: TextAlign.center,
-                              ),
-                              value: e,
-                            ))
-                        .toList(),
-                  ),
-                ),
-                SizedBox(height: 18),
-                TextField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.location_on_rounded),
-                    label: Text(
-                      'عنوان تفصيلي',
-                      style: GoogleFonts.tajawal(
-                          fontSize: 14, fontWeight: FontWeight.w600),
-                    ),
-                    hintText: (' الحي - الشارع - اسم البناية ورقم الشقة'),
-                    alignLabelWithHint: false,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/images/map.png',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 170,
-                    alignment: Alignment(0, 0.5),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Step(
-            state: currentStep > 2 ? StepState.complete : StepState.indexed,
-            isActive: currentStep > 2,
-            title: Text('تفاصيل إضافية',
-                style: GoogleFonts.tajawal(
-                    color: Colors.black, fontWeight: FontWeight.w600)),
-            content:
-                detailsStep[typeOfRealEstate.indexOf(selectedTypeOfRealEstate)],
-          ),
-          Step(
-            state: currentStep > 3 ? StepState.complete : StepState.indexed,
-            isActive: currentStep > 3,
-            title: Text(
-              'السعر و مدة الإجار',
-              style: GoogleFonts.tajawal(
-                  color: Colors.black, fontWeight: FontWeight.w600),
-            ),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'السعر',
+      body: Theme(
+        data: ThemeData(
+            colorScheme: ColorScheme.light(
+                primary: Color(0xFF14688C),
+            )
+        ),
+        child: Stepper(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          type: StepperType.vertical,
+          currentStep: currentStep,
+          onStepTapped: (x) {
+            setState(() => currentStep = x);
+          },
+          onStepCancel: () {
+            currentStep == 0 ? null : setState(() => currentStep--);
+          },
+          onStepContinue: () {
+            currentStep < 5 ? setState(() => currentStep++) : _showMyDialog();
+          },
+          steps: [
+            Step(
+              state: currentStep > 0 ? StepState.complete : StepState.indexed,
+              isActive: currentStep > 0,
+              title: Text('اختر نوع العقار',
                   style: GoogleFonts.tajawal(
-                      color: Colors.black, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  width: 120,
-                  height: 50,
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    maxLength: 4,
-                    style:
-                        GoogleFonts.tajawal(fontSize: 18, color: Colors.black),
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        suffixText: 'شيكل',
-                        contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
-                  ),
-                ),
-                SizedBox(height: 12),
-                Text(
-                  ' مدة الإجار',
-                  style: GoogleFonts.tajawal(
-                      color: Colors.black, fontWeight: FontWeight.w600),
-                ),
-                DropdownButton(
+                      color: Colors.black, fontWeight: FontWeight.w600)),
+              content: Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButton(
                   alignment: Alignment.centerRight,
                   elevation: 4,
                   isExpanded: true,
                   borderRadius: BorderRadius.circular(15),
-                  value: selected_timeframe,
+                  value: selectedTypeOfRealEstate,
                   icon: Padding(
                     padding: const EdgeInsets.only(right: 30),
                     child: Icon(Icons.arrow_drop_down_outlined),
                   ),
                   onChanged: (e) => setState(() {
-                    selected_timeframe = e.toString();
+                    selectedTypeOfRealEstate = e.toString();
                   }),
-                  items: rental_timeframe
+                  items: typeOfRealEstate
                       .map((e) => DropdownMenuItem(
                             child: Text(
                               e,
@@ -291,127 +163,262 @@ class _AddRealEstateState extends State<AddRealEstate> {
                           ))
                       .toList(),
                 ),
-              ],
+              ),
             ),
-          ),
-          Step(
-              state: currentStep > 4 ? StepState.complete : StepState.indexed,
-              isActive: currentStep > 4,
+            Step(
+              state: currentStep > 1 ? StepState.complete : StepState.indexed,
+              isActive: currentStep > 1,
+              title: Text('الموقع',
+                  style: GoogleFonts.tajawal(
+                      color: Colors.black, fontWeight: FontWeight.w600)),
+              content: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: DropdownButton(
+                      alignment: Alignment.centerRight,
+                      elevation: 4,
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(15),
+                      value: selected_city,
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      onChanged: (e) => setState(() {
+                        selected_city = e.toString();
+                      }),
+                      items: cities
+                          .map((e) => DropdownMenuItem(
+                                child: Text(
+                                  e,
+                                  style: GoogleFonts.tajawal(),
+                                  textAlign: TextAlign.center,
+                                ),
+                                value: e,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(height: 18),
+                  TextField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.location_on_rounded),
+                      label: Text(
+                        'عنوان تفصيلي',
+                        style: GoogleFonts.tajawal(
+                            fontSize: 14, fontWeight: FontWeight.w600),
+                      ),
+                      hintText: (' الحي - الشارع - اسم البناية ورقم الشقة'),
+                      alignLabelWithHint: false,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/images/map.png',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 170,
+                      alignment: Alignment(0, 0.5),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Step(
+              state: currentStep > 2 ? StepState.complete : StepState.indexed,
+              isActive: currentStep > 2,
+              title: Text('تفاصيل إضافية',
+                  style: GoogleFonts.tajawal(
+                      color: Colors.black, fontWeight: FontWeight.w600)),
+              content:
+                  detailsStep[typeOfRealEstate.indexOf(selectedTypeOfRealEstate)],
+            ),
+            Step(
+              state: currentStep > 3 ? StepState.complete : StepState.indexed,
+              isActive: currentStep > 3,
               title: Text(
-                'ساعات الزيارة',
+                'السعر و مدة الإجار',
                 style: GoogleFonts.tajawal(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
-              content: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('من',
-                        style: GoogleFonts.tajawal(
-                            color: Colors.black, fontWeight: FontWeight.w600)),
-                    DateTimePicker(
-                      type: DateTimePickerType.dateTimeSeparate,
-                      dateMask: 'd MMM, yyyy',
-                      initialValue: DateTime.now().toString(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                      icon: Icon(Icons.event),
-                      dateLabelText: 'يوم',
-                      timeLabelText: "ساعة",
-                      selectableDayPredicate: (date) {
-                        // Disable weekend days to select from the calendar
-                        if (date.weekday == 6 || date.weekday == 7) {
-                          return false;
-                        }
-
-                        return true;
-                      },
-                      onChanged: (val) => print(val),
-                      validator: (val) {
-                        print(val);
-                        return null;
-                      },
-                      onSaved: (val) => print(val),
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'السعر',
+                    style: GoogleFonts.tajawal(
+                        color: Colors.black, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    width: 120,
+                    height: 50,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 4,
+                      style:
+                          GoogleFonts.tajawal(fontSize: 18, color: Colors.black),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          suffixText: 'شيكل',
+                          contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
                     ),
-                    Text('الى',
-                        style: GoogleFonts.tajawal(
-                            color: Colors.black, fontWeight: FontWeight.w600)),
-                    DateTimePicker(
-                      type: DateTimePickerType.dateTimeSeparate,
-                      dateMask: 'd MMM, yyyy',
-                      initialValue: DateTime.now().toString(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                      icon: Icon(Icons.event),
-                      dateLabelText: 'يوم',
-                      timeLabelText: "ساعة",
-                      selectableDayPredicate: (date) {
-                        if (date.weekday == 5) {
-                          return false;
-                        }
-
-                        return true;
-                      },
-                      onChanged: (val) => print(val),
-                      validator: (val) {
-                        print(val);
-                        return null;
-                      },
-                      onSaved: (val) => print(val),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    ' مدة الإجار',
+                    style: GoogleFonts.tajawal(
+                        color: Colors.black, fontWeight: FontWeight.w600),
+                  ),
+                  DropdownButton(
+                    alignment: Alignment.centerRight,
+                    elevation: 4,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(15),
+                    value: selected_timeframe,
+                    icon: Padding(
+                      padding: const EdgeInsets.only(right: 30),
+                      child: Icon(Icons.arrow_drop_down_outlined),
                     ),
-                  ],
-                ),
-              )),
-          Step(
-            state: currentStep > 5 ? StepState.complete : StepState.indexed,
-            isActive: currentStep > 5,
-            title: Text(
-              'رفع الصور',
-              style: GoogleFonts.tajawal(
-                  color: Colors.black, fontWeight: FontWeight.w600),
+                    onChanged: (e) => setState(() {
+                      selected_timeframe = e.toString();
+                    }),
+                    items: rental_timeframe
+                        .map((e) => DropdownMenuItem(
+                              child: Text(
+                                e,
+                                style: GoogleFonts.tajawal(),
+                              ),
+                              value: e,
+                            ))
+                        .toList(),
+                  ),
+                ],
+              ),
             ),
-            content: GestureDetector(
-              onTap: () {
-                /// implement upload picture
-              },
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.cloud_upload,
-                      size: 100,
-                      color: Colors.black,
-                    ),
-                    Text(
-                      'اختر صور من الاستوديو',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      'ملاحظة : أول صورة سوف تكون صورة الغلاف',
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
+            Step(
+                state: currentStep > 4 ? StepState.complete : StepState.indexed,
+                isActive: currentStep > 4,
+                title: Text(
+                  'ساعات الزيارة',
+                  style: GoogleFonts.tajawal(
+                      color: Colors.black, fontWeight: FontWeight.w600),
                 ),
-                alignment: Alignment.center,
-                width: double.infinity,
-                height: 220,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.teal[50],
-                  border: Border.all(color: Colors.grey),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6.0,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
+                content: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('من',
+                          style: GoogleFonts.tajawal(
+                              color: Colors.black, fontWeight: FontWeight.w600)),
+                      DateTimePicker(
+                        type: DateTimePickerType.dateTimeSeparate,
+                        dateMask: 'd MMM, yyyy',
+                        initialValue: DateTime.now().toString(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        icon: Icon(Icons.event),
+                        dateLabelText: 'يوم',
+                        timeLabelText: "ساعة",
+                        selectableDayPredicate: (date) {
+                          // Disable weekend days to select from the calendar
+                          if (date.weekday == 6 || date.weekday == 7) {
+                            return false;
+                          }
+
+                          return true;
+                        },
+                        onChanged: (val) => print(val),
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => print(val),
+                      ),
+                      Text('الى',
+                          style: GoogleFonts.tajawal(
+                              color: Colors.black, fontWeight: FontWeight.w600)),
+                      DateTimePicker(
+                        type: DateTimePickerType.dateTimeSeparate,
+                        dateMask: 'd MMM, yyyy',
+                        initialValue: DateTime.now().toString(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        icon: Icon(Icons.event),
+                        dateLabelText: 'يوم',
+                        timeLabelText: "ساعة",
+                        selectableDayPredicate: (date) {
+                          if (date.weekday == 5) {
+                            return false;
+                          }
+
+                          return true;
+                        },
+                        onChanged: (val) => print(val),
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => print(val),
+                      ),
+                    ],
+                  ),
+                )),
+            Step(
+              state: currentStep > 5 ? StepState.complete : StepState.indexed,
+              isActive: currentStep > 5,
+              title: Text(
+                'رفع الصور',
+                style: GoogleFonts.tajawal(
+                    color: Colors.black, fontWeight: FontWeight.w600),
+              ),
+              content: GestureDetector(
+                onTap: () {
+                  /// implement upload picture
+                },
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud_upload,
+                        size: 100,
+                        color: Colors.black,
+                      ),
+                      Text(
+                        'اختر صور من الاستوديو',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        'ملاحظة : أول صورة سوف تكون صورة الغلاف',
+                        style: TextStyle(fontSize: 10),
+                      )
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: 220,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.teal[50],
+                    border: Border.all(color: Colors.grey),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6.0,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -951,8 +958,8 @@ class _CustomChoiceState extends State<CustomChoice> {
         });
       },
       child: Chip(
-        label: Text(widget.label),
-        backgroundColor: isSelected ? Colors.greenAccent : Colors.black12,
+        label: Text(widget.label,style: GoogleFonts.tajawal(color: isSelected ? Colors.white:Colors.black),),
+        backgroundColor: isSelected ?Color(0xFF14688C).withOpacity(0.5) : Colors.black12,
         avatar: Icon(widget.iconData),
       ),
     );

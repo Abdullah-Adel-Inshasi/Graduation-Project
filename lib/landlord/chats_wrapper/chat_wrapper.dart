@@ -21,7 +21,7 @@ class ChatWrapper extends StatelessWidget {
                   Scaffold.of(context).openDrawer();
                 },
               ),
-              backgroundColor: Colors.teal,
+              backgroundColor: Color(0xFF14688C),
               pinned: true,
               floating: true,
               title: Text(

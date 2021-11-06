@@ -35,7 +35,7 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
           slivers: [
             SliverAppBar(
               title: Text('Apartment Name'),
-              backgroundColor: Colors.teal,
+              backgroundColor: Color(0xFF14688C),
               leading: BackButton(),
               actions: [
                 Switch(

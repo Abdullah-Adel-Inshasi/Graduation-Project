@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/normal_user/screens/search_options_screen.dart';
+import 'package:home_explorer/normal_user/screens/store_screen.dart';
+import 'package:home_explorer/normal_user/screens/workspace_screen.dart';
 import 'package:home_explorer/widgets/widgets.dart';
 import 'apartment_screen.dart';
 
@@ -16,8 +19,11 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
   int selectedView = 0;
+  int selectedRealEstateType = 0;
 
   toggleView() {
     setState(() {
@@ -25,7 +31,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  final List<Widget> screens = [ApartmentList(), Map()];
+  List<Widget> realEstates = [
+    ApartmentList(),
+    StoreList(),
+    WorkSpaceList(),
+  ];
+
+  late List<Widget> screens;
+
+  @override
+  void initState() {
+    tabController = TabController(initialIndex: 0, vsync: this, length: 3);
+    screens = [realEstates[selectedRealEstateType], Map()];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +58,201 @@ class _HomeScreenState extends State<HomeScreen> {
           iconOnTap: () => Navigator.push(context,
               MaterialPageRoute(builder: (context) => SearchOptionScreen())),
         ),
-        screens[selectedView]
+        selectedView == 0
+            ? SliverToBoxAdapter(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: TabBar(
+                    labelColor: Colors.black,
+                    controller: tabController,
+                    onTap: (x) {
+                      setState(() {
+                        selectedRealEstateType = x;
+                      });
+                      print(x.toString());
+                    },
+                    tabs: [
+                      Tab(
+                        text: 'منازل',
+                      ),
+                      Tab(
+                        text: 'متاجر',
+                      ),
+                      Tab(
+                        text: 'مساحة عمل',
+                      )
+                    ],
+                  ),
+                ),
+              )
+            : SliverToBoxAdapter(
+                child: SizedBox.shrink(),
+              ),
+        selectedView == 0 ? realEstates[selectedRealEstateType] : Map(),
       ],
+    );
+  }
+}
+
+class WorkSpaceList extends StatelessWidget {
+  const WorkSpaceList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => WorkSpaceScreen()));
+        },
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: <Widget>[
+              Hero(
+                transitionOnUserGestures: true,
+                tag: 'assets/images/house5.jpg',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(32),
+                      topLeft: Radius.circular(32)),
+                  child: Image.asset(
+                    'assets/images/house5.jpg',
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: double.infinity,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 15),
+                padding: EdgeInsets.all(10),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$120 / شهر ',
+                          style: GoogleFonts.tajawal(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          ' 1  غرفة | 2 حمام | 3 متر',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'Gaza',
+                      style: GoogleFonts.tajawal(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      'Abood',
+                      style: GoogleFonts.tajawal(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class StoreList extends StatelessWidget {
+  const StoreList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => StoreScreen()));
+        },
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: <Widget>[
+              Hero(
+                transitionOnUserGestures: true,
+                tag: 'assets/images/house5.jpg',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(32),
+                      topLeft: Radius.circular(32)),
+                  child: Image.asset(
+                    'assets/images/house5.jpg',
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: double.infinity,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 15),
+                padding: EdgeInsets.all(10),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$120 / شهر ',
+                          style: GoogleFonts.tajawal(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          ' 1  غرفة | 2 حمام | 3 متر',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'Gaza',
+                      style: GoogleFonts.tajawal(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      'Abood',
+                      style: GoogleFonts.tajawal(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -159,7 +371,7 @@ class _NewWidgetState extends State<NewWidget> {
     return Container(
       height: 88,
       width: double.infinity,
-      color: Colors.teal,
+      color: Color(0xFF14688C),
       padding: EdgeInsets.fromLTRB(12, 18, 30, 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -560,17 +772,24 @@ class _MapState extends State<Map> {
           ),
           onMapCreated: (GoogleMapController controller) {
             setState(() {
-              myMarkers.add(Marker(
+              myMarkers.add(
+                Marker(
                   markerId: MarkerId('1'),
-                  position:LatLng(31.466154, 34.423684),
-                  infoWindow: InfoWindow(title: "عنوان 1",snippet: "تفاصيل عن الشقة 1"),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-              ),);
-              myMarkers.add(Marker(
+                  position: LatLng(31.466154, 34.423684),
+                  infoWindow: InfoWindow(
+                      title: "عنوان 1", snippet: "تفاصيل عن الشقة 1"),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueAzure),
+                ),
+              );
+              myMarkers.add(
+                Marker(
                   markerId: MarkerId('2'),
-                  position:LatLng(31.448435, 34.392796),
-                  infoWindow: InfoWindow(title: "عنوان 2",snippet: "تفاصيل عن الشقة 2"),
-              ),);
+                  position: LatLng(31.448435, 34.392796),
+                  infoWindow: InfoWindow(
+                      title: "عنوان 2", snippet: "تفاصيل عن الشقة 2"),
+                ),
+              );
             });
             _controllerGoogleMap.complete(controller);
             newGoogleMapController = controller;

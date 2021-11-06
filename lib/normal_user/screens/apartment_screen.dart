@@ -25,10 +25,10 @@ class ApartmentScreen extends StatelessWidget {
             physics:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
-              // SliverPersistentHeader(
-              //   delegate: BlurredOutAppBar(),
-              //   pinned: true,
-              // ),
+              SliverPersistentHeader(
+                delegate: BlurredOutAppBar(),
+                pinned: true,
+              ),
 
               SliverToBoxAdapter(
                 child: Column(
@@ -67,7 +67,7 @@ class ApartmentScreen extends StatelessWidget {
                             body: 'شمالي غربي',
                           ),
                           SizedBox(height: 32),
-                          ApartmentDetails(apartment: apartment),
+                          ApartmentDetails(),
                           SizedBox(height: 20),
                           AvailableDays(),
                           SizedBox(height: 32),
@@ -232,7 +232,9 @@ class MakeAnOfferButton extends StatelessWidget {
         width: double.infinity,
         height: 44,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22), color: Colors.blue),
+          borderRadius: BorderRadius.circular(22),
+          color: Color(0xFF14688C),
+        ),
         child: Center(
           child: Text(
             'ابدأ الرهن الآن',
@@ -305,7 +307,7 @@ class AvailableDays extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 26, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Color(0xFF14688C),
                         borderRadius: BorderRadius.circular(
                           22,
                         ),
@@ -330,12 +332,6 @@ class AvailableDays extends StatelessWidget {
 }
 
 class ApartmentDetails extends StatelessWidget {
-  const ApartmentDetails({
-    Key? key,
-    required this.apartment,
-  }) : super(key: key);
-
-  final Apartment apartment;
 
   /// TODO : after you created the apartment class , add final Apartment [apartment]
   /// apartment gives access to details about the apartment :
@@ -364,16 +360,16 @@ class ApartmentDetails extends StatelessWidget {
                   ApartmentDetail(
                     label: 'غرف النوم',
                     iconData: Icons.bed,
-                    num: 3,
+                    value: '3',
                   ),
                   SizedBox(height: 5),
                   ApartmentDetail(
-                      label: 'الصالات', iconData: Icons.chair, num: 2),
+                      label: 'الصالات', iconData: Icons.chair, value: '2'),
                   SizedBox(height: 5),
                   ApartmentDetail(
                       label: 'دورات المياه',
                       iconData: Icons.bathtub_outlined,
-                      num: 3)
+                      value: '3')
                 ],
               ),
               Column(
@@ -382,16 +378,16 @@ class ApartmentDetails extends StatelessWidget {
                   ApartmentDetail(
                     label: 'مساحة الشقة',
                     iconData: Icons.format_size,
-                    num: apartment.size,
+                    value: '120',
                   ),
                   SizedBox(height: 5),
                   ApartmentDetail(
-                      label: 'الطابق', iconData: Icons.menu, num: 3),
+                      label: 'الطابق', iconData: Icons.menu, value: '3'),
                   SizedBox(height: 5),
                   ApartmentDetail(
                       label: 'رقم الشقة',
                       iconData: Icons.format_list_numbered,
-                      num: 202)
+                      value: '202')
                 ],
               ),
             ],
@@ -399,83 +395,351 @@ class ApartmentDetails extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          height: 40,
-          color: Colors.blue,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text(
-                    'مصعد',
-                    style:
-                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
-                  ),
-                  SizedBox(width: 5),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 18,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Color(0xFF14688C),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color: Colors.white),
                       ),
-                    ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            color: Color(0xFF14688C),
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    'مكيف',
-                    style:
-                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
-                  ),
-                  SizedBox(width: 5),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 18,
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Color(0xFF14688C),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color: Colors.white),
                       ),
-                    ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            color: Color(0xFF14688C),
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    'مفروشة',
-                    style:
-                        Constant.kBodyTextStyle.copyWith(color: Colors.white),
-                  ),
-                  SizedBox(width: 5),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 18,
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.grey.shade200,
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color: Color(0xFF14688C)),
                       ),
-                    ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
-        )
+        ),
+        Container(
+          width: double.infinity,
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.grey.shade200,
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color: Color(0xFF14688C)),
+                      ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Color(0xFF14688C),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color: Colors.white),
+                      ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            color: Color(0xFF14688C),
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.grey.shade200,
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'مصعد',
+                        style: Constant.kBodyTextStyle.copyWith(
+                          color: Colors.red,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Center(
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Container(
+        //   width: double.infinity,
+        //   height: 60,
+        //   color: Color(0xFF14688C),
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //     children: [
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //         children: <Widget>[
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مصعد',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.check,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مكيف',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.check,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مفروشة',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.check,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           )
+        //         ],
+        //       ),
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //         children: <Widget>[
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مصعد',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.close,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مكيف',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.check,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //           Row(
+        //             children: <Widget>[
+        //               Text(
+        //                 'مفروشة',
+        //                 style: Constant.kBodyTextStyle
+        //                     .copyWith(color: Colors.white),
+        //               ),
+        //               SizedBox(width: 5),
+        //               Container(
+        //                 width: 20,
+        //                 height: 20,
+        //                 decoration: BoxDecoration(
+        //                     shape: BoxShape.circle, color: Colors.white),
+        //                 child: Center(
+        //                   child: Icon(
+        //                     Icons.check,
+        //                     color: Color(0xFF14688C),
+        //                     size: 18,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           )
+        //         ],
+        //       )
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }
@@ -484,13 +748,13 @@ class ApartmentDetails extends StatelessWidget {
 class ApartmentDetail extends StatelessWidget {
   final String label;
   final IconData iconData;
-  final int num;
+  final String value;
 
   const ApartmentDetail(
       {Key? key,
       required this.label,
       required this.iconData,
-      required this.num})
+      required this.value})
       : super(key: key);
 
   @override
@@ -500,7 +764,7 @@ class ApartmentDetail extends StatelessWidget {
         Icon(iconData),
         SizedBox(width: 5),
         Text(
-          '$label : $num',
+          '$label : $value',
           style: Constant.kBodyTextStyle.copyWith(),
         ),
       ],
@@ -528,77 +792,46 @@ class _ImagesState extends State<Images> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 300,
-          child: PageView(
-            controller: _pageController,
-            padEnds: false,
-            children: [
-              // should be the cover image ALWAYS
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Hero(
-                  tag: widget.imageUrl,
-                  child: Image.asset(
-                    widget.imageUrl,
-                    fit: BoxFit.cover,
-                    height: 300,
-                    width: double.infinity,
-                  ),
-                ),
+    return Container(
+      height: 300,
+      child: PageView(
+        controller: _pageController,
+        padEnds: false,
+        children: [
+          // should be the cover image ALWAYS
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Hero(
+              tag: widget.imageUrl,
+              child: Image.asset(
+                widget.imageUrl,
+                fit: BoxFit.cover,
+                height: 300,
+                width: double.infinity,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Image.asset(
-                  'assets/images/house4.jpg',
-                  fit: BoxFit.cover,
-                  height: 300,
-                  width: double.infinity,
-                ),
-              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Image.asset(
+              'assets/images/house4.jpg',
+              fit: BoxFit.cover,
+              height: 300,
+              width: double.infinity,
+            ),
+          ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Image.asset(
-                  'assets/images/house3.jpg',
-                  fit: BoxFit.cover,
-                  height: 300,
-                  width: double.infinity,
-                ),
-              )
-            ],
-          ),
-        ),
-        Positioned(
-          top: 20,
-          right: 40,
-          left: 40,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  print('added to favourites');
-                },
-                child: Icon(
-                  Icons.favorite_outline_rounded,
-                  size: 30,
-                ),
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(
-                    Icons.arrow_forward,
-                    size: 30,
-                  )),
-            ],
-          ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Image.asset(
+              'assets/images/house3.jpg',
+              fit: BoxFit.cover,
+              height: 300,
+              width: double.infinity,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -750,13 +983,21 @@ class BlurredOutAppBar extends SliverPersistentHeaderDelegate {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              IconButton(onPressed: () {}, icon: Icon(Icons.share)),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.favorite_border),
+                  ),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.share))
+                ],
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.arrow_forward_ios_sharp),
-              )
+              ),
             ],
           ),
         ),
@@ -765,10 +1006,10 @@ class BlurredOutAppBar extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 75;
+  double get maxExtent => 50;
 
   @override
-  double get minExtent => 75;
+  double get minExtent => 50;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

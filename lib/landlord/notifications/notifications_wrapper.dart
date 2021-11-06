@@ -27,10 +27,10 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xFFF4EDEA),
+        backgroundColor: Color(0xFFF6F6F6),
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.teal,
+          backgroundColor: Color(0xFF14688C),
           title: Text(
             'الاشعارات',
             style: GoogleFonts.tajawal(

@@ -30,7 +30,7 @@ class _MyApartmentsState extends State<MyApartments>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4EDEA),
+      backgroundColor: Color(0xFFF6F6F6),
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -47,12 +47,12 @@ class _MyApartmentsState extends State<MyApartments>
             Scaffold.of(context).openDrawer();
           },
         ),
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xFF14688C),
         bottom: TabBar(
-          indicatorColor: Color(0xFF12263A),
+          indicatorColor: Colors.white,
           controller: tabController,
-          labelColor: Colors.black,
-          unselectedLabelColor: Color(0xFFC5D8D1),
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white60,
           tabs: [
             Tab(
               icon: Icon(

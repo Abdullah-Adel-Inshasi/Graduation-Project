@@ -10,12 +10,12 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4EDEA),
+      backgroundColor: Color(0xFFF6F6F6),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xFF14688C),
             pinned: true,
             title: Text(
               'الإشعارات',

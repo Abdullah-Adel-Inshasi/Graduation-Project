@@ -23,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xFFF4EDEA),
+        backgroundColor: Color(0xFFF6F6F6),
         drawer: Drawer(child: Text('155555555555555555'),),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int index) {
@@ -32,7 +32,7 @@ class _WrapperState extends State<Wrapper> {
             });
           },
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Color(0xFF14688C),
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: true,
           unselectedIconTheme: IconThemeData(size: 20),

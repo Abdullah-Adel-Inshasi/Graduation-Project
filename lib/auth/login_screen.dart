@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Color(0xFFF6F6F6),
+        // Color(0xFF14688C),
         body: Stack(
           children: [
             Container(

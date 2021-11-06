@@ -43,7 +43,7 @@ class CustomAppBar extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       height: 120,
-      color: Colors.blue,
+      color: Color(0xFF14688C),
       padding: EdgeInsets.fromLTRB(16, 22, 16, 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

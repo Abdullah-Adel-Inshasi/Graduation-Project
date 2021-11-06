@@ -13,7 +13,7 @@ class SearchOptionScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xFFF4EDEA),
+        backgroundColor: Color(0xFFF6F6F6),
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
@@ -44,7 +44,7 @@ class SearchOptionScreen extends StatelessWidget {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.blue,
+                        color: Color(0xFF14688C),
                       ),
                       alignment: Alignment.center,
                       child: Text(
@@ -501,7 +501,7 @@ class PriceRangeSelector extends StatelessWidget {
         updateStartPrice(values.start);
         updateEndPrice(values.end);
       },
-      activeColor: Colors.blue,
+      activeColor: Color(0xFF14688C),
       inactiveColor: Colors.transparent,
     );
   }
