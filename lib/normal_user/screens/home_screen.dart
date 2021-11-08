@@ -14,6 +14,7 @@ import 'package:home_explorer/normal_user/screens/workspace_screen.dart';
 import 'package:home_explorer/widgets/widgets.dart';
 import 'apartment_screen.dart';
 
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();

@@ -4,6 +4,7 @@ import 'package:home_explorer/normal_user/wrapper.dart';
 import 'package:home_explorer/splash_screen.dart';
 
 import 'auth/login_screen.dart';
+import 'auth/signup_screen_generic.dart';
 import 'normal_user/screens/home_screen.dart';
 
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: Wrapper(),
+      home: LoginScreen(),
+      // home: Wrapper(),
       // home: LandLordWrapper(),
       routes: {
         '/login' : (context) => LoginScreen(),

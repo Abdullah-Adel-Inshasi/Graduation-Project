@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/auth/signup_landlord.dart';
+import 'package:home_explorer/models/apartment.dart';
+import 'package:home_explorer/models/user.dart';
+import 'package:home_explorer/normal_user/wrapper.dart';
 
 import '../size_config.dart';
 
@@ -17,8 +20,10 @@ class SignupScreenGeneric extends StatefulWidget {
 
 class _SignupScreenGenericState extends State<SignupScreenGeneric> {
 
+  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirm_password = TextEditingController();
   TextEditingController _mobile = TextEditingController();
   TextEditingController age = TextEditingController();
 
@@ -38,6 +43,12 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
     });
   }
 
+  setSelectedRadio2(int val){
+    setState(() {
+      selectedValue2 = val;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +60,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
         body: SingleChildScrollView(
           child: Container(
             child: Stack(
-
               children: [
                 Container(
                   child: Image.asset('assets/images/login.png'),
@@ -108,13 +118,13 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                             child: Padding(
                               padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
                               child: TextField(
-                                controller: email,
+                                controller: name,
                                 cursorColor: Colors.black,
                                 decoration: InputDecoration(
                                     hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
                                     focusedBorder: InputBorder.none,
                                     border: InputBorder.none,
-                                    hintText: "البريد الإلكتروني"
+                                    hintText: 'الإسم الكامل'
                                 ),
                               ),
                             ),
@@ -122,7 +132,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                           SizedBox(
                             height: SizeConfig.scaleHeight(20),
                           ),
-
                           Row(
                             children: [
                               Icon(Icons.mail, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
@@ -167,7 +176,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                           SizedBox(
                             height: SizeConfig.scaleHeight(20),
                           ),
-
                           Row(
                             children: [
                               Icon(Icons.phone, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(20),),
@@ -252,7 +260,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                           SizedBox(
                             height: SizeConfig.scaleHeight(10),
                           ),
-
                           Row(
                             children: [
                               Icon(Icons.lock, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
@@ -329,7 +336,7 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                             child: Padding(
                               padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
                               child: TextField(
-                                controller: password,
+                                controller: confirm_password,
                                 cursorColor: Colors.black,
                                 obscureText: isObscure1,
                                 decoration: InputDecoration(
@@ -344,20 +351,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                           SizedBox(
                             height: SizeConfig.scaleHeight(10),
                           ),
-                          // Container(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Text(
-                          //     'اختر نوع المستخدم : ',
-                          //     textAlign: TextAlign.right,
-                          //     style: TextStyle(
-                          //       fontSize: SizeConfig.scaleTextFont(16),
-                          //       color: Color(0xFF8B8B8B),
-                          //     ),
-                          //   ),
-                          // ),
-                          // SizedBox(
-                          //   height: SizeConfig.scaleHeight(10),
-                          // ),
                           /************************/
                           Visibility(
                             visible: widget.type==1,
@@ -569,7 +562,7 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                               groupValue: selectedValue2,
                                               onChanged: (int? value) {
                                                 isSelectedYes2 = true;
-                                                setSelectedRadio(value!);
+                                                setSelectedRadio2(value!);
                                               },),
                                             alignment: Alignment.centerLeft,
                                           ),
@@ -590,7 +583,7 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                               groupValue: selectedValue2,
                                               onChanged: (int? value) {
                                                 isSelectedYes2 = false;
-                                                setSelectedRadio(value!);
+                                                setSelectedRadio2(value!);
                                               },),
                                             alignment: Alignment.centerLeft,
                                           ),
@@ -606,100 +599,58 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                               ],
                             ),
                           ),
-                          // Row(
-                          //   children: [
-                          //     GestureDetector(
-                          //       onTap: (){
-                          //         setState(() {
-                          //           isSelected = !isSelected;
-                          //         });
-                          //       },
-                          //       child: Container(
-                          //         width: 120,
-                          //         height: 50,
-                          //         decoration: BoxDecoration(
-                          //           // border: isSelected ? null : Border.all(color: Color(0xFF14688C)),
-                          //           color: isSelected ? Color(0xFF14688C) : Colors.white,
-                          //           shape: BoxShape.rectangle,
-                          //           borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
-                          //         ),
-                          //         padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
-                          //         child: Text(
-                          //           'مستاجر',
-                          //           style: TextStyle(
-                          //             fontSize: SizeConfig.scaleTextFont(16),
-                          //             color: isSelected ?Colors.white: Color(0xFF333333) ,
-                          //           ),
-                          //           textAlign: TextAlign.center,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(
-                          //       width: SizeConfig.scaleWidth(15),
-                          //     ),
-                          //     GestureDetector(
-                          //       onTap: (){
-                          //         setState(() {
-                          //           isSelected = !isSelected;
-                          //         });
-                          //       },
-                          //       child: Container(
-                          //         width: 120,
-                          //         height: 50,
-                          //         decoration: BoxDecoration(
-                          //           // border: !isSelected ? null : Border.all(color: Color(0xFF14688C)),
-                          //           color: !isSelected ? Color(0xFF14688C) : Colors.white,
-                          //           shape: BoxShape.rectangle,
-                          //           borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
-                          //         ),
-                          //         padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
-                          //         child: Text(
-                          //           'صاحب عقار',
-                          //           style: TextStyle(
-                          //             fontSize: SizeConfig.scaleTextFont(16),
-                          //             color: !isSelected ?Colors.white: Color(0xFF333333),
-                          //           ),
-                          //           textAlign: TextAlign.center,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          SizedBox(height: SizeConfig.scaleHeight(20),),
+                          SizedBox(height: SizeConfig.scaleHeight(40),),
+                          GestureDetector(
+                            onTap: (){
+                              if(name.text.isNotEmpty&&email.text.isNotEmpty&&password.text.isNotEmpty
+                              && confirm_password.text.isNotEmpty&&_mobile.text.isNotEmpty){
+                                if(password.text==confirm_password.text){
+                                  if(widget.type==2){
+                                    if(selectedValue2==1){
+                                      landLord.add(LandLord.isOffice(id: landLord.length, fullName: name.text.toString(),
+                                          email: email.text.toString(), phoneNumber: _mobile.text.toString(),
+                                          password: password.text.toString(), isRealEstateOffice: selectedValue2==1,
+                                          OfficeName: name.text.toString(),OfficeAddress: Address(city: "city", street: "street", estateNo: "estateNo")));
+                                    }else{
+                                      landLord.add(LandLord(id: landLord.length, fullName: name.text.toString(),
+                                          email: email.text.toString(), phoneNumber: _mobile.text.toString(),
+                                          password: password.text.toString(), isRealEstateOffice: selectedValue2==1));
+                                    }
+                                  }else{
+                                    // normalUser.add(value);
+                                  }
+                                }else{
+                                  print("كلمة المرور غير متطابقة");
+                                }
+                              }else{
+                                print("يرجى التأكد من جميع البيانات المطلوبة");
+                              }
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => Wrapper()));
+                              print("login");
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: SizeConfig.scaleHeight(50),
+                              width: double.infinity,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Color(0xff14688C),
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                              ),
+                              child: Text('تسجيل', style: TextStyle(fontSize: SizeConfig.scaleTextFont(18),color: Color(0xffF6F6F6))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: SizeConfig.scaleHeight(20),
+                          ),
                         ],
                       ),
                     ),
-
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: [
-                    //     GestureDetector(
-                    //       onTap: (){
-                    //         Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //                 builder: (context) => SignupLandlord()));
-                    //       },
-                    //       child: Container(
-                    //         width: SizeConfig.scaleWidth(100),
-                    //         height: SizeConfig.scaleHeight(55),
-                    //         decoration: BoxDecoration(
-                    //           color: Color(0xFF14688C),
-                    //           borderRadius: BorderRadius.only(
-                    //             topLeft: Radius.circular(0),
-                    //             bottomLeft: Radius.circular(0),
-                    //             topRight: Radius.circular(50),
-                    //             bottomRight: Radius.circular(50),
-                    //           ),
-                    //         ),
-                    //         alignment: Alignment.center,
-                    //         child: Text("التالي", style: TextStyle(fontSize: SizeConfig.scaleTextFont(20),color: Colors.white),),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(
-                      height: SizeConfig.scaleHeight(20),
+                      height: SizeConfig.scaleHeight(30),
                     ),
                   ],
                 )],

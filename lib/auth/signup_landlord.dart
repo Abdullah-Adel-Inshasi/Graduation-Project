@@ -12,6 +12,7 @@ class SignupLandlord extends StatefulWidget {
 
 class _SignupLandlordState extends State<SignupLandlord> {
 
+
   // TextEditingController email = TextEditingController();
 
   TextEditingController age = TextEditingController();
@@ -54,7 +55,6 @@ class _SignupLandlordState extends State<SignupLandlord> {
                     SizedBox(
                       height: SizeConfig.scaleHeight(150),
                     ),
-
                     Row(
                       children: [
                         Icon(Icons.calendar_today_outlined, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(20),),

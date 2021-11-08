@@ -9,6 +9,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/models/apartment.dart';
 
 class AddRealEstate extends StatefulWidget {
   const AddRealEstate({Key? key}) : super(key: key);
@@ -421,6 +422,14 @@ class _AddRealEstateState extends State<AddRealEstate> {
         ),
       ),
     );
+  }
+  void add(){
+    // home.add(),
+    Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast,numOfHalls: 2,floor: 6,
+    typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
+    monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
+    coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
+    endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true);
   }
 }
 

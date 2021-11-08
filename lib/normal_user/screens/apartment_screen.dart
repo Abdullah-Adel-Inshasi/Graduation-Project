@@ -10,6 +10,48 @@ import 'package:home_explorer/constants/styles.dart';
 import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/constants/styles.dart' as Constant;
 
+String getDate(DateTime open,DateTime close){
+  String openDay = '';
+  String openHour=getTime(open.hour);
+  String closeHour =getTime(close.hour);
+
+  switch (open.weekday) {
+    case 1:
+      openDay = 'الاثنين';
+      break;
+    case 2:
+      openDay = 'الثلاثاء';
+      break;
+    case 3:
+      openDay = 'الأربعاء';
+      break;
+    case 4:
+      openDay = 'الخميس';
+      break;
+    case 5:
+      openDay = 'الجمعة';
+      break;
+    case 6:
+      openDay = 'السبت';
+      break;
+    case 7:
+      openDay = 'الأحد';
+      break;
+  }
+
+  return openDay +" : من " + openHour + ' حتى ' + closeHour;
+}
+
+String getTime(int hour){
+  String hourAsString ='';
+  if(hour <= 12){
+    hourAsString = '$hour مساءً';
+  }else{
+    hourAsString = '${hour-12} صباحاً';
+  }
+  return hourAsString;
+}
+
 class ApartmentScreen extends StatelessWidget {
   final Home home;
 
@@ -255,28 +297,6 @@ class AvailableDays extends StatelessWidget {
   final DateTime end;
   AvailableDays({required this.start, required this.end});
 
-  // String day = "";
-  // String hours = "";
-  // String minutes = "";
-  // String timing = "";
-  //
-  //
-  // String getDate(DateTime date){
-  //   switch(date.day){
-  //     case 1 : day = "الإثنين";break;
-  //     case 2 : day = "الثلاثاء";break;
-  //     case 3 : day = "الأربعاء";break;
-  //     case 4 : day = "الخميس";break;
-  //     case 5 : day = "الجمعة";break;
-  //     case 6 : day = "السبت";break;
-  //     case 7 : day = "الأحد";break;
-  //   }
-  //   if(date.hour>12){
-  //
-  //   }
-  //   return "";
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -316,8 +336,7 @@ class AvailableDays extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ///TODO : make the day name and times bold to stand out and attract user attention
-                Text('${start.toString()}',
-                  // 'الأحد : من ال12 ظهراً حتى 1:30 ظهراً',
+                Text(getDate(start,end),
                   style: Constant.kBodyTextStyle,
                 ),
                 Text(

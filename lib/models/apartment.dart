@@ -315,6 +315,7 @@ class WorkSpace extends RealEstate {
       owner: owner);
 }
 
+
 List<Store> store = [
   Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
       monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
@@ -326,14 +327,14 @@ Address address1 = Address(city: "غزة", street: "شارع الشهداء", es
 Address address2 = Address(city: "رفح", street: "شارع الثورة", estateNo: "غرب مخبز الدهشان");
 
 DateTime startDate1 = DateTime(2021,2,19,12,30,0,0,0);
-DateTime EndDate1 = DateTime(2021,2,25,12,30,0,0,0);
+DateTime EndDate1 = DateTime(2021,2,25,30,30,0,0,0);
+
 List<Home> home = [
   Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast,numOfHalls: 2,floor: 6,
       typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
       monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
       coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
       endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
-
   Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast,numOfHalls: 1,floor: 2,
       typeOfHome: HomeType.house, owner: owner, downpayment: 200,
       monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
