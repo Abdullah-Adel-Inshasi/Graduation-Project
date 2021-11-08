@@ -11,9 +11,9 @@ import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/constants/styles.dart' as Constant;
 
 class ApartmentScreen extends StatelessWidget {
-  final Apartment apartment;
+  final Home home;
 
-  const ApartmentScreen({Key? key, required this.apartment}) : super(key: key);
+  const ApartmentScreen({Key? key, required this.home}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ApartmentScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    Images(imageUrl: apartment.imageUrl),
+                    Images(imageUrl: home.coverImg),
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -48,7 +48,7 @@ class ApartmentScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ApartmentPrice(price: apartment.price),
+                          ApartmentPrice(price: home.monthlyRent),
                           // SizedBox(height: 20),
                           // BookingDetails(
                           //   bookingPercentage: 22,
@@ -57,19 +57,23 @@ class ApartmentScreen extends StatelessWidget {
                           // ),
                           SizedBox(height: 20),
                           DetailedParagraph(
+                            title: 'الموقع',
+                            body: home.address.toString(),
+                          ),
+                          SizedBox(height: 20),
+                          DetailedParagraph(
                             title: 'وصف العقار',
-                            body:
-                                ' مساحة الشقة 170 م ومسورة وفيها بئر مياه خاص ومبنى مؤسس لخمس طوابق بعد الدور الارضي بالقرب من مفترق ضبيط جنوب جامع ابو ايوب الانصاري',
+                            body:"${home.aboutEstate}",
                           ),
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'اتجاهات الشقة',
-                            body: 'شمالي غربي',
+                            body: "${home.direction.toString()}",
                           ),
                           SizedBox(height: 32),
-                          ApartmentDetails(),
+                          ApartmentDetails(home: home,),
                           SizedBox(height: 20),
-                          AvailableDays(),
+                          AvailableDays(start: home.beginObservation,end: home.endObservation,),
                           SizedBox(height: 32),
                           Text(
                             'قد يعجبك أيضاً',
@@ -80,7 +84,6 @@ class ApartmentScreen extends StatelessWidget {
                             children: [HalfImageCard(), HalfImageCard()],
                           ),
                           SizedBox(height: 32),
-
                           TrackThisApartment(),
                           SizedBox(height: 15),
                           ReportButton(),
@@ -248,9 +251,31 @@ class MakeAnOfferButton extends StatelessWidget {
 }
 
 class AvailableDays extends StatelessWidget {
-  const AvailableDays({
-    Key? key,
-  }) : super(key: key);
+  final DateTime start;
+  final DateTime end;
+  AvailableDays({required this.start, required this.end});
+
+  // String day = "";
+  // String hours = "";
+  // String minutes = "";
+  // String timing = "";
+  //
+  //
+  // String getDate(DateTime date){
+  //   switch(date.day){
+  //     case 1 : day = "الإثنين";break;
+  //     case 2 : day = "الثلاثاء";break;
+  //     case 3 : day = "الأربعاء";break;
+  //     case 4 : day = "الخميس";break;
+  //     case 5 : day = "الجمعة";break;
+  //     case 6 : day = "السبت";break;
+  //     case 7 : day = "الأحد";break;
+  //   }
+  //   if(date.hour>12){
+  //
+  //   }
+  //   return "";
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -291,8 +316,8 @@ class AvailableDays extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ///TODO : make the day name and times bold to stand out and attract user attention
-                Text(
-                  'الأحد : من ال12 ظهراً حتى 1:30 ظهراً',
+                Text('${start.toString()}',
+                  // 'الأحد : من ال12 ظهراً حتى 1:30 ظهراً',
                   style: Constant.kBodyTextStyle,
                 ),
                 Text(
@@ -341,6 +366,11 @@ class ApartmentDetails extends StatelessWidget {
   /// - apartment area (x m^2)
   /// -- if the property
 
+  final Home home;
+
+
+  ApartmentDetails({required this.home});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -360,16 +390,16 @@ class ApartmentDetails extends StatelessWidget {
                   ApartmentDetail(
                     label: 'غرف النوم',
                     iconData: Icons.bed,
-                    value: '3',
+                    value: '${home.numOfRoom}',
                   ),
                   SizedBox(height: 5),
                   ApartmentDetail(
-                      label: 'الصالات', iconData: Icons.chair, value: '2'),
+                      label: 'الصالات', iconData: Icons.chair, value: '${home.numOfHalls}',),
                   SizedBox(height: 5),
                   ApartmentDetail(
                       label: 'دورات المياه',
                       iconData: Icons.bathtub_outlined,
-                      value: '3')
+                      value: '${home.numOfBathroom}',)
                 ],
               ),
               Column(
@@ -378,16 +408,16 @@ class ApartmentDetails extends StatelessWidget {
                   ApartmentDetail(
                     label: 'مساحة الشقة',
                     iconData: Icons.format_size,
-                    value: '120',
+                    value: '${home.size}',
                   ),
                   SizedBox(height: 5),
                   ApartmentDetail(
-                      label: 'الطابق', iconData: Icons.menu, value: '3'),
+                      label: 'الطابق', iconData: Icons.menu, value: '${home.floor}',),
                   SizedBox(height: 5),
                   ApartmentDetail(
                       label: 'رقم الشقة',
                       iconData: Icons.format_list_numbered,
-                      value: '202')
+                    value: home.apartmentNumber!= null ? '${home.apartmentNumber}' : 'لا يوجد',)
                 ],
               ),
             ],
@@ -398,15 +428,18 @@ class ApartmentDetails extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFF14688C),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.hasElevator==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'مصعد',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color:home.hasElevator==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -416,8 +449,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.check,
-                            color: Color(0xFF14688C),
+                            home.hasElevator==true ? Icons.check : Icons.clear,
+                            color: home.hasElevator==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -427,15 +460,18 @@ class ApartmentDetails extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFF14688C),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.hasFurnature==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'معفشة',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color:home.hasFurnature==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -445,8 +481,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.check,
-                            color: Color(0xFF14688C),
+                            home.hasFurnature==true ? Icons.check : Icons.clear,
+                            color: home.hasFurnature==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -456,15 +492,18 @@ class ApartmentDetails extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.grey.shade200,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.closeFromMosque==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'قريب من مسجد',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Color(0xFF14688C)),
+                            .copyWith(color:home.closeFromMosque==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -474,8 +513,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.clear,
-                            color: Colors.red,
+                            home.closeFromMosque==true ? Icons.check : Icons.clear,
+                            color: home.closeFromMosque==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -492,15 +531,18 @@ class ApartmentDetails extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
+                flex: 3,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.grey.shade200,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.closeFromSchool==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'قريب من مدرسة',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Color(0xFF14688C)),
+                            .copyWith(color:home.closeFromSchool==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -510,8 +552,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.clear,
-                            color: Colors.red,
+                            home.closeFromSchool==true ? Icons.check : Icons.clear,
+                            color: home.closeFromSchool==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -521,15 +563,18 @@ class ApartmentDetails extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFF14688C),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.hasAC==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'تكييف',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color:home.hasAC==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -539,8 +584,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.check,
-                            color: Color(0xFF14688C),
+                            home.hasAC==true ? Icons.check : Icons.clear,
+                            color: home.hasAC==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -550,16 +595,18 @@ class ApartmentDetails extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.grey.shade200,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: home.hasGarage==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
-                        style: Constant.kBodyTextStyle.copyWith(
-                          color: Colors.red,
-                        ),
+                        'كراج',
+                        style: Constant.kBodyTextStyle
+                            .copyWith(color:home.hasGarage==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -569,8 +616,8 @@ class ApartmentDetails extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.clear,
-                            color: Colors.red,
+                            home.hasGarage==true ? Icons.check : Icons.clear,
+                            color: home.hasGarage==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -945,7 +992,7 @@ class ApartmentPrice extends StatelessWidget {
     required this.price,
   }) : super(key: key);
 
-  final int price;
+  final double price;
 
   @override
   Widget build(BuildContext context) {

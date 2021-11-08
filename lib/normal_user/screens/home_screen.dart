@@ -95,263 +95,181 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-class WorkSpaceList extends StatelessWidget {
-  const WorkSpaceList({
-    Key? key,
-  }) : super(key: key);
+// class WorkSpaceList extends StatelessWidget {
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SliverToBoxAdapter(
+//       child: GestureDetector(
+//         onTap: () {
+//           Navigator.push(
+//               context, MaterialPageRoute(builder: (context) => WorkSpaceScreen()));
+//         },
+//         child: Padding(
+//           padding: EdgeInsets.all(15),
+//           child: Column(
+//             children: <Widget>[
+//               Hero(
+//                 transitionOnUserGestures: true,
+//                 tag: 'assets/images/house5.jpg',
+//                 child: ClipRRect(
+//                   borderRadius: BorderRadius.only(
+//                       topRight: Radius.circular(32),
+//                       topLeft: Radius.circular(32)),
+//                   child: Image.asset(
+//                     'assets/images/house5.jpg',
+//                     fit: BoxFit.cover,
+//                     height: 150,
+//                     width: double.infinity,
+//                   ),
+//                 ),
+//               ),
+//               Container(
+//                 margin: EdgeInsets.only(bottom: 15),
+//                 padding: EdgeInsets.all(10),
+//                 color: Colors.white,
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.stretch,
+//                   children: <Widget>[
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           '\$120 / شهر ',
+//                           style: GoogleFonts.tajawal(
+//                             fontWeight: FontWeight.w500,
+//                             fontSize: 16,
+//                           ),
+//                         ),
+//                         Text(
+//                           ' 1  غرفة | 2 حمام | 3 متر',
+//                           style: GoogleFonts.tajawal(
+//                               fontSize: 16, fontWeight: FontWeight.w500),
+//                         ),
+//                       ],
+//                     ),
+//                     Text(
+//                       'Gaza',
+//                       style: GoogleFonts.tajawal(
+//                           color: Colors.black,
+//                           fontSize: 16,
+//                           fontWeight: FontWeight.w600),
+//                     ),
+//                     Text(
+//                       'Abood',
+//                       style: GoogleFonts.tajawal(
+//                           color: Colors.black,
+//                           fontSize: 16,
+//                           fontWeight: FontWeight.w600),
+//                     )
+//                   ],
+//                 ),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => WorkSpaceScreen()));
-        },
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              Hero(
-                transitionOnUserGestures: true,
-                tag: 'assets/images/house5.jpg',
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(32),
-                      topLeft: Radius.circular(32)),
-                  child: Image.asset(
-                    'assets/images/house5.jpg',
-                    fit: BoxFit.cover,
-                    height: 150,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 15),
-                padding: EdgeInsets.all(10),
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '\$120 / شهر ',
-                          style: GoogleFonts.tajawal(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          ' 1  غرفة | 2 حمام | 3 متر',
-                          style: GoogleFonts.tajawal(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Gaza',
-                      style: GoogleFonts.tajawal(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'Abood',
-                      style: GoogleFonts.tajawal(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
-class StoreList extends StatelessWidget {
-  const StoreList({
-    Key? key,
-  }) : super(key: key);
+// class NewlyAdded extends StatefulWidget {
+//   const NewlyAdded({
+//     Key? key,
+//   }) : super(key: key);
+//
+//   @override
+//   // _NewlyAddedState createState() => _NewlyAddedState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => StoreScreen()));
-        },
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              Hero(
-                transitionOnUserGestures: true,
-                tag: 'assets/images/house5.jpg',
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(32),
-                      topLeft: Radius.circular(32)),
-                  child: Image.asset(
-                    'assets/images/house5.jpg',
-                    fit: BoxFit.cover,
-                    height: 150,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 15),
-                padding: EdgeInsets.all(10),
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '\$120 / شهر ',
-                          style: GoogleFonts.tajawal(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          ' 1  غرفة | 2 حمام | 3 متر',
-                          style: GoogleFonts.tajawal(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Gaza',
-                      style: GoogleFonts.tajawal(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'Abood',
-                      style: GoogleFonts.tajawal(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class NewlyAdded extends StatefulWidget {
-  const NewlyAdded({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _NewlyAddedState createState() => _NewlyAddedState();
-}
-
-class _NewlyAddedState extends State<NewlyAdded> {
-  late PageController _pageController;
-  late List<Apartment> apartments;
-
-  @override
-  void initState() {
-    _pageController = PageController(viewportFraction: 0.9);
-    apartments = apartments;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 260,
-      width: MediaQuery.of(context).size.width,
-      child: PageView.builder(
-        controller: _pageController,
-        itemCount: apartments.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          Apartment apartment = apartments[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 7.5),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.network(
-                      apartment.imageUrl,
-                      fit: BoxFit.cover,
-                      height: 180,
-                      width: double.infinity,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 6,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    width: 240,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 6.0,
-                          offset: Offset(2, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('name: ' + (apartment.name ?? 'null')),
-                        const Text('price : 120\$/month'),
-                        Text('location : ${apartment.location}')
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
-      ),
-    );
-  }
-}
+// class _NewlyAddedState extends State<NewlyAdded> {
+//   late PageController _pageController;
+//   late List<Apartment> apartments;
+//
+//   @override
+//   void initState() {
+//     _pageController = PageController(viewportFraction: 0.9);
+//     apartments = apartments;
+//     super.initState();
+//   }
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 260,
+//       width: MediaQuery.of(context).size.width,
+//       child: PageView.builder(
+//         controller: _pageController,
+//         itemCount: apartments.length,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (context, index) {
+//           Apartment apartment = apartments[index];
+//           return Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 5),
+//             child: Stack(
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 7.5),
+//                   child: ClipRRect(
+//                     borderRadius: BorderRadius.circular(25),
+//                     child: Image.network(
+//                       apartment.imageUrl,
+//                       fit: BoxFit.cover,
+//                       height: 180,
+//                       width: double.infinity,
+//                     ),
+//                   ),
+//                 ),
+//                 Positioned(
+//                   bottom: 6,
+//                   left: 0,
+//                   right: 0,
+//                   child: Container(
+//                     margin: const EdgeInsets.symmetric(horizontal: 15),
+//                     padding: const EdgeInsets.symmetric(
+//                         horizontal: 10, vertical: 10),
+//                     width: 240,
+//                     height: 100,
+//                     decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.circular(15),
+//                       color: Colors.white,
+//                       boxShadow: const [
+//                         BoxShadow(
+//                           color: Colors.black,
+//                           blurRadius: 6.0,
+//                           offset: Offset(2, 2),
+//                         ),
+//                       ],
+//                     ),
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: <Widget>[
+//                         Text('name: ' + (apartment.name ?? 'null')),
+//                         const Text('price : 120\$/month'),
+//                         Text('location : ${apartment.location}')
+//                       ],
+//                     ),
+//                   ),
+//                 )
+//               ],
+//             ),
+//           );
+//         },
+//         physics: const BouncingScrollPhysics(
+//           parent: AlwaysScrollableScrollPhysics(),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class NewWidget extends StatefulWidget {
   const NewWidget({
@@ -547,6 +465,7 @@ class RealEstateList extends StatelessWidget {
   }
 }
 
+// Apartment **************************************
 class ApartmentList extends StatelessWidget {
   const ApartmentList({Key? key}) : super(key: key);
 
@@ -557,10 +476,10 @@ class ApartmentList extends StatelessWidget {
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, i) {
-            Apartment apartment = apartments[i];
-            return ApartmentCard(apartment: apartment);
+            Home _home = home[i];
+            return ApartmentCard(home: _home);
           },
-          childCount: apartments.length,
+          childCount: home.length,
           addRepaintBoundaries: false,
         ),
       ),
@@ -569,10 +488,10 @@ class ApartmentList extends StatelessWidget {
 }
 
 class ApartmentCard extends StatelessWidget {
-  final Apartment apartment;
+  final Home home;
 
   const ApartmentCard({
-    required this.apartment,
+    required this.home,
   });
 
   @override
@@ -580,8 +499,8 @@ class ApartmentCard extends StatelessWidget {
     return GestureDetector(
       child: Column(
         children: [
-          ApartmentImage(imageUrl: apartment.imageUrl),
-          ApartmentDeatils(apartment: apartment),
+          ApartmentImage(imageUrl: home.coverImg),
+          ApartmentDeatils(home: home),
         ],
       ),
       onTap: () {
@@ -589,7 +508,7 @@ class ApartmentCard extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => ApartmentScreen(
-                      apartment: apartment,
+                      home: home,
                     )));
       },
     );
@@ -599,10 +518,10 @@ class ApartmentCard extends StatelessWidget {
 class ApartmentDeatils extends StatelessWidget {
   const ApartmentDeatils({
     Key? key,
-    required this.apartment,
+    required this.home,
   }) : super(key: key);
 
-  final Apartment apartment;
+  final Home home;
 
   @override
   Widget build(BuildContext context) {
@@ -617,26 +536,26 @@ class ApartmentDeatils extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '\$${apartment.price} / شهر ',
+                '\$${home.monthlyRent} / شهر ',
                 style: GoogleFonts.tajawal(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
               ),
               Text(
-                ' ${apartment.room_number}  غرفة | ${apartment.bathroom_number} حمام | ${apartment.size} متر',
+                ' ${home.numOfRoom}  غرفة | ${home.numOfBathroom} حمام | ${home.size} متر',
                 style: GoogleFonts.tajawal(
                     fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ],
           ),
           Text(
-            '${apartment.location}',
+            '${home.address.toString()}',
             style: GoogleFonts.tajawal(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           Text(
-            '${apartment.ownerName}',
+            '${home.owner.name}',
             style: GoogleFonts.tajawal(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           )
@@ -669,6 +588,255 @@ class ApartmentImage extends StatelessWidget {
     );
   }
 }
+
+// store **************************************
+class StoreList extends StatelessWidget {
+  const StoreList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: EdgeInsets.all(15),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+              (context, i) {
+            Store _store = store[i];
+            return StoreCard(store: _store);
+          },
+          childCount: store.length,
+          addRepaintBoundaries: false,
+        ),
+      ),
+    );
+  }
+}
+
+class StoreCard extends StatelessWidget {
+  final Store store;
+
+  const StoreCard({
+    required this.store,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Column(
+        children: [
+          StoreImage(imageUrl: store.coverImg),
+          StoreDeatils(stor : store),
+        ],
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => StoreScreen(
+                  store: store,
+                )));
+      },
+    );
+  }
+}
+
+class StoreDeatils extends StatelessWidget {
+  const StoreDeatils({
+    Key? key,
+    required this.stor,
+  }) : super(key: key);
+
+  final Store stor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.all(10),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '\$${stor.monthlyRent} / شهر ',
+                style: GoogleFonts.tajawal(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              // Text(
+              //   ' ${stor.}  غرفة | ${home.numOfBathroom} حمام | ${home.size} متر',
+              //   style: GoogleFonts.tajawal(
+              //       fontSize: 16, fontWeight: FontWeight.w500),
+              // ),
+            ],
+          ),
+          Text(
+            '${stor.address.toString()}',
+            style: GoogleFonts.tajawal(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            '${stor.owner.name}',
+            style: GoogleFonts.tajawal(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class StoreImage extends StatelessWidget {
+  final String imageUrl;
+
+  const StoreImage({Key? key, required this.imageUrl}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      transitionOnUserGestures: true,
+      tag: imageUrl,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(32), topLeft: Radius.circular(32)),
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+          height: 150,
+          width: double.infinity,
+        ),
+      ),
+    );
+  }
+}
+
+// workSpace **************************************
+class WorkSpaceList extends StatelessWidget {
+  const WorkSpaceList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: EdgeInsets.all(15),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+              (context, i) {
+            WorkSpace  _workSpace= workSpace[i];
+            return WorkSpaceCard(workSpace: _workSpace);
+          },
+          childCount: workSpace.length,
+          addRepaintBoundaries: false,
+        ),
+      ),
+    );
+  }
+}
+
+class WorkSpaceCard extends StatelessWidget {
+  final WorkSpace workSpace;
+
+  const WorkSpaceCard({
+    required this.workSpace,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Column(
+        children: [
+          WorkSpaceImage(imageUrl: workSpace.coverImg),
+          WorkSpaceDeatils(workSpace: workSpace,),
+        ],
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WorkSpaceScreen(
+                  workSpace: workSpace,
+                )));
+      },
+    );
+  }
+}
+
+class WorkSpaceDeatils extends StatelessWidget {
+  const WorkSpaceDeatils({
+    Key? key,
+    required this.workSpace, stor,
+  }) : super(key: key);
+
+  final WorkSpace workSpace;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.all(10),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '\$${workSpace.monthlyRent} / شهر ',
+                style: GoogleFonts.tajawal(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              // Text(
+              //   ' ${stor.}  غرفة | ${home.numOfBathroom} حمام | ${home.size} متر',
+              //   style: GoogleFonts.tajawal(
+              //       fontSize: 16, fontWeight: FontWeight.w500),
+              // ),
+            ],
+          ),
+          Text(
+            '${workSpace.address.toString()}',
+            style: GoogleFonts.tajawal(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            '${workSpace.owner.name}',
+            style: GoogleFonts.tajawal(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class WorkSpaceImage extends StatelessWidget {
+  final String imageUrl;
+
+  const WorkSpaceImage({Key? key, required this.imageUrl}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      transitionOnUserGestures: true,
+      tag: imageUrl,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(32), topLeft: Radius.circular(32)),
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+          height: 150,
+          width: double.infinity,
+        ),
+      ),
+    );
+  }
+}
+
 
 class CategorySelector extends StatefulWidget {
   const CategorySelector({

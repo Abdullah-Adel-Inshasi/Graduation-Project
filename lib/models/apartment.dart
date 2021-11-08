@@ -105,8 +105,14 @@ class Address {
   final String estateNo;
   final String? buildingName;
 
-  Address(
-      {required this.city, required this.street, required this.estateNo, this.buildingName});
+  Address({required this.city, required this.street, required this.estateNo, this.buildingName});
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "$city - $street - $estateNo" + (buildingName!=null ? "- $buildingName" : "");
+  }
+
 }
 
 enum RealEstateType { home, workspace, shops }
@@ -146,13 +152,17 @@ class Store extends RealEstate {
   bool? hasFurnature = false;
   bool? hasPowerLine = false;
   final int stockRoomSize;
+  final String finishingStatus;
+  final String exhibitionRating;
 
   Store({this.hasFurnature,
+    required this.finishingStatus,
+    required this.exhibitionRating,
     this.hasAc,
     this.hasPowerLine,
     required this.stockRoomSize,
     required Owner owner,
-    required RealEstateType type,
+    RealEstateType type = RealEstateType.shops,
     required double downpayment,
     required double monthlyRent,
     required String name,
@@ -208,6 +218,9 @@ enum HomeType { apartment, roof, house }
 class Home extends RealEstate {
   final int numOfBathroom;
   final int numOfRoom;
+  final int numOfHalls;
+  final int floor;
+  int? apartmentNumber = -1;
   final Direction direction;
   final HomeType typeOfHome;
   bool? hasElevator = false;
@@ -219,6 +232,9 @@ class Home extends RealEstate {
 
   Home({required this.numOfBathroom,
     required this.numOfRoom,
+    required this.numOfHalls,
+    required this.floor,
+    this.apartmentNumber,
     this.hasFurnature,
     this.hasAC,
     this.hasElevator,
@@ -228,7 +244,7 @@ class Home extends RealEstate {
     required this.direction,
     required this.typeOfHome,
     required Owner owner,
-    required RealEstateType type,
+    // required RealEstateType type,
     required double downpayment,
     required double monthlyRent,
     required String name,
@@ -242,7 +258,7 @@ class Home extends RealEstate {
     required bool isAvailable})
       : super(
       name: name,
-      type: type,
+      type: RealEstateType.home,
       size: size,
       aboutEstate: aboutEstate,
       address: address,
@@ -299,3 +315,28 @@ class WorkSpace extends RealEstate {
       owner: owner);
 }
 
+List<Store> store = [
+  Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
+      monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
+      coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
+];
+List<WorkSpace> workSpace = [];
+Address address1 = Address(city: "غزة", street: "شارع الشهداء", estateNo: "مقابل مترو",buildingName: "عمارة الحساينة");
+Address address2 = Address(city: "رفح", street: "شارع الثورة", estateNo: "غرب مخبز الدهشان");
+
+DateTime startDate1 = DateTime(2021,2,19,12,30,0,0,0);
+DateTime EndDate1 = DateTime(2021,2,25,12,30,0,0,0);
+List<Home> home = [
+  Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast,numOfHalls: 2,floor: 6,
+      typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
+      monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
+      coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
+
+  Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast,numOfHalls: 1,floor: 2,
+      typeOfHome: HomeType.house, owner: owner, downpayment: 200,
+      monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
+      coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true,),
+];

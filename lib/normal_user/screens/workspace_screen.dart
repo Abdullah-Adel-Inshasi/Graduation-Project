@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/landlord/add_apartment/appbar/add_realestate.dart';
+import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/normal_user/screens/store_screen.dart';
 import 'package:home_explorer/constants/styles.dart' as Constant;
 
 import 'apartment_screen.dart';
 
 class WorkSpaceScreen extends StatelessWidget {
-  const WorkSpaceScreen({Key? key}) : super(key: key);
+  final WorkSpace workSpace;
+
+
+  WorkSpaceScreen({required this.workSpace});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class WorkSpaceScreen extends StatelessWidget {
                           SizedBox(height: 32),
                           WorkSpaceDetails(),
                           SizedBox(height: 20),
-                          AvailableDays(),
+                          AvailableDays(start: workSpace.beginObservation,end: workSpace.endObservation,),
                           SizedBox(height: 32),
                           Text(
                             'قد يعجبك أيضاً',

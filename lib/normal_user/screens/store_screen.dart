@@ -5,7 +5,9 @@ import 'package:home_explorer/constants/styles.dart' as Constant;
 import 'apartment_screen.dart';
 
 class StoreScreen extends StatelessWidget {
-  const StoreScreen({Key? key}) : super(key: key);
+  final Store store;
+
+  StoreScreen({required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class StoreScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    Images(imageUrl: 'assets/images/house5.jpg'),
+                    Images(imageUrl: store.coverImg),
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -50,23 +52,22 @@ class StoreScreen extends StatelessWidget {
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'الموقع',
-                            body: 'غزة - النصر - نبيل طموس',
+                            body: store.address.toString(),
                           ),
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'وصف المعرض',
-                            body:
-                                ' مساحة الشقة 170 م ومسورة وفيها بئر مياه خاص ومبنى مؤسس لخمس طوابق بعد الدور الارضي بالقرب من مفترق ضبيط جنوب جامع ابو ايوب الانصاري',
+                            body:store.aboutEstate,
                           ),
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'مساحة السدة',
-                            body: '170 متر',
+                            body: '${store.size} متر',
                           ),
                           SizedBox(height: 32),
-                          StoreDetailss(),
+                          StoreDetailss(store: store,),
                           SizedBox(height: 20),
-                          AvailableDays(),
+                          AvailableDays(start: store.beginObservation,end: store.endObservation,),
                           SizedBox(height: 32),
                           Text(
                             'قد يعجبك أيضاً',
@@ -106,6 +107,11 @@ class StoreDetailss extends StatelessWidget {
   /// - apartment area (x m^2)
   /// -- if the property
 
+  final Store store ;
+
+
+  StoreDetailss({required this.store});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -123,19 +129,19 @@ class StoreDetailss extends StatelessWidget {
               ApartmentDetail(
                 label: 'مساحة المعرض',
                 iconData: Icons.format_size,
-                value: '120 متر مربع',
+                value: '${store.size} متر مربع',
               ),
               SizedBox(height: 6),
               ApartmentDetail(
                 label: 'حالة التشطيب',
                 iconData: Icons.star,
-                value: 'تشطيب معرض ', //تشطيب ورشة / تشطيب مخزن
+                value: store.finishingStatus, //تشطيب ورشة / تشطيب مخزن
               ),
               SizedBox(height: 6),
               ApartmentDetail(
                 label: 'تصنيف المعرض',
                 iconData: Icons.store,
-                value: 'معرض مجمع', //سوق شعبي و على شارع تجاري و على شارع عام
+                value: store.exhibitionRating, //سوق شعبي و على شارع تجاري و على شارع عام
               ),
             ],
           ),
@@ -145,15 +151,18 @@ class StoreDetailss extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFF14688C),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: store.hasFurnature==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'معفش',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color:store.hasFurnature==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -163,8 +172,8 @@ class StoreDetailss extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.check,
-                            color: Color(0xFF14688C),
+                            store.hasFurnature==true ? Icons.check : Icons.clear,
+                            color: store.hasFurnature==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -174,15 +183,18 @@ class StoreDetailss extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFF14688C),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: store.hasPowerLine==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'خط ماتور',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color:store.hasPowerLine==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -192,8 +204,8 @@ class StoreDetailss extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.check,
-                            color: Color(0xFF14688C),
+                            store.hasPowerLine==true ? Icons.check : Icons.clear,
+                            color: store.hasPowerLine==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
@@ -203,15 +215,18 @@ class StoreDetailss extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.grey.shade200,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  color: store.hasAc==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'مصعد',
+                        'تكييف',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color: Color(0xFF14688C)),
+                            .copyWith(color:store.hasAc==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -221,8 +236,8 @@ class StoreDetailss extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            Icons.clear,
-                            color: Colors.red,
+                            store.hasAc==true ? Icons.check : Icons.clear,
+                            color: store.hasAc==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),
