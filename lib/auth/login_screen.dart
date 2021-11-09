@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/auth/signup_screen_generic.dart';
+import 'package:home_explorer/landlord/wrapper.dart';
+import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/wrapper.dart';
 
 import '../size_config.dart';
@@ -12,8 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController email = TextEditingController();
 
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
   bool isObscure = true;
@@ -174,9 +176,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Wrapper()));
-                        print("login");
+                        if(login()==2){
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                        }else if(login()==1){
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) => Wrapper()), (route) => false);
+                        }else{
+                          print("البريد الالكتورني او كلمة السر غير الصحيحة");
+                        }
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -318,5 +326,20 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+  int login(){
+    for(int i =0; i<landLord.length;i++){
+      if(landLord[i].email==email.text.toString()
+          &&landLord[i].password==password.text.toString()){
+        return 2;
+      }
+    }
+    for(int i =0; i<normalUser.length;i++){
+      if(normalUser[i].email==email.text.toString()
+          &&normalUser[i].password==password.text.toString()){
+        return 1;
+      }
+    }
+    return -1;
   }
 }

@@ -103,9 +103,14 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
                 title: Text('الدعم و المساندة'),
                 leading: Icon(Icons.support_agent),
               ),
-              ListTile(
-                title: Text('تسجيل خروج'),
-                leading: Icon(Icons.logout),
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                },
+                child: ListTile(
+                  title: Text('تسجيل خروج'),
+                  leading: Icon(Icons.logout),
+                ),
               )
             ],
           ),

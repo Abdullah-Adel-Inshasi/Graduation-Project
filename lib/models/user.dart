@@ -60,7 +60,7 @@ class NormalUser extends User{
   final String phoneNumber;
   final String password;
   final int familyNumber;
-  final int age;
+  final String age;
   final bool isSingle;
   String OfficeName = "";
   Address OfficeAddress = Address(city: "", street: "", estateNo: "") ;

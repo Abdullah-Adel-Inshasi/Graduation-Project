@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/auth/signup_landlord.dart';
+import 'package:home_explorer/landlord/wrapper.dart';
 import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/wrapper.dart';
@@ -611,13 +612,24 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                           email: email.text.toString(), phoneNumber: _mobile.text.toString(),
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1,
                                           OfficeName: name.text.toString(),OfficeAddress: Address(city: "city", street: "street", estateNo: "estateNo")));
+                                      Navigator.pushAndRemoveUntil(context,
+                                          MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                                      print(landLord);
                                     }else{
                                       landLord.add(LandLord(id: landLord.length, fullName: name.text.toString(),
                                           email: email.text.toString(), phoneNumber: _mobile.text.toString(),
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1));
+                                      Navigator.pushAndRemoveUntil(context,
+                                          MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                                      print(landLord);
                                     }
                                   }else{
-                                    // normalUser.add(value);
+                                    normalUser.add(NormalUser(id: landLord.length, fullName: name.text.toString(),
+                                        email: email.text.toString(), phoneNumber: _mobile.text.toString(),isSingle: selectedValue==2,
+                                        password: password.text.toString(),familyNumber:numOfSons,age: age.text.toString(),));
+                                    Navigator.pushAndRemoveUntil(context,
+                                        MaterialPageRoute(builder: (context) => Wrapper()), (route) => false);
+                                    print(normalUser);
                                   }
                                 }else{
                                   print("كلمة المرور غير متطابقة");
@@ -626,9 +638,7 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                 print("يرجى التأكد من جميع البيانات المطلوبة");
                               }
 
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => Wrapper()));
-                              print("login");
+
                             },
                             child: Container(
                               alignment: Alignment.center,
