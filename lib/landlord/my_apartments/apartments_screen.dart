@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/landlord/my_apartments/private_apartments.dart';
+import 'package:home_explorer/models/user.dart';
 import 'public_apartments.dart';
 
 class MyApartments extends StatefulWidget {
-  const MyApartments({Key? key}) : super(key: key);
+  final User? user;
+
+  MyApartments({required this.user});
 
   @override
   State<MyApartments> createState() => _MyApartmentsState();
@@ -16,9 +19,9 @@ class _MyApartmentsState extends State<MyApartments>
   List<String> tab_names = ['طلبات خاصة', 'طلبات عامة'];
   int selected_index = 0;
   late TabController tabController;
-  List<Widget> tabScreens = [
-    PrivateApartments(),
-    PublicApartments(),
+  late List<Widget> tabScreens = [
+    PrivateApartments(user: widget.user,),
+    PublicApartments(user: widget.user,),
   ];
 
   @override

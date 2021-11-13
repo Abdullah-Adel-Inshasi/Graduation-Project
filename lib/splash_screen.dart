@@ -23,9 +23,17 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Color(0xFFF6F6F6),
+      backgroundColor: Color(0xFF1D7AA3),
       body: Center(
-        child: Image.asset('assets/images/logo.png',height: SizeConfig.scaleHeight(295),width: SizeConfig.scaleWidth(295)),
+        child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+            ),
+            child: Image.asset('assets/images/splash_logo.jpg',
+                height: SizeConfig.scaleHeight(295),
+                width: SizeConfig.scaleWidth(295))),
       ),
     );
   }

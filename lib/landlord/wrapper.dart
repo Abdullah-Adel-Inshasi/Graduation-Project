@@ -26,7 +26,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
   _LandLordWrappeState({required this.user});
 
   late List<Widget> _bnbScreens = [
-    MyApartments(),
+    MyApartments(user: widget.user,),
     AddRealEstate(user: widget.user,),
     ChatWrapper(),
     // HomeScreen_Landlord(),

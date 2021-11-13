@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/landlord/my_apartments/public_apartments.dart';
+import 'package:home_explorer/models/user.dart';
 
 class PrivateApartments extends StatelessWidget {
-  const PrivateApartments({Key? key}) : super(key: key);
+  final User? user;
+
+  PrivateApartments({required this.user});
 
   @override
   Widget build(BuildContext context) {

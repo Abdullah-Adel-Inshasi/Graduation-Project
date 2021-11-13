@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: LoginScreen(),
+      home: SplashScreen(),
       // home: Wrapper(),
       // home: LandLordWrapper(),
       routes: {

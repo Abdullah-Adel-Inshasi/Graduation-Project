@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/landlord/manage_apartment.dart';
+import 'package:home_explorer/models/user.dart';
 
 import 'package:page_transition/page_transition.dart';
 class PublicApartments extends StatelessWidget {
-  const PublicApartments({
-    Key? key,
-  }) : super(key: key);
+  final User? user;
+
+  PublicApartments({required this.user});
 
   @override
   Widget build(BuildContext context) {

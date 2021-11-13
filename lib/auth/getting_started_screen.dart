@@ -19,16 +19,15 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
     SizeConfig().init(context);
     return Scaffold(
       body: Container(
-        color: Color(0xFF14688C),
+        color: Color(0xFF1D7AA3),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: SizeConfig.scaleWidth(25)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/logo.png',
-                height: SizeConfig.scaleHeight(150),width: SizeConfig.scaleWidth(150),
+              Image.asset('assets/images/splash_logo.jpg',
+                height: SizeConfig.scaleHeight(230),width: SizeConfig.scaleWidth(230),
               ),
-              SizedBox(height: SizeConfig.scaleHeight(60)),
               Container(
                 width: double.infinity,
                 height: SizeConfig.scaleHeight(450),
@@ -59,7 +58,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                           width: double.infinity,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                            color: Color(0xFF14688C),
+                            color: Color(0xFF1D7AA3),
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
                           ),
@@ -82,7 +81,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                           width: double.infinity,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                            color: Color(0xFF14688C),
+                            color: Color(0xFF1D7AA3),
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
                           ),

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:geolocator/geolocator.dart' as geolocator;
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:home_explorer/models/apartment.dart';
@@ -12,7 +12,9 @@ import 'package:home_explorer/normal_user/screens/search_options_screen.dart';
 import 'package:home_explorer/normal_user/screens/store_screen.dart';
 import 'package:home_explorer/normal_user/screens/workspace_screen.dart';
 import 'package:home_explorer/widgets/widgets.dart';
+// import 'package:location/location.dart';
 import 'apartment_screen.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -919,9 +921,8 @@ class Map extends StatefulWidget {
 
 class _MapState extends State<Map> {
   var myMarkers = HashSet<Marker>();
-
+  late Position currentPosition;
   late GoogleMapController newGoogleMapController;
-
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
 
   @override
@@ -935,38 +936,32 @@ class _MapState extends State<Map> {
           myLocationEnabled: true,
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
-          initialCameraPosition: CameraPosition(
-            target: LatLng(31.466154, 34.423684),
-            zoom: 10.4746,
-          ),
+          initialCameraPosition: _kGooglePlex,
           onMapCreated: (GoogleMapController controller) {
-            setState(() {
-              myMarkers.add(
-                Marker(
-                  markerId: MarkerId('1'),
-                  position: LatLng(31.466154, 34.423684),
-                  infoWindow: InfoWindow(
-                      title: "عنوان 1", snippet: "تفاصيل عن الشقة 1"),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueAzure),
-                ),
-              );
-              myMarkers.add(
-                Marker(
-                  markerId: MarkerId('2'),
-                  position: LatLng(31.448435, 34.392796),
-                  infoWindow: InfoWindow(
-                      title: "عنوان 2", snippet: "تفاصيل عن الشقة 2"),
-                ),
-              );
-            });
             _controllerGoogleMap.complete(controller);
             newGoogleMapController = controller;
-            // locatePosition();
+            locatePosition();
           },
-          markers: myMarkers,
+
         ),
       ),
     );
+  }
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(31.466154, 34.423684),
+    zoom: 10.4746,
+  );
+
+  void locatePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: geolocator.LocationAccuracy.high);
+    currentPosition = position;
+
+    LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+    new CameraPosition(target: latLngPosition, zoom: 14);
+    newGoogleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 }
