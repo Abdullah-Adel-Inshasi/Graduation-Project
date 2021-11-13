@@ -5,29 +5,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/landlord/chats_wrapper/chat_wrapper.dart';
 import 'package:home_explorer/landlord/my_apartments/apartments_screen.dart';
 import 'package:home_explorer/landlord/notifications/notifications_wrapper.dart';
-import 'package:home_explorer/landlord/profile/landlord_homescreen.dart';
-import 'package:home_explorer/normal_user/screens/chat_screen.dart';
+import 'package:home_explorer/models/apartment.dart';
+import 'package:home_explorer/models/user.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'add_apartment/appbar/add_realestate.dart';
 
 class LandLordWrapper extends StatefulWidget {
-  const LandLordWrapper({Key? key}) : super(key: key);
+  late final User? user;
+
+  LandLordWrapper({required this.user});
 
   @override
-  _LandLordWrappeState createState() => _LandLordWrappeState();
+  _LandLordWrappeState createState() => _LandLordWrappeState(user: user);
 }
 
 class _LandLordWrappeState extends State<LandLordWrapper> {
-  final List<Widget> _bnbScreens = [
+  late final User? user;
+
+  _LandLordWrappeState({required this.user});
+
+  late List<Widget> _bnbScreens = [
     MyApartments(),
-    AddRealEstate(),
+    AddRealEstate(user: widget.user,),
     ChatWrapper(),
     // HomeScreen_Landlord(),
   ];
   int _selectedIndex = 0;
 
   bool isPro = false;
+
 
   @override
   Widget build(BuildContext context) {

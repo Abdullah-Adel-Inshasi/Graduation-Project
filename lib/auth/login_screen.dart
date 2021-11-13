@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
+  User user = User(id: -1, fullName: "", email: "", phoneNumber: "", password: "");
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -178,12 +178,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: (){
                         if(login()==2){
                           Navigator.pushAndRemoveUntil(context,
-                              MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                              MaterialPageRoute(builder: (context) => LandLordWrapper(user: user,)), (route) => false);
                         }else if(login()==1){
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) => Wrapper()), (route) => false);
                         }else{
-                          print("البريد الالكتورني او كلمة السر غير الصحيحة");
+                          print("البريد الالكتورني او كلمة السر غير صحيحة");
                         }
                       },
                       child: Container(
@@ -331,12 +331,14 @@ class _LoginScreenState extends State<LoginScreen> {
     for(int i =0; i<landLord.length;i++){
       if(landLord[i].email==email.text.toString()
           &&landLord[i].password==password.text.toString()){
+        user = landLord[i];
         return 2;
       }
     }
     for(int i =0; i<normalUser.length;i++){
       if(normalUser[i].email==email.text.toString()
           &&normalUser[i].password==password.text.toString()){
+        user = normalUser[i];
         return 1;
       }
     }

@@ -556,7 +556,7 @@ class ApartmentDeatils extends StatelessWidget {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           Text(
-            '${home.owner.name}',
+            '${home.user.fullName}',
             style: GoogleFonts.tajawal(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           )
@@ -680,7 +680,7 @@ class StoreDeatils extends StatelessWidget {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           Text(
-            '${stor.owner.name}',
+            '${stor.user.fullName}',
             style: GoogleFonts.tajawal(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           )
@@ -804,7 +804,7 @@ class WorkSpaceDeatils extends StatelessWidget {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           Text(
-            '${workSpace.owner.name}',
+            '${workSpace.user.fullName}',
             style: GoogleFonts.tajawal(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           )

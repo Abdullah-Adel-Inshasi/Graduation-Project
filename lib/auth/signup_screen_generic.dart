@@ -613,14 +613,14 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1,
                                           OfficeName: name.text.toString(),OfficeAddress: Address(city: "city", street: "street", estateNo: "estateNo")));
                                       Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                                          MaterialPageRoute(builder: (context) => LandLordWrapper(user : landLord[landLord.length-1])), (route) => false);
                                       print(landLord);
                                     }else{
                                       landLord.add(LandLord(id: landLord.length, fullName: name.text.toString(),
                                           email: email.text.toString(), phoneNumber: _mobile.text.toString(),
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1));
                                       Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => LandLordWrapper()), (route) => false);
+                                          MaterialPageRoute(builder: (context) => LandLordWrapper(user : landLord[landLord.length-1])), (route) => false);
                                       print(landLord);
                                     }
                                   }else{

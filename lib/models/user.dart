@@ -13,6 +13,7 @@ User({required this.id, required this.fullName, required this.email, required th
 }
 
 class LandLord extends User{
+  int type = 2 ;
   final int id;
   final String fullName;
   final String email;
@@ -54,6 +55,7 @@ class LandLord extends User{
 
 
 class NormalUser extends User{
+  int type = 1;
   final int id;
   final String fullName;
   final String email;
@@ -82,6 +84,12 @@ class NormalUser extends User{
 
 }
 
-List<LandLord> landLord = [];
-List<NormalUser> normalUser = [];
+List<LandLord> landLord = [
+  LandLord(id: 0, fullName: "anas", email: "a", phoneNumber: "0597981988",
+      password: "1", isRealEstateOffice: false),
+];
+List<NormalUser> normalUser = [
+  NormalUser(id: 0, fullName: "ahmed", email: "h", phoneNumber: "059819811",
+      password: "1", familyNumber: 5, age: "20", isSingle: true),
+];
 

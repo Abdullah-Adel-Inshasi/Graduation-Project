@@ -1,3 +1,5 @@
+import 'package:home_explorer/models/user.dart';
+
 class Apartment {
   final String? name;
   final int price;
@@ -70,34 +72,34 @@ List<Apartment> apartments = [
   )
 ];
 
-class User {
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String profileImgUrl;
+// class User {
+//   final String name;
+//   final String email;
+//   final String phoneNumber;
+//   final String profileImgUrl;
+//
+//   User(this.name, this.email, this.phoneNumber, this.profileImgUrl);
+// }
 
-  User(this.name, this.email, this.phoneNumber, this.profileImgUrl);
-}
+// class Owner extends User {
+//   final List<RealEstate> myRealEstate;
+//
+//   Owner({
+//     required this.myRealEstate,
+//     required String name,
+//     required String email,
+//     required String phoneNumber,
+//     required String profileImgUrl,
+//   }) : super(name, email, phoneNumber, profileImgUrl);
+// }
 
-class Owner extends User {
-  final List<RealEstate> myRealEstate;
-
-  Owner({
-    required this.myRealEstate,
-    required String name,
-    required String email,
-    required String phoneNumber,
-    required String profileImgUrl,
-  }) : super(name, email, phoneNumber, profileImgUrl);
-}
-
-Owner owner = Owner(
-  name: 'ahmad',
-  email: 'blahblah@blah.com',
-  phoneNumber: '123',
-  profileImgUrl: '',
-  myRealEstate: [],
-);
+// Owner owner = Owner(
+//   name: 'ahmad',
+//   email: 'blahblah@blah.com',
+//   phoneNumber: '123',
+//   profileImgUrl: '',
+//   myRealEstate: [],
+// );
 
 class Address {
   final String city;
@@ -118,7 +120,7 @@ class Address {
 enum RealEstateType { home, workspace, shops }
 
 class RealEstate {
-  final Owner owner;
+  final User user;
   final RealEstateType type;
   final double downpayment;
   final double monthlyRent;
@@ -132,7 +134,7 @@ class RealEstate {
   final DateTime endObservation;
   final bool isAvailable;
 
-  RealEstate({required this.owner,
+  RealEstate({required this.user,
     required this.type,
     required this.downpayment,
     required this.monthlyRent,
@@ -161,7 +163,7 @@ class Store extends RealEstate {
     this.hasAc,
     this.hasPowerLine,
     required this.stockRoomSize,
-    required Owner owner,
+    required User user,
     RealEstateType type = RealEstateType.shops,
     required double downpayment,
     required double monthlyRent,
@@ -187,7 +189,7 @@ class Store extends RealEstate {
       imgUrl: imgUrl,
       isAvailable: isAvailable,
       monthlyRent: monthlyRent,
-      owner: owner);
+      user: user);
 }
 
 enum Direction {
@@ -221,7 +223,7 @@ class Home extends RealEstate {
   final int numOfHalls;
   final int floor;
   int? apartmentNumber = -1;
-  final Direction direction;
+  final String direction;
   final HomeType typeOfHome;
   bool? hasElevator = false;
   bool? hasFurnature = false;
@@ -243,7 +245,7 @@ class Home extends RealEstate {
     this.closeFromSchool,
     required this.direction,
     required this.typeOfHome,
-    required Owner owner,
+    required User user,
     // required RealEstateType type,
     required double downpayment,
     required double monthlyRent,
@@ -269,7 +271,7 @@ class Home extends RealEstate {
       imgUrl: imgUrl,
       isAvailable: isAvailable,
       monthlyRent: monthlyRent,
-      owner: owner);
+      user: user);
 }
 
 class WorkSpace extends RealEstate {
@@ -286,7 +288,7 @@ class WorkSpace extends RealEstate {
     required this.hasElevator,
     required this.hasAC,
     required this.hasPowerCable,
-    required Owner owner,
+    required User user,
     required RealEstateType type,
     required double downpayment,
     required double monthlyRent,
@@ -312,15 +314,15 @@ class WorkSpace extends RealEstate {
       imgUrl: imgUrl,
       isAvailable: isAvailable,
       monthlyRent: monthlyRent,
-      owner: owner);
+      user: user);
 }
 
 
 List<Store> store = [
-  Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
-      monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
-      coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
-      endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
+  // Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
+  //     monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
+  //     coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
+  //     endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
 ];
 List<WorkSpace> workSpace = [];
 Address address1 = Address(city: "غزة", street: "شارع الشهداء", estateNo: "مقابل مترو",buildingName: "عمارة الحساينة");
@@ -330,14 +332,14 @@ DateTime startDate1 = DateTime(2021,2,19,12,30,0,0,0);
 DateTime EndDate1 = DateTime(2021,2,25,30,30,0,0,0);
 
 List<Home> home = [
-  Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast,numOfHalls: 2,floor: 6,
-      typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
-      monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
-      coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
-      endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
-  Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast,numOfHalls: 1,floor: 2,
-      typeOfHome: HomeType.house, owner: owner, downpayment: 200,
-      monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
-      coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
-      endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true,),
+  // Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast.toString(),numOfHalls: 2,floor: 6,
+  //     typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
+  //     monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
+  //     coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
+  //     endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
+  // Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast.toString(),numOfHalls: 1,floor: 2,
+  //     typeOfHome: HomeType.house, owner: owner, downpayment: 200,
+  //     monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
+  //     coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
+  //     endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true,),
 ];
