@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_explorer/landlord/wrapper.dart';
-import 'package:home_explorer/normal_user/wrapper.dart';
-import 'package:home_explorer/splash_screen.dart';
+
 
 import 'auth/login_screen.dart';
-import 'auth/signup_screen_generic.dart';
-import 'normal_user/screens/home_screen.dart';
+import 'models/user.dart';
 
 
 void main() => runApp(MyApp());
@@ -21,8 +19,8 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: Color(0xFFE5E5E5),
       ),
-      home: LoginScreen(),
-      // home: Wrapper(),
+      // home: LoginScreen(),
+      home: LandLordWrapper(user: landLord[0],),
       // home: LandLordWrapper(),
       routes: {
         '/login' : (context) => LoginScreen(),

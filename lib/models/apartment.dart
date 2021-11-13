@@ -319,10 +319,10 @@ class WorkSpace extends RealEstate {
 
 
 List<Store> store = [
-  // Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
-  //     monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
-  //     coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
+  Store(stockRoomSize: 100, user: landLord[0], downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
+      monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
+      coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
 ];
 List<WorkSpace> workSpace = [];
 Address address1 = Address(city: "غزة", street: "شارع الشهداء", estateNo: "مقابل مترو",buildingName: "عمارة الحساينة");
@@ -332,14 +332,14 @@ DateTime startDate1 = DateTime(2021,2,19,12,30,0,0,0);
 DateTime EndDate1 = DateTime(2021,2,25,30,30,0,0,0);
 
 List<Home> home = [
-  // Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast.toString(),numOfHalls: 2,floor: 6,
-  //     typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
-  //     monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
-  //     coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
-  // Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast.toString(),numOfHalls: 1,floor: 2,
-  //     typeOfHome: HomeType.house, owner: owner, downpayment: 200,
-  //     monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
-  //     coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true,),
+  Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast.toString(),numOfHalls: 2,floor: 6,
+      typeOfHome: HomeType.house, user: landLord[0], downpayment: 300,apartmentNumber: 23,
+      monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
+      coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
+  Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast.toString(),numOfHalls: 1,floor: 2,
+      typeOfHome: HomeType.house, downpayment: 200,
+      monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
+      coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
+      endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true, user: landLord[0],),
 ];

@@ -52,7 +52,6 @@ class _AddRealEstateState extends State<AddRealEstate> {
   // ignore: non_constant_identifier_names
   late String selected_timeframe;
 
-  int selectedTypeOfAd = 1;
   late String selectedTypeOfRealEstate;
   late TextEditingController address ;
   late TextEditingController price ;
@@ -81,16 +80,14 @@ class _AddRealEstateState extends State<AddRealEstate> {
       // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('تم إرسال طلبك'),
-                Text('سيتم مراجعة طلبك و التأكد أنه يتوافق مع المتطلبات '
-                    'سيتم إشعارك بحالة الطلب '),
-              ],
-            ),
+          title: const Text(
+            'تم إرسال طلبك',
+            textDirection: TextDirection.rtl,
           ),
+          content: Text(
+              'سيتم مراجعة طلبك و التأكد أنه يتوافق مع المتطلبات '
+              'سيتم إشعارك بحالة الطلب ',
+              textDirection: TextDirection.rtl),
           actions: <Widget>[
             TextButton(
               child: const Text('الرجوع'),
@@ -635,7 +632,6 @@ class WorkspaceDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         SizedBox(height: 16),
         Text(
           'وصف العقار',

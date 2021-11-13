@@ -37,10 +37,10 @@ class _NotificationsWrapperState extends State<NotificationsWrapper>
                 color: Colors.white, fontWeight: FontWeight.w600),
           ),
           bottom: TabBar(
+            indicatorColor: Colors.white,
             controller: tabController,
-            labelColor: Colors.black,
-            indicatorColor: Color(0xFF12263A),
-            unselectedLabelColor: Color(0xFFC5D8D1),
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white60,
             tabs: [
               Tab(text: 'اشعارات العقارات'),
               Tab(text: 'صندوق الشكاوي'),

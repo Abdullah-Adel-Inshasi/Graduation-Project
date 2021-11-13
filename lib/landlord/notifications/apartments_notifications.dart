@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/models/apartment.dart';
 
 class Notifications_List extends StatefulWidget {
   @override
@@ -8,25 +9,23 @@ class Notifications_List extends StatefulWidget {
 
 class _Notifications_ListState extends State<Notifications_List> {
   List<String> notifications = [
-    'اشعار 1',
-    'اشعار 2',
-    'اشعار 3',
-    'اشعار 4',
-    'اشعار 4',
-    'اشعار 4',
-    'اشعار 4',
-
+    'تمت مشاهدة العقار (${home[0].name} ) من قبل ليلى مصباح',
+    'طلب تأجير من ليلى مصباح',
+    'هناك 20 مشاهدة جديدة ${home[0].name}',
   ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView.builder(
       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      children: notifications
-          .map(
-            (e) => NotificationBuilder(notification: e,goToDetails: (){},),
-          )
-          .toList(),
+      itemCount: notifications.length,
+      itemBuilder: (context, index) {
+        return NotificationBuilder(
+          notification: notifications[index],
+          personImgUrl: 'assets/images/notification_bell.png',
+          goToDetails: () {},
+        );
+      },
     );
   }
 }
@@ -34,41 +33,51 @@ class _Notifications_ListState extends State<Notifications_List> {
 class NotificationBuilder extends StatelessWidget {
   final String notification;
   final VoidCallback goToDetails;
+  final String personImgUrl;
 
-  const NotificationBuilder({Key? key,required this.notification,required this.goToDetails}) : super(key: key);
+  const NotificationBuilder(
+      {Key? key,
+      required this.notification,
+      required this.goToDetails,
+      required this.personImgUrl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      width: double.infinity,
+      height: 80,
+      margin: EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.shade300, blurRadius: 6.0, spreadRadius: 3)
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
-            notification,
-            textAlign: TextAlign.right,
-            style:
-                GoogleFonts.tajawal(fontSize: 22, color: Colors.black),
-          ),
           Row(
-            children: [
-              Spacer(),
-              GestureDetector(
-                onTap: goToDetails,
-                child: Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.black,width: 1)
-                  ),
-                  child: Text(
-                    'التفاصيل',
-                    style: GoogleFonts.tajawal(fontSize: 16),
-                  ),
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(32),
+                  child: Image.asset('assets/images/notification_bell.png',
+                      width: 64, height: 64,color: Colors.black,colorBlendMode: BlendMode.dstIn,)),
+              SizedBox(width: 5),
+              SizedBox.square(
+                child: Text(
+                  notification,
+                  style: GoogleFonts.tajawal(),
                 ),
-              )
+              ),
             ],
-          )
+          ),
+          IconButton(
+            icon: Icon(Icons.more_horiz_sharp),
+            onPressed: () {},
+          ),
         ],
       ),
     );

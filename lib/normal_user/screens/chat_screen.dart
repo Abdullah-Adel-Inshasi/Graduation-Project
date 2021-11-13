@@ -53,11 +53,11 @@ class Chat extends StatelessWidget {
                         otherImageUrl: imageUrl),
                     Message(
                         isMe: true,
-                        messageText: 'لقد تلقيت الطلب الخاص بك',
+                        messageText: 'ٍسآتي لأرى المنزل غداً',
                         otherImageUrl: imageUrl),
                     Message(
                         isMe: false,
-                        messageText: 'نعم، أتمنى ان نتم المهمة',
+                        messageText: 'حسناً أن أراك غداً',
                         otherImageUrl: imageUrl)
                   ],
                 ),
