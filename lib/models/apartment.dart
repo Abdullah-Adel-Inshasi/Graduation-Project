@@ -10,14 +10,15 @@ class Apartment {
   final int bathroom_number;
   final int size;
 
-  Apartment({this.name,
-    required this.price,
-    required this.location,
-    required this.ownerName,
-    required this.imageUrl,
-    required this.room_number,
-    required this.bathroom_number,
-    required this.size});
+  Apartment(
+      {this.name,
+      required this.price,
+      required this.location,
+      required this.ownerName,
+      required this.imageUrl,
+      required this.room_number,
+      required this.bathroom_number,
+      required this.size});
 }
 
 List<Apartment> apartments = [
@@ -107,20 +108,24 @@ class Address {
   final String estateNo;
   final String? buildingName;
 
-  Address({required this.city, required this.street, required this.estateNo, this.buildingName});
+  Address(
+      {required this.city,
+      required this.street,
+      required this.estateNo,
+      this.buildingName});
 
   @override
   String toString() {
     // TODO: implement toString
-    return "$city - $street - $estateNo" + (buildingName!=null ? "- $buildingName" : "");
+    return "$city - $street - $estateNo" +
+        (buildingName != null ? "- $buildingName" : "");
   }
-
 }
 
 enum RealEstateType { home, workspace, shops }
 
 class RealEstate {
-  final User user;
+  late final User user;
   final RealEstateType type;
   final double downpayment;
   final double monthlyRent;
@@ -133,63 +138,69 @@ class RealEstate {
   final DateTime beginObservation;
   final DateTime endObservation;
   final bool isAvailable;
+  final bool isPrivat;
 
-  RealEstate({required this.user,
-    required this.type,
-    required this.downpayment,
-    required this.monthlyRent,
-    required this.name,
-    required this.address,
-    required this.size,
-    required this.imgUrl,
-    required this.coverImg,
-    required this.aboutEstate,
-    required this.beginObservation,
-    required this.endObservation,
-    required this.isAvailable});
+  RealEstate(
+      {required this.user,
+      required this.type,
+      required this.downpayment,
+      required this.monthlyRent,
+      required this.name,
+      required this.address,
+      required this.size,
+      required this.imgUrl,
+      required this.coverImg,
+      required this.aboutEstate,
+      required this.beginObservation,
+      required this.endObservation,
+      required this.isAvailable,
+      required this.isPrivat});
 }
 
 class Store extends RealEstate {
   bool? hasAc = false;
-  bool? hasFurnature = false;
+  bool? publicStreet = false;
   bool? hasPowerLine = false;
   final int stockRoomSize;
   final String finishingStatus;
   final String exhibitionRating;
 
-  Store({this.hasFurnature,
-    required this.finishingStatus,
-    required this.exhibitionRating,
-    this.hasAc,
-    this.hasPowerLine,
-    required this.stockRoomSize,
-    required User user,
-    RealEstateType type = RealEstateType.shops,
-    required double downpayment,
-    required double monthlyRent,
-    required String name,
-    required Address address,
-    required double size,
-    required List<String> imgUrl,
-    required String coverImg,
-    required String aboutEstate,
-    required DateTime beginObservation,
-    required DateTime endObservation,
-    required bool isAvailable})
+  Store(
+      {this.publicStreet,
+      required this.finishingStatus,
+      required this.exhibitionRating,
+      this.hasAc,
+      this.hasPowerLine,
+      required this.stockRoomSize,
+      required User user,
+      RealEstateType type = RealEstateType.shops,
+      required double downpayment,
+      required double monthlyRent,
+      required String name,
+      required Address address,
+      required double size,
+      required List<String> imgUrl,
+      required String coverImg,
+      required String aboutEstate,
+      required DateTime beginObservation,
+      required DateTime endObservation,
+      required bool isPrivat,
+      required bool isAvailable})
       : super(
-      name: name,
-      type: type,
-      size: size,
-      aboutEstate: aboutEstate,
-      address: address,
-      beginObservation: beginObservation,
-      coverImg: coverImg,
-      downpayment: downpayment,
-      endObservation: endObservation,
-      imgUrl: imgUrl,
-      isAvailable: isAvailable,
-      monthlyRent: monthlyRent,
-      user: user);
+            name: name,
+            type: type,
+            size: size,
+            aboutEstate: aboutEstate,
+            address: address,
+            beginObservation: beginObservation,
+            coverImg: coverImg,
+            downpayment: downpayment,
+            endObservation: endObservation,
+            imgUrl: imgUrl,
+            isAvailable: isAvailable,
+            monthlyRent: monthlyRent,
+            isPrivat: isPrivat,
+            user: user);
 }
 
 enum Direction {
@@ -232,114 +243,200 @@ class Home extends RealEstate {
   bool? closeFromMosque = false;
   bool? closeFromSchool = false;
 
-  Home({required this.numOfBathroom,
-    required this.numOfRoom,
-    required this.numOfHalls,
-    required this.floor,
-    this.apartmentNumber,
-    this.hasFurnature,
-    this.hasAC,
-    this.hasElevator,
-    this.hasGarage,
-    this.closeFromMosque,
-    this.closeFromSchool,
-    required this.direction,
-    required this.typeOfHome,
-    required User user,
-    // required RealEstateType type,
-    required double downpayment,
-    required double monthlyRent,
-    required String name,
-    required Address address,
-    required double size,
-    required List<String> imgUrl,
-    required String coverImg,
-    required String aboutEstate,
-    required DateTime beginObservation,
-    required DateTime endObservation,
-    required bool isAvailable})
+  Home(
+      {required this.numOfBathroom,
+      required this.numOfRoom,
+      required this.numOfHalls,
+      required this.floor,
+      this.apartmentNumber,
+      this.hasFurnature,
+      this.hasAC,
+      this.hasElevator,
+      this.hasGarage,
+      this.closeFromMosque,
+      this.closeFromSchool,
+      required this.direction,
+      required this.typeOfHome,
+      required User user,
+      // required RealEstateType type,
+      required double downpayment,
+      required double monthlyRent,
+      required String name,
+      required Address address,
+      required double size,
+      required List<String> imgUrl,
+      required String coverImg,
+      required String aboutEstate,
+      required DateTime beginObservation,
+      required DateTime endObservation,
+        required bool isPrivat,
+      required bool isAvailable})
       : super(
-      name: name,
-      type: RealEstateType.home,
-      size: size,
-      aboutEstate: aboutEstate,
-      address: address,
-      beginObservation: beginObservation,
-      coverImg: coverImg,
-      downpayment: downpayment,
-      endObservation: endObservation,
-      imgUrl: imgUrl,
-      isAvailable: isAvailable,
-      monthlyRent: monthlyRent,
-      user: user);
+            name: name,
+            type: RealEstateType.home,
+            size: size,
+            aboutEstate: aboutEstate,
+            address: address,
+            beginObservation: beginObservation,
+            coverImg: coverImg,
+            downpayment: downpayment,
+            endObservation: endObservation,
+            imgUrl: imgUrl,
+            isAvailable: isAvailable,
+            monthlyRent: monthlyRent,
+            isPrivat: isPrivat,
+            user: user);
 }
 
 class WorkSpace extends RealEstate {
-  final int floorNum;
   final int numOfDesks;
   final String internetStatus;
   bool hasAC = false;
   bool hasPowerCable = false;
-  bool hasElevator = false;
+  bool publicStreet = false;
 
-  WorkSpace({required this.floorNum,
-    required this.numOfDesks,
-    required this.internetStatus,
-    required this.hasElevator,
-    required this.hasAC,
-    required this.hasPowerCable,
-    required User user,
-    required RealEstateType type,
-    required double downpayment,
-    required double monthlyRent,
-    required String name,
-    required Address address,
-    required double size,
-    required List<String> imgUrl,
-    required String coverImg,
-    required String aboutEstate,
-    required DateTime beginObservation,
-    required DateTime endObservation,
-    required bool isAvailable})
+  WorkSpace(
+      {required this.numOfDesks,
+      required this.internetStatus,
+      required this.publicStreet,
+      required this.hasAC,
+      required this.hasPowerCable,
+      required User user,
+      // required RealEstateType type,
+      required double downpayment,
+      required double monthlyRent,
+      required String name,
+      required Address address,
+      required double size,
+      required List<String> imgUrl,
+      required String coverImg,
+      required String aboutEstate,
+      required DateTime beginObservation,
+      required DateTime endObservation,
+      required bool isPrivat,
+      required bool isAvailable})
       : super(
-      name: name,
-      type: type,
-      size: size,
-      aboutEstate: aboutEstate,
-      address: address,
-      beginObservation: beginObservation,
-      coverImg: coverImg,
-      downpayment: downpayment,
-      endObservation: endObservation,
-      imgUrl: imgUrl,
-      isAvailable: isAvailable,
-      monthlyRent: monthlyRent,
-      user: user);
+            name: name,
+            type: RealEstateType.workspace,
+            size: size,
+            aboutEstate: aboutEstate,
+            address: address,
+            beginObservation: beginObservation,
+            coverImg: coverImg,
+            downpayment: downpayment,
+            endObservation: endObservation,
+            imgUrl: imgUrl,
+            isAvailable: isAvailable,
+            monthlyRent: monthlyRent,
+            isPrivat: isPrivat,
+            user: user);
 }
 
-
 List<Store> store = [
-  // Store(stockRoomSize: 100, owner: owner, downpayment: 200, finishingStatus: "سوبر لوكس",exhibitionRating: "معرض مجمع",
-  //     monthlyRent: 180, name: "no.1", address: address2, size: 150, imgUrl: ['assets/images/house3.jpg'],
-  //     coverImg: 'assets/images/house3.jpg',aboutEstate: "الوصف...", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: true,hasAc: true,hasFurnature: true),
+  Store(
+      stockRoomSize: 100,
+      user: landLord[0],
+      downpayment: 200,
+      finishingStatus: "سوبر لوكس",
+      exhibitionRating: "معرض مجمع",
+      monthlyRent: 180,
+      name: "no.1",
+      address: address2,
+      size: 150,
+      imgUrl: ['assets/images/house3.jpg'],
+      coverImg: 'assets/images/house3.jpg',
+      aboutEstate: "الوصف...",
+      beginObservation: startDate1,
+      endObservation: EndDate1,
+      isAvailable: true,
+      hasAc: true,
+      isPrivat: false,
+      publicStreet: true),
 ];
-List<WorkSpace> workSpace = [];
-Address address1 = Address(city: "غزة", street: "شارع الشهداء", estateNo: "مقابل مترو",buildingName: "عمارة الحساينة");
+List<WorkSpace> workSpace = [WorkSpace(
+    user: landLord[0],
+    downpayment: 200,
+    monthlyRent: 180,
+    name: "no.1",
+    address: address2,
+    size: 150,
+    imgUrl: ['assets/images/house3.jpg'],
+    coverImg: 'assets/images/house3.jpg',
+    aboutEstate: "الوصف...",
+    beginObservation: startDate1,
+    endObservation: EndDate1,
+    isAvailable: true,
+    isPrivat: false,
+    publicStreet: true,
+    numOfDesks: 1,
+    internetStatus: 'نت قوي',
+    hasPowerCable: true,
+    hasAC: false)];
+Address address1 = Address(
+    city: "غزة",
+    street: "شارع الشهداء",
+    estateNo: "مقابل مترو",
+    buildingName: "عمارة الحساينة");
 Address address2 = Address(city: "رفح", street: "شارع الثورة", estateNo: "غرب مخبز الدهشان");
+Address address3 = Address(city: "غزة", street: "شارع السفارة المصرية", estateNo: "عمارة بيروت 3");
 
-DateTime startDate1 = DateTime(2021,2,19,12,30,0,0,0);
-DateTime EndDate1 = DateTime(2021,2,25,30,30,0,0,0);
+DateTime startDate1 = DateTime(2021, 2, 19, 12, 30, 0, 0, 0);
+DateTime EndDate1 = DateTime(2021, 2, 25, 30, 30, 0, 0, 0);
 
 List<Home> home = [
-  // Home(numOfBathroom: 2, numOfRoom: 4, direction: Direction.northEast.toString(),numOfHalls: 2,floor: 6,
-  //     typeOfHome: HomeType.house, owner: owner, downpayment: 300,apartmentNumber: 23,
-  //     monthlyRent: 250, name: 'no.1', address: address1, size: 170, imgUrl: ['assets/images/house1.jpg'],
-  //     coverImg: 'assets/images/house1.jpg', aboutEstate: "وصف الشقة.....", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: true,hasFurnature: true,closeFromMosque: true,hasGarage: true),
-  // Home(numOfBathroom: 1, numOfRoom: 3, direction: Direction.northEast.toString(),numOfHalls: 1,floor: 2,
-  //     typeOfHome: HomeType.house, owner: owner, downpayment: 200,
-  //     monthlyRent: 150, name: 'no.2', address: address2, size: 115, imgUrl: ['assets/images/house3.jpg'],
-  //     coverImg: 'assets/images/house3.jpg', aboutEstate: "وصف الشقة ....", beginObservation: startDate1,
-  //     endObservation: EndDate1, isAvailable: false,closeFromMosque: true,hasAC: true,closeFromSchool: true,),
+  Home(
+      numOfBathroom: 2,
+      numOfRoom: 4,
+      direction: 'شمالي غربي',
+      numOfHalls: 2,
+      floor: 6,
+      typeOfHome: HomeType.house,
+      user: landLord[0],
+      downpayment: 300,
+      apartmentNumber: 23,
+      monthlyRent: 250,
+      name: 'no.1',
+      address: address1,
+      size: 170,
+      imgUrl: ['assets/images/house1.jpg'],
+      coverImg: 'assets/images/house1.jpg',
+      aboutEstate: ''':  ناﻮﻨﻌﻟا ﻦﻴﻋرﺎﺷ ﻰﻠﻋ ﺔﻘﺸﻟا
+يرﺎﺼﻧﺎﻟا بﻮﻳا ﻮﺑا ﻊﻣﺎﺟ بﻮﻨﺟ ﻂﻴﺒﺿ قﺮﺘﻔﻣ ﻦﻣ بﺮﻘﻟﺎﺑ ﻲﺿرﺎﻟا روﺪﻟا ﺪﻌﺑ ﻖﺑاﻮﻃ ﺲﻤﺨﻟ ﺲﺳﺆﻣ  ﻰﻨﺒﻣو صﺎﺧ هﺎﻴﻣ ﺮﺌﺑ ﺎﻬﻴﻓو ةرﻮﺴﻣو م 170 ﺔﻘﺸﻟا ﺔﺣﺎﺴﻣ ''',
+      beginObservation: startDate1,
+      endObservation: EndDate1,
+      isAvailable: true,
+      hasFurnature: true,
+      closeFromMosque: true,
+      isPrivat: false,
+      hasGarage: true),
+  Home(
+      numOfBathroom: 1,
+      numOfRoom: 3,
+      direction: 'جنوبي شرقي',
+      numOfHalls: 1,
+      floor: 4,
+      typeOfHome: HomeType.apartment,
+      user: landLord[1],
+      downpayment: 150,
+      apartmentNumber: 21,
+      monthlyRent: 200,
+      name: 'شقة برج الطاهر',
+      address: address2,
+      size: 170,
+      imgUrl: ['assets/images/house2.jpg'],
+      coverImg: 'assets/images/house2.jpg',
+      aboutEstate: ''':  ناﻮﻨﻌﻟا ﻦﻴﻋرﺎﺷ ﻰﻠﻋ ﺔﻘﺸﻟا
+يرﺎﺼﻧﺎﻟا بﻮﻳا ﻮﺑا ﻊﻣﺎﺟ بﻮﻨﺟ ﻂﻴﺒﺿ قﺮﺘﻔﻣ ﻦﻣ بﺮﻘﻟﺎﺑ ﻲﺿرﺎﻟا روﺪﻟا ﺪﻌﺑ ﻖﺑاﻮﻃ ﺲﻤﺨﻟ ﺲﺳﺆﻣ  ﻰﻨﺒﻣو صﺎﺧ هﺎﻴﻣ ﺮﺌﺑ ﺎﻬﻴﻓو ةرﻮﺴﻣو م 170 ﺔﻘﺸﻟا ﺔﺣﺎﺴﻣ ''',
+      beginObservation: startDate1,
+      endObservation: EndDate1,
+      isAvailable: true,
+      hasFurnature: true,
+      closeFromMosque: true,
+      isPrivat: true,
+      hasGarage: false,
+    closeFromSchool: true,
+    hasAC: false
+
+  ),
 ];
+

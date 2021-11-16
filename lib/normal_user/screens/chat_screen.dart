@@ -19,16 +19,70 @@ class Chat extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: TextField(
-              enabled: true,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 12,
+                      offset:
+                      Offset(1, 5), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                          },
+                          icon: Icon(
+                            Icons.send,
+                            textDirection:TextDirection.rtl,
+                            color: Color(0xFF14688C),
+                          )),
+                      Expanded(
+                          child: TextField(
+                            textAlign: TextAlign.right,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'مراسلة',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF14688C)
+                                )),
+                          )),
+                      IconButton(
+                          onPressed: () {
+                          },
+                          icon: Icon(
+                            Icons.attach_file,
+                            color: Color(0xFF14688C),
+                          )),
+                      Image.asset(
+                        'assets/images/emoji.png',
+                        color: Color(0xFF14688C)
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ],
         body: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: 15)),
             SliverPersistentHeader(
               delegate: ChatAppBar(imageUrl: imageUrl,username: username),
             ),
@@ -53,12 +107,12 @@ class Chat extends StatelessWidget {
                         otherImageUrl: imageUrl),
                     Message(
                         isMe: true,
-                        messageText: 'لقد تلقيت الطلب الخاص بك',
+                        messageText: 'ٍسآتي لأرى المنزل غداً',
                         otherImageUrl: imageUrl),
                     Message(
                         isMe: false,
-                        messageText: 'نعم، أتمنى ان نتم المهمة',
-                        otherImageUrl: imageUrl)
+                        messageText: 'حسناً أن أراك غداً',
+                        otherImageUrl: imageUrl),
                   ],
                 ),
               ),
@@ -80,7 +134,8 @@ class ChatAppBar extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      height: 100,
+      color: Color(0xFF14688C),
+      height: 80,
       width: double.infinity,
       padding: EdgeInsets.fromLTRB(16, 30, 0, 0),
       child: Row(
@@ -96,15 +151,14 @@ class ChatAppBar extends SliverPersistentHeaderDelegate {
             alignment: Alignment.center,
             children: [
               Container(
-                height: 70,
-                width: 70,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+                height: 50,
+                width: 50,
+                // decoration:
+                // BoxDecoration(shape: BoxShape.circle, color: Colors.green),
               ),
               CircleAvatar(
                 backgroundColor: Colors.red,
                 backgroundImage: NetworkImage(imageUrl),
-                radius: 30,
               ),
             ],
           ),
@@ -151,9 +205,9 @@ class Message extends StatelessWidget {
 
   const Message(
       {Key? key,
-      required this.isMe,
-      required this.messageText,
-      required this.otherImageUrl})
+        required this.isMe,
+        required this.messageText,
+        required this.otherImageUrl})
       : super(key: key);
 
   @override
@@ -182,7 +236,7 @@ class Message extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '${messageText}',
+                  '$messageText',
                   softWrap: false,
                 ),
                 SizedBox(height: 15),

@@ -155,14 +155,14 @@ class StoreDetailss extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-                  color: store.hasFurnature==true ? Color(0xFF14688C) : Colors.grey.shade200,
+                  color: store.publicStreet==true ? Color(0xFF14688C) : Colors.grey.shade200,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'معفش',
                         style: Constant.kBodyTextStyle
-                            .copyWith(color:store.hasFurnature==true ? Colors.white : Colors.red),
+                            .copyWith(color:store.publicStreet==true ? Colors.white : Colors.red),
                       ),
                       SizedBox(width: 5),
                       Container(
@@ -172,8 +172,8 @@ class StoreDetailss extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.white),
                         child: Center(
                           child: Icon(
-                            store.hasFurnature==true ? Icons.check : Icons.clear,
-                            color: store.hasFurnature==true ? Color(0xFF14688C) : Colors.red,
+                            store.publicStreet==true ? Icons.check : Icons.clear,
+                            color: store.publicStreet==true ? Color(0xFF14688C) : Colors.red,
                             size: 18,
                           ),
                         ),

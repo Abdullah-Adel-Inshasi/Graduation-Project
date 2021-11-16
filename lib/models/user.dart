@@ -85,11 +85,13 @@ class NormalUser extends User{
 }
 
 List<LandLord> landLord = [
-  LandLord(id: 0, fullName: "anas", email: "a", phoneNumber: "0597981988",
-      password: "1", isRealEstateOffice: false),
+  LandLord(id: 0, fullName: "محمد ابو صفية", email: "a@com", phoneNumber: "0594156728",
+      password: "1234567", isRealEstateOffice: false),
+  LandLord(id: 1, fullName: "عبد الله النشاصي", email: "abed@hotmail.com", phoneNumber: "0594156728",
+      password: "1234567", isRealEstateOffice: false),
 ];
 List<NormalUser> normalUser = [
-  NormalUser(id: 0, fullName: "ahmed", email: "h", phoneNumber: "059819811",
-      password: "1", familyNumber: 5, age: "20", isSingle: true),
+  NormalUser(id: 0, fullName: "ahmed", email: "h@com", phoneNumber: "059819811",
+      password: "1234567", familyNumber: 5, age: "20", isSingle: true),
 ];
 

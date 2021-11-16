@@ -34,9 +34,14 @@ dependencies:
   dotted_border: ^2.0.0+1
   date_time_picker: ^2.1.0
   url_launcher: ^6.0.12
-#  location: ^4.3.0
+  location: ^4.3.0
   google_maps_flutter: ^2.0.6
   geolocator: ^7.2.0+1
+  image_picker: ^0.8.4+4
+  path_provider: ^2.0.6
+  provider: ^5.0.0
+
+#  toast: ^0.1.5
 
 
 dev_dependencies:

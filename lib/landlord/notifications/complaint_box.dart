@@ -7,30 +7,62 @@ class ComplaintBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
-      itemCount: complaints.length,
-      itemBuilder: (BuildContext context, int index) {
-        Complaint complaint = complaints[index];
-        return Container(
-          decoration:
-              BoxDecoration(border: Border.all(color: Colors.black, width: 1)),
-          margin: EdgeInsets.symmetric(vertical: 8),
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-             Text('اسم المستخدم : ${complaint.user}'),
-              SizedBox(height: 8),
-              Text('رقم الشقة : ${complaint.apartment.name ?? 'unknown'}'),
-              SizedBox(height: 8),
-              Text('الشكوى : ${complaint.text}')
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      backgroundColor: Color(0xFFF9FAFF),
+      body: ListView.builder(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        itemCount: complaints.length,
+        itemBuilder: (BuildContext context, int index) {
+          Complaint complaint = complaints[index];
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.shade300,
+                    blurRadius: 6.0,
+                    spreadRadius: 3)
+              ],
+            ),
+            margin: EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 8,
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  child: Image.asset(
+                    home[0].coverImg,
+                    width: 140,
+                    height: 140,
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('اسم الشخص : ${complaint.user}'),
+                    SizedBox(height: 8),
+                    Text(
+                        'اسم الشقة : ${complaint.apartment.name ?? 'unknown'}'),
+                    SizedBox(height: 8),
+                    Text('الشكوى : ${complaint.text}')
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

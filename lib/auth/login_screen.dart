@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_explorer/auth/signup_screen_generic.dart';
 import 'package:home_explorer/landlord/wrapper.dart';
 import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/wrapper.dart';
@@ -19,6 +18,21 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController password = TextEditingController();
 
   bool isObscure = true;
+
+  var loginKey = GlobalKey<FormState>();
+  saveForm() {
+    if (loginKey.currentState!.validate()) {
+      if(login()==2){
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => LandLordWrapper(user: user,)), (route) => false);
+      }else if(login()==1){
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => Wrapper(user: user,)), (route) => false);
+      }else{
+        print("البريد الالكتورني او كلمة السر غير صحيحة");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,101 +64,178 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: SizeConfig.scaleWidth(25)),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(120),
-                    ),
-                    Container(
-                        height: SizeConfig.scaleHeight(128),width: SizeConfig.scaleWidth(100),
-                        child: Image.asset('assets/images/logo.jpg',fit: BoxFit.fill,),
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(30),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.mail, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
-                        SizedBox(
-                          width: SizeConfig.scaleHeight(10),
-                        ),
-                        Text(
-                          'البريد الإلكتروني',
-                          style: TextStyle(
-                            fontSize: SizeConfig.scaleTextFont(16),
-                            color: Color(0xFF8B8B8B),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(10),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: SizeConfig.scaleHeight(56),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                child: Form(
+                  key: loginKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(120),
                       ),
-                      child: Padding(
-                        padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
-                        child: TextField(
-                          controller: email,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
-                              focusedBorder: InputBorder.none,
-                              border: InputBorder.none,
-                              hintText: "البريد الإلكتروني"
-                          ),
-                        ),
+                      Container(
+                          height: SizeConfig.scaleHeight(128),width: SizeConfig.scaleWidth(100),
+                          child: Image.asset('assets/images/logo.jpg',fit: BoxFit.fill,),
                       ),
-                    ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(30),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.mail, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
+                          SizedBox(
+                            width: SizeConfig.scaleHeight(10),
+                          ),
+                          Text(
+                            'البريد الإلكتروني',
+                            style: TextStyle(
+                              fontSize: SizeConfig.scaleTextFont(16),
+                              color: Color(0xFF8B8B8B),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(10),
+                      ),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //
+                      //   clipBehavior: Clip.antiAlias,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     shape: BoxShape.rectangle,
+                      //     borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                      //   ),
+                      //   child: Padding(
+                      //     padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
+                      //     child: TextFormField(
+                      //       validator: (String? value) {
+                      //         if (value!.isEmpty || value == "") {
+                      //           return "هذا الحقل مطلوب";
+                      //         } else if (!value!.contains('@')) {
+                      //           return "الرجاء ادخال ايميل صالح";
+                      //         } else{
+                      //           return null;
+                      //         }
+                      //       },
+                      //       controller: email,
+                      //       cursorColor: Colors.black,
+                      //       decoration: InputDecoration(
+                      //
+                      //         fillColor: Colors.white,
+                      //         border: new OutlineInputBorder(
+                      //           borderRadius: new BorderRadius.circular(10),
+                      //           borderSide: new BorderSide(
+                      //           )),
+                      //           hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
+                      //           focusedBorder: InputBorder.none,
+                      //
+                      //           hintText: "البريد الإلكتروني",
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      TextFormField(
+                        validator: (String? value) {
+                          if (value!.isEmpty || value == "") {
+                            return "هذا الحقل مطلوب";
+                          } else if (!value.contains('@')) {
+                            return "الرجاء ادخال ايميل صالح";
+                          } else{
+                            return null;
+                          }
+                        },
+                        controller: email,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: new BorderSide(
+                              )),
+                          hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
+                          focusedBorder:new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: new BorderSide(
+                              )),
 
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(20),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.lock, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
-                        SizedBox(
-                          width: SizeConfig.scaleHeight(10),
+                          hintText: "البريد الإلكتروني",
                         ),
-                        Text(
-                          'كلمة المرور',
-                          style: TextStyle(
-                            fontSize: SizeConfig.scaleTextFont(16),
-                            color: Color(0xFF8B8B8B),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(10),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: SizeConfig.scaleHeight(56),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
                       ),
-                      child: Padding(
-                        padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
-                        child: TextField(
-                          controller: password,
-                          cursorColor: Colors.black,
-                          obscureText: isObscure,
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
-                            focusedBorder: InputBorder.none,
-                            border: InputBorder.none,
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(20),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.lock, color: Color(0xFF8B8B8B),size: SizeConfig.scaleTextFont(18),),
+                          SizedBox(
+                            width: SizeConfig.scaleHeight(10),
+                          ),
+                          Text(
+                            'كلمة المرور',
+                            style: TextStyle(
+                              fontSize: SizeConfig.scaleTextFont(16),
+                              color: Color(0xFF8B8B8B),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(10),
+                      ),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: SizeConfig.scaleHeight(56),
+                      //   clipBehavior: Clip.antiAlias,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     shape: BoxShape.rectangle,
+                      //     borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                      //   ),
+                      //   child: Padding(
+                      //     padding:  EdgeInsetsDirectional.only(start: SizeConfig.scaleWidth(15),end:SizeConfig.scaleWidth(10)),
+                      //     child: TextField(
+                      //       controller: password,
+                      //       cursorColor: Colors.black,
+                      //       obscureText: isObscure,
+                      //       decoration: InputDecoration(
+                      //         hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
+                      //         focusedBorder: InputBorder.none,
+                      //         border: InputBorder.none,
+                      //         hintText: "كلمة المرور",
+                      //         suffixIcon: IconButton(
+                      //           icon: isObscure ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+                      //           onPressed: (){
+                      //             setState(() {
+                      //               isObscure = !isObscure;
+                      //             });
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      TextFormField(
+                        validator: (String? v) {
+                          if (v!.length == 0) {
+                            return "هذا الحقل مطلوب";
+                          } else if (v.length < 6) {
+                            return "كلمة المرور يجب ان تكون اكبر من 6 حروف ";
+                          }
+                        },
+                        controller: password,
+                        cursorColor: Colors.black,
+                        obscureText: isObscure,
+                        decoration: InputDecoration(
+                          border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: new BorderSide(
+                              )),
+                          hintStyle: TextStyle(fontSize: SizeConfig.scaleTextFont(14),color: Color(0xFFB6B7B7)),
+                          focusedBorder:new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: new BorderSide(
+                              )),
+
                             hintText: "كلمة المرور",
                             suffixIcon: IconButton(
                               icon: isObscure ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
@@ -153,173 +244,165 @@ class _LoginScreenState extends State<LoginScreen> {
                                   isObscure = !isObscure;
                                 });
                               },
-                            ),
-                          ),
+                            )
                         ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        child: Text(
-                          'نسيت كلمة المرور؟',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: SizeConfig.scaleTextFont(14),
-                            color: Color(0xFF14688C),
-                          ),
-                        ),
-                        onPressed: (){},
-                      ),
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(55),
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        if(login()==2){
-                          Navigator.pushAndRemoveUntil(context,
-                              MaterialPageRoute(builder: (context) => LandLordWrapper(user: user,)), (route) => false);
-                        }else if(login()==1){
-                          Navigator.pushAndRemoveUntil(context,
-                              MaterialPageRoute(builder: (context) => Wrapper()), (route) => false);
-                        }else{
-                          print("البريد الالكتورني او كلمة السر غير صحيحة");
-                        }
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: SizeConfig.scaleHeight(50),
-                        width: double.infinity,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: Color(0xff14688C),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
-                        ),
-                        child: Text('دخول', style: TextStyle(fontSize: SizeConfig.scaleTextFont(18),color: Color(0xffF6F6F6))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(15),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Google',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.scaleTextFont(16),
-                                    color: Color(0xFF333333),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(
-                                  width: SizeConfig.scaleWidth(10),
-                                ),
-                                Image.asset('assets/images/google.png',
-                                  height: SizeConfig.scaleHeight(16),width: SizeConfig.scaleWidth(16),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: SizeConfig.scaleWidth(15),
-                        ),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Facebook',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.scaleTextFont(16),
-                                    color: Color(0xFF333333),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(
-                                  width: SizeConfig.scaleWidth(10),
-                                ),
-                                Image.asset('assets/images/facebook.png',
-                                  height: SizeConfig.scaleHeight(16),width: SizeConfig.scaleWidth(16),
-                                ),
 
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: SizeConfig.scaleHeight(120),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'ليس لديك حساب؟',
-                          style: TextStyle(
-                            fontSize: SizeConfig.scaleTextFont(14),
-                            color: Color(0xFF333333),
-                          ),
-                        ),
-                        SizedBox(
-                          width: SizeConfig.scaleHeight(5),
-                        ),
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => GettingStartedScreen()));
-                          },
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
                           child: Text(
-                            'التسجيل',
+                            'نسيت كلمة المرور؟',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: SizeConfig.scaleTextFont(14),
                               color: Color(0xFF14688C),
                             ),
                           ),
+                          onPressed: (){},
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(55),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          saveForm();
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: SizeConfig.scaleHeight(50),
+                          width: double.infinity,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            color: Color(0xff14688C),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                          ),
+                          child: Text('دخول', style: TextStyle(fontSize: SizeConfig.scaleTextFont(18),color: Color(0xffF6F6F6))),
+                        ),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(15),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Google',
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.scaleTextFont(16),
+                                      color: Color(0xFF333333),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(
+                                    width: SizeConfig.scaleWidth(10),
+                                  ),
+                                  Image.asset('assets/images/google.png',
+                                    height: SizeConfig.scaleHeight(16),width: SizeConfig.scaleWidth(16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: SizeConfig.scaleWidth(15),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(15)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Facebook',
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.scaleTextFont(16),
+                                      color: Color(0xFF333333),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(
+                                    width: SizeConfig.scaleWidth(10),
+                                  ),
+                                  Image.asset('assets/images/facebook.png',
+                                    height: SizeConfig.scaleHeight(16),width: SizeConfig.scaleWidth(16),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: SizeConfig.scaleHeight(120),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'ليس لديك حساب؟',
+                            style: TextStyle(
+                              fontSize: SizeConfig.scaleTextFont(14),
+                              color: Color(0xFF333333),
+                            ),
+                          ),
+                          SizedBox(
+                            width: SizeConfig.scaleHeight(5),
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GettingStartedScreen()));
+                            },
+                            child: Text(
+                              'التسجيل',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontSize: SizeConfig.scaleTextFont(14),
+                                color: Color(0xFF14688C),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

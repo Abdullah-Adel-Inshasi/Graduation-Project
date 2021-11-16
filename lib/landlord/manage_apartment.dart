@@ -2,9 +2,12 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/models/apartment.dart';
 
 class ApartmentPage_Landlord extends StatefulWidget {
-  const ApartmentPage_Landlord({Key? key}) : super(key: key);
+  const ApartmentPage_Landlord({Key? key, required this.realEstate})
+      : super(key: key);
+  final RealEstate realEstate;
 
   @override
   State<ApartmentPage_Landlord> createState() => _ApartmentPage_LandlordState();
@@ -12,15 +15,30 @@ class ApartmentPage_Landlord extends StatefulWidget {
 
 class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
   bool canEdit = false;
-  String address = 'غزة - شارع النصر - دوار الشباب و الرياضة';
-  double rentPrice = 120;
   bool isRented = false;
   late TextEditingController addressTEC;
   late PageController _pageController;
+  late TextEditingController titleTEC;
+  late TextEditingController aboutTEC;
+  late TextEditingController rentTEC;
+  late String about;
+  late String address;
+  late String rent;
+  late List<String> image;
+  late String title;
 
   @override
   void initState() {
+    about = widget.realEstate.aboutEstate;
+    address =
+        '${widget.realEstate.address.city} - ${widget.realEstate.address.street} - ${widget.realEstate.address.street}';
+    title = widget.realEstate.name;
+    image = widget.realEstate.imgUrl;
+    rent = widget.realEstate.monthlyRent.toString();
     addressTEC = TextEditingController(text: address);
+    rentTEC = TextEditingController(text: rent.toString());
+    titleTEC = TextEditingController(text: title);
+    aboutTEC = TextEditingController(text: about);
     _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
     super.initState();
   }
@@ -31,10 +49,11 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         body: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
-              title: Text('Apartment Name'),
+              title: Text(title),
               backgroundColor: Color(0xFF14688C),
               leading: BackButton(),
               actions: [
@@ -61,7 +80,10 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Image.asset('assets/images/house4.jpg',fit: BoxFit.cover,),
+                      child: Image.asset(
+                        image[0],
+                        fit: BoxFit.cover,
+                      ),
                     );
                   },
                 ),
@@ -74,6 +96,35 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 15),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Icon(Icons.home),
+                        SizedBox(width: 5),
+                        Text(
+                          'اسم الشقة',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    TextField(
+                      textDirection: TextDirection.rtl,
+                      controller: titleTEC,
+                      onChanged: (newTitle) => setState(() => title = newTitle),
+                      enabled: canEdit,
+                      style: GoogleFonts.tajawal(
+                          fontSize: 16, color: Colors.black),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(right: 10),
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
                     Row(
                       children: [
                         Icon(Icons.location_on_rounded),
@@ -103,6 +154,78 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                       ),
                     ),
                     canEdit ? Text('') : SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Icon(Icons.text_snippet),
+                        SizedBox(width: 5),
+                        Text(
+                          'وصف الشقة',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    TextField(
+                      textDirection: TextDirection.rtl,
+                      controller: aboutTEC,
+                      onChanged: (newAbout) => setState(() => about = newAbout),
+                      enabled: canEdit,
+                      maxLines: 5,
+                      style: GoogleFonts.tajawal(
+                          fontSize: 16, color: Colors.black),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Icon(Icons.attach_money),
+                        SizedBox(width: 5),
+                        Text(
+                          'الإجار الشهري',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    TextField(
+                      textDirection: TextDirection.rtl,
+                      controller: rentTEC,
+
+                      onChanged: (newRent) => setState(() => rent = newRent),
+                      enabled: canEdit,
+                      keyboardType: TextInputType.number,
+                      style: GoogleFonts.tajawal(
+                          fontSize: 16, color: Colors.black),
+                      decoration: InputDecoration(
+                        suffixText: '\$ \\ شهر',
+                        contentPadding: EdgeInsets.only(right: 10),
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                    canEdit ? Text('') : SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Icon(Icons.text_snippet),
+                        SizedBox(width: 5),
+                        Text(
+                          'وصف الشقة',
+                          style: GoogleFonts.tajawal(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -156,7 +279,7 @@ class _ApartmentPage_LandlordState extends State<ApartmentPage_Landlord> {
                             onSaved: (val) => print(val),
                           )
                         : Text(''),
-
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

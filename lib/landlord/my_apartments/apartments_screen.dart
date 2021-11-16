@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_explorer/landlord/my_apartments/private_apartments.dart';
+import 'package:home_explorer/landlord/widgets/apartment_landlord.dart';
+import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/models/user.dart';
 import 'public_apartments.dart';
 
 class MyApartments extends StatefulWidget {
-  final User? user;
+  late final User? user;
 
   MyApartments({required this.user});
 
@@ -17,15 +19,22 @@ class MyApartments extends StatefulWidget {
 class _MyApartmentsState extends State<MyApartments>
     with SingleTickerProviderStateMixin {
   List<String> tab_names = ['طلبات خاصة', 'طلبات عامة'];
+  late List<RealEstate> private = [];
+  late List<RealEstate> public = [];
   int selected_index = 0;
   late TabController tabController;
   late List<Widget> tabScreens = [
-    PrivateApartments(user: widget.user,),
-    PublicApartments(user: widget.user,),
+    PrivateApartments(
+      user: widget.user,
+    ),
+    PublicApartments(user: widget.user),
   ];
 
   @override
   void initState() {
+    private = buildApartments(normalUser[0], true);
+    private = buildApartments(normalUser[0], false);
+
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     super.initState();
   }
@@ -82,9 +91,50 @@ class _MyApartmentsState extends State<MyApartments>
         slivers: [
           SliverToBoxAdapter(
             child: tabScreens[selected_index],
-          )
+          ),
+          // SliverList(
+          //     delegate: ApartmentCards(
+          //         realEstates: private))
         ],
       ),
     );
   }
+}
+
+class ApartmentCards extends SliverChildDelegate {
+  final List<RealEstate> realEstates;
+
+  ApartmentCards({required this.realEstates});
+
+  @override
+  Widget? build(BuildContext context, int index) {
+    return ApartmnetCardLandlord(
+      realEstate: realEstates[index],
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant SliverChildDelegate oldDelegate) {
+    return true;
+  }
+}
+
+buildApartments(User user, bool isPrivate) {
+  List<RealEstate> realEstates = [];
+  List<Home> homes = home
+      .where(
+          (element) => (element.user == user && element.isPrivat == isPrivate))
+      .toList();
+  List<Store> stores = store
+      .where(
+          (element) => (element.user == user && element.isPrivat == isPrivate))
+      .toList();
+  List<WorkSpace> workSpaces = workSpace
+      .where(
+          (element) => (element.user == user && element.isPrivat == isPrivate))
+      .toList();
+  realEstates.addAll(homes);
+  realEstates.addAll(stores);
+  realEstates.addAll(workSpaces);
+  return realEstates;
 }

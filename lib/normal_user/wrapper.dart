@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:home_explorer/models/apartment.dart';
+import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/screens/bookmarks.dart';
 import 'package:home_explorer/normal_user/screens/home_screen.dart';
 import 'package:home_explorer/normal_user/screens/notifications_screen.dart';
 import 'package:home_explorer/normal_user/screens/profile_screen.dart';
 
 class Wrapper extends StatefulWidget {
+  late final User? user;
+  Wrapper({required this.user});
+
   @override
   _WrapperState createState() => _WrapperState();
 }
 
 class _WrapperState extends State<Wrapper> {
-  final List<Widget> _bnbScreens = [
+  late List<Widget> _bnbScreens = [
     HomeScreen(),
     NotificationsScreen(),
     Bookmarks(),
-    ProfileScreen(),
+    ProfileScreen(user: widget.user,),
   ];
-  int _selectedIndex = 0;
 
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Color(0xFFF6F6F6),
-        drawer: Drawer(child: Text('155555555555555555'),),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int index) {
             setState(() {

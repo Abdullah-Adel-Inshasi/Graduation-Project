@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:home_explorer/auth/signup_landlord.dart';
 import 'package:home_explorer/landlord/wrapper.dart';
 import 'package:home_explorer/models/apartment.dart';
 import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/wrapper.dart';
 
 import '../size_config.dart';
+import 'login_screen.dart';
 
 class SignupScreenGeneric extends StatefulWidget {
 
@@ -613,14 +613,14 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1,
                                           OfficeName: name.text.toString(),OfficeAddress: Address(city: "city", street: "street", estateNo: "estateNo")));
                                       Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => LandLordWrapper(user : landLord[landLord.length-1])), (route) => false);
+                                          MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                       print(landLord);
                                     }else{
                                       landLord.add(LandLord(id: landLord.length, fullName: name.text.toString(),
                                           email: email.text.toString(), phoneNumber: _mobile.text.toString(),
                                           password: password.text.toString(), isRealEstateOffice: selectedValue2==1));
                                       Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => LandLordWrapper(user : landLord[landLord.length-1])), (route) => false);
+                                          MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                       print(landLord);
                                     }
                                   }else{
@@ -628,7 +628,7 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                                         email: email.text.toString(), phoneNumber: _mobile.text.toString(),isSingle: selectedValue==2,
                                         password: password.text.toString(),familyNumber:numOfSons,age: age.text.toString(),));
                                     Navigator.pushAndRemoveUntil(context,
-                                        MaterialPageRoute(builder: (context) => Wrapper()), (route) => false);
+                                        MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                     print(normalUser);
                                   }
                                 }else{
@@ -637,8 +637,6 @@ class _SignupScreenGenericState extends State<SignupScreenGeneric> {
                               }else{
                                 print("يرجى التأكد من جميع البيانات المطلوبة");
                               }
-
-
                             },
                             child: Container(
                               alignment: Alignment.center,

@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:home_explorer/models/apartment.dart';
+import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/screens/search_options_screen.dart';
 import 'package:home_explorer/normal_user/screens/store_screen.dart';
 import 'package:home_explorer/normal_user/screens/workspace_screen.dart';
@@ -18,6 +19,8 @@ import 'apartment_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
+
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -98,181 +101,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-// class WorkSpaceList extends StatelessWidget {
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SliverToBoxAdapter(
-//       child: GestureDetector(
-//         onTap: () {
-//           Navigator.push(
-//               context, MaterialPageRoute(builder: (context) => WorkSpaceScreen()));
-//         },
-//         child: Padding(
-//           padding: EdgeInsets.all(15),
-//           child: Column(
-//             children: <Widget>[
-//               Hero(
-//                 transitionOnUserGestures: true,
-//                 tag: 'assets/images/house5.jpg',
-//                 child: ClipRRect(
-//                   borderRadius: BorderRadius.only(
-//                       topRight: Radius.circular(32),
-//                       topLeft: Radius.circular(32)),
-//                   child: Image.asset(
-//                     'assets/images/house5.jpg',
-//                     fit: BoxFit.cover,
-//                     height: 150,
-//                     width: double.infinity,
-//                   ),
-//                 ),
-//               ),
-//               Container(
-//                 margin: EdgeInsets.only(bottom: 15),
-//                 padding: EdgeInsets.all(10),
-//                 color: Colors.white,
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.stretch,
-//                   children: <Widget>[
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Text(
-//                           '\$120 / شهر ',
-//                           style: GoogleFonts.tajawal(
-//                             fontWeight: FontWeight.w500,
-//                             fontSize: 16,
-//                           ),
-//                         ),
-//                         Text(
-//                           ' 1  غرفة | 2 حمام | 3 متر',
-//                           style: GoogleFonts.tajawal(
-//                               fontSize: 16, fontWeight: FontWeight.w500),
-//                         ),
-//                       ],
-//                     ),
-//                     Text(
-//                       'Gaza',
-//                       style: GoogleFonts.tajawal(
-//                           color: Colors.black,
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.w600),
-//                     ),
-//                     Text(
-//                       'Abood',
-//                       style: GoogleFonts.tajawal(
-//                           color: Colors.black,
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.w600),
-//                     )
-//                   ],
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-// class NewlyAdded extends StatefulWidget {
-//   const NewlyAdded({
-//     Key? key,
-//   }) : super(key: key);
-//
-//   @override
-//   // _NewlyAddedState createState() => _NewlyAddedState();
-// }
-
-// class _NewlyAddedState extends State<NewlyAdded> {
-//   late PageController _pageController;
-//   late List<Apartment> apartments;
-//
-//   @override
-//   void initState() {
-//     _pageController = PageController(viewportFraction: 0.9);
-//     apartments = apartments;
-//     super.initState();
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 260,
-//       width: MediaQuery.of(context).size.width,
-//       child: PageView.builder(
-//         controller: _pageController,
-//         itemCount: apartments.length,
-//         scrollDirection: Axis.horizontal,
-//         itemBuilder: (context, index) {
-//           Apartment apartment = apartments[index];
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 5),
-//             child: Stack(
-//               children: [
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 7.5),
-//                   child: ClipRRect(
-//                     borderRadius: BorderRadius.circular(25),
-//                     child: Image.network(
-//                       apartment.imageUrl,
-//                       fit: BoxFit.cover,
-//                       height: 180,
-//                       width: double.infinity,
-//                     ),
-//                   ),
-//                 ),
-//                 Positioned(
-//                   bottom: 6,
-//                   left: 0,
-//                   right: 0,
-//                   child: Container(
-//                     margin: const EdgeInsets.symmetric(horizontal: 15),
-//                     padding: const EdgeInsets.symmetric(
-//                         horizontal: 10, vertical: 10),
-//                     width: 240,
-//                     height: 100,
-//                     decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular(15),
-//                       color: Colors.white,
-//                       boxShadow: const [
-//                         BoxShadow(
-//                           color: Colors.black,
-//                           blurRadius: 6.0,
-//                           offset: Offset(2, 2),
-//                         ),
-//                       ],
-//                     ),
-//                     child: Column(
-//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         Text('name: ' + (apartment.name ?? 'null')),
-//                         const Text('price : 120\$/month'),
-//                         Text('location : ${apartment.location}')
-//                       ],
-//                     ),
-//                   ),
-//                 )
-//               ],
-//             ),
-//           );
-//         },
-//         physics: const BouncingScrollPhysics(
-//           parent: AlwaysScrollableScrollPhysics(),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class NewWidget extends StatefulWidget {
   const NewWidget({
@@ -915,6 +743,7 @@ class _CategorySelectorState extends State<CategorySelector> {
 }
 
 class Map extends StatefulWidget {
+
   @override
   State<Map> createState() => _MapState();
 }
@@ -929,7 +758,7 @@ class _MapState extends State<Map> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 610,
+        height: 615,
         child: GoogleMap(
           mapType: MapType.normal,
           myLocationButtonEnabled: true,
@@ -940,9 +769,32 @@ class _MapState extends State<Map> {
           onMapCreated: (GoogleMapController controller) {
             _controllerGoogleMap.complete(controller);
             newGoogleMapController = controller;
-            locatePosition();
+            setState(() {
+              myMarkers.add(Marker(
+                onTap: (){
+                  _modalBottomSheetMenu();
+                },
+                markerId: MarkerId('1'),
+                position:LatLng(31.466154, 34.423684),
+                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+              ),);
+              myMarkers.add(Marker(
+                onTap: (){
+                  _modalBottomSheetMenu();
+                },
+                markerId: MarkerId('2'),
+                position:LatLng(31.448435, 34.392796),
+              ),);
+              myMarkers.add(Marker(
+                onTap: (){
+                  _modalBottomSheetMenu();
+                },
+                markerId: MarkerId('3'),
+                position:LatLng(31.448440, 34.392780),
+              ),);
+            });
           },
-
+          markers: myMarkers,
         ),
       ),
     );
@@ -964,4 +816,146 @@ class _MapState extends State<Map> {
     newGoogleMapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
+
+  void _modalBottomSheetMenu(){
+    int x = 5;
+    int y = 2;
+    int z = 300;
+    int m = 120;
+
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (builder){
+          return  Directionality(
+            textDirection: TextDirection.rtl,
+            child: Container(
+              color: Colors.transparent,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: new Container(
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(20),
+                        topRight: const Radius.circular(20.0))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '\$120',
+                              style: GoogleFonts.tajawal(
+                                  color: Colors.green, fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text: '/شهريا',
+                              style: GoogleFonts.tajawal(
+                                  color: Colors.black, fontWeight: FontWeight.w600, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              ApartmentDetail(
+                                label: 'غرف النوم',
+                                iconData: Icons.bed,
+                                value: '4',
+                              ),
+                              SizedBox(height: 5),
+                              ApartmentDetail(
+                                label: 'الصالات', iconData: Icons.chair, value: '2',),
+                              SizedBox(height: 5),
+                              ApartmentDetail(
+                                label: 'دورات المياه',
+                                iconData: Icons.bathtub_outlined,
+                                value: '1',)
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              ApartmentDetail(
+                                label: 'مساحة الشقة',
+                                iconData: Icons.format_size,
+                                value: '170',
+                              ),
+                              SizedBox(height: 5),
+                              ApartmentDetail(
+                                label: 'الطابق', iconData: Icons.menu, value: '${2}',),
+                              SizedBox(height: 5),
+                              ApartmentDetail(
+                                label: 'رقم الشقة',
+                                iconData: Icons.format_list_numbered,
+                                value: '24'),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ApartmentScreen(
+                                    home: Home(
+                                        numOfBathroom: 1,
+                                        numOfRoom: 4,
+                                        direction: 'شمالي غربي',
+                                        numOfHalls: 2,
+                                        floor: 5,
+                                        typeOfHome: HomeType.house,
+                                        user: landLord[0],
+                                        downpayment: 300,
+                                        apartmentNumber: 23,
+                                        monthlyRent: 250,
+                                        name: 'no.1',
+                                        address: address1,
+                                        size: 170,
+                                        imgUrl: ['assets/images/house1.jpg'],
+                                        coverImg: 'assets/images/house1.jpg',
+                                        aboutEstate: 'تفاصيل الوحدة السكنية ....',
+                                        beginObservation: startDate1,
+                                        endObservation: EndDate1,
+                                        isAvailable: true,
+                                        hasFurnature: true,
+                                        closeFromMosque: true,
+                                        isPrivat: false,
+                                        hasGarage: true),
+                                  )));
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50,
+                          width: double.infinity,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            color: Color(0xff14688C),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text('عرض المزيد', style: TextStyle(fontSize: 18,color: Color(0xffF6F6F6))),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
 }
+
+

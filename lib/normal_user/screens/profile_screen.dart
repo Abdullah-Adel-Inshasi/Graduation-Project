@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_explorer/models/user.dart';
 import 'package:home_explorer/normal_user/screens/chat_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  late final User? user;
+
+  ProfileScreen({required this.user});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -48,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(60),
                             child: Image.asset(
-                              'assets/images/girl.jpg',
+                              'assets/images/user_image.png',
                               height: 120,
                               width: 120,
                               fit: BoxFit.cover,
@@ -60,19 +63,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               Text(
-                                'نانسي عجرم',
+                                widget.user!.fullName,
                                 style: GoogleFonts.tajawal(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               SizedBox(height: 8),
                               Text(
-                                'nancy.ajram@gmail.com',
+                                  widget.user!.email,
                                 style: GoogleFonts.tajawal(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               SizedBox(height: 8),
                               Text(
-                                '0591324567',
+                                widget.user!.phoneNumber,
                                 style: GoogleFonts.tajawal(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               )
@@ -397,10 +400,10 @@ class ChatWithUser extends StatelessWidget {
           isRead
               ? Text('')
               : Container(
-                  width: 14,
-                  height: 14,
+                  width: 10,
+                  height: 10,
                   decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.green),
                 )
         ],
       ),

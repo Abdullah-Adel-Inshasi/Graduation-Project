@@ -26,7 +26,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
   _LandLordWrappeState({required this.user});
 
   late List<Widget> _bnbScreens = [
-    MyApartments(user: widget.user,),
+    MyApartments(user: widget.user),
     AddRealEstate(user: widget.user,),
     ChatWrapper(),
     // HomeScreen_Landlord(),
@@ -52,30 +52,30 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
                 alignment: Alignment.center,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 40),
+                    SizedBox(height: 50),
                     Container(
                       width: 70,
                       height: 70,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.green,
+                        color: Colors.white,
                       ),
                       alignment: Alignment.center,
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage('assets/images/girl.jpg'),
+                        backgroundImage: AssetImage('assets/images/user_image.png'),
                       ),
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'ليلى مصباح',
+                      user!.fullName,
                       style: GoogleFonts.tajawal(
                         color: Colors.white,
                         fontSize: 22,
                       ),
                     ),
                     SizedBox(height: 8),
-                    Text('(059) - 2089866',
+                    Text(user!.phoneNumber,
                         textDirection: TextDirection.ltr,
                         style: GoogleFonts.tajawal(
                           color: Colors.white,
@@ -86,7 +86,7 @@ class _LandLordWrappeState extends State<LandLordWrapper> {
               ),
               SizedBox(height: 30),
               SwitchListTile.adaptive(
-                title: Text('عقارات PRO'),
+                title: Text('Makani Pro'),
                 secondary: Icon(Icons.add),
                 value: isPro,
                 onChanged: (x) {

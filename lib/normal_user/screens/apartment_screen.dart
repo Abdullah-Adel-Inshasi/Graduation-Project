@@ -110,7 +110,7 @@ class ApartmentScreen extends StatelessWidget {
                           SizedBox(height: 20),
                           DetailedParagraph(
                             title: 'اتجاهات الشقة',
-                            body: "${home.direction.toString()}",
+                            body: "شمالي جنوبي",
                           ),
                           SizedBox(height: 32),
                           ApartmentDetails(home: home,),
